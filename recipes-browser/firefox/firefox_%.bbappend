@@ -9,7 +9,7 @@ SRC_URI += "file://common \
             file://userContent.files \
             file://firefox.cfg \
             file://0002-minimize-ff.patch \
-            file://0003-further-minimize-ff.patch
+            file://0003-further-minimize-ff.patch \
            "
 
 
