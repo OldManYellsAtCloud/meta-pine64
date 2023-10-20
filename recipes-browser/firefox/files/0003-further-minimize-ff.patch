@@ -1,0 +1,33 @@
+--- ./toolkit/moz.configure	2023-10-11 09:07:39.142480709 +0200
++++ ./toolkit/moz.configure	2023-10-11 09:10:38.516100890 +0200
+@@ -122,7 +122,7 @@
+     # MozDescribeCodeAddress to call into some Rust crates that parse ELF and
+     # DWARF data, but build system issues currently prevent Rust from being
+     # used in mozglue.)
+-    
++    return False
+     if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
+         return True
+ 
+@@ -540,7 +540,7 @@
+ def vaapi(target, toolkit_gtk):
+     # VAAPI is mostly used on x86(-64) but is sometimes used on ARM/ARM64 SOCs.
+     if target.cpu in ("arm", "aarch64", "x86", "x86_64") and toolkit_gtk:
+-        return True
++        return False
+ 
+ 
+ @depends(target, toolkit_gtk)
+--- ./widget/gtk/GfxInfo.cpp	2023-10-11 09:12:06.866871728 +0200
++++ ./widget/gtk/GfxInfo.cpp	2023-10-11 09:12:33.571705298 +0200
+@@ -222,8 +222,8 @@
+   char* glxData = nullptr;
+   auto free = mozilla::MakeScopeExit([&] { g_free((void*)glxData); });
+ 
+-  bool error = !ManageChildProcess("glxtest", &sGLXTestPID, &sGLXTestPipe,
+-                                   GFX_TEST_TIMEOUT, &glxData);
++  bool error = true;
++
+   if (error) {
+     gfxCriticalNote << "glxtest: ManageChildProcess failed\n";
+   }

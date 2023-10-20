@@ -1,0 +1,8 @@
+header:
+  version: 11
+  includes:
+    - pine-common.yml
+
+machine: pine-a64-lts
+
+target: core-image-minimal

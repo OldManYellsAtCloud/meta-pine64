@@ -1,0 +1,11 @@
+common/header.css
+userChrome/appMenu.css
+userChrome/browser.css
+userChrome/editBookmarkPanel.css
+userChrome/findbar.css
+userChrome/popups.before-ff-108.css
+userChrome/popups.css
+userChrome/root.css
+userChrome/tabmenu.css
+userChrome/urlbar.css
+userChrome/userChrome.css

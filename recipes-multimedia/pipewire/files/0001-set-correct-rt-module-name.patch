@@ -1,0 +1,13 @@
+diff --git a/media-session.d/media-session.conf b/media-session.d/media-session.conf
+index 1386f5587..cd14358e9 100644
+--- a/media-session.d/media-session.conf
++++ b/media-session.d/media-session.conf
+@@ -33,7 +33,7 @@ context.modules = [
+     # If nofail is given, module initialization failures are ignored.
+     #
+     # Uses RTKit to boost the data thread priority.
+-    { name = libpipewire-module-rtkit
++    { name = libpipewire-module-rt
+         args = {
+             #nice.level   = -11
+             #rt.prio      = 88

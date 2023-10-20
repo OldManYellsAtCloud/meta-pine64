@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable wireless devices
+
+[Service]
+ExecStart=/usr/sbin/rfkill unblock all
+Type=idle
+
+[Install]
+WantedBy=multi-user.target

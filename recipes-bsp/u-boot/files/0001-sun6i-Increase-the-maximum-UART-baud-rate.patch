@@ -26,15 +26,15 @@ index cda6949dff..8d595a1d10 100644
  
  		/* open the clock for uart */
 diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
-index 4bab917c0b..43c8a3434b 100644
+index d2d70f0fc2..67ee016f27 100644
 --- a/include/configs/sunxi-common.h
 +++ b/include/configs/sunxi-common.h
-@@ -26,7 +26,7 @@
+@@ -21,7 +21,7 @@
  /* suniv doesn't have apb2 and uart is connected to apb1 */
- #define CONFIG_SYS_NS16550_CLK		100000000
+ #define CFG_SYS_NS16550_CLK		100000000
  #else
--#define CONFIG_SYS_NS16550_CLK		24000000
-+#define CONFIG_SYS_NS16550_CLK		240000000
+-#define CFG_SYS_NS16550_CLK		24000000
++#define CFG_SYS_NS16550_CLK		240000000
  #endif
- #ifndef CONFIG_DM_SERIAL
- # define CONFIG_SYS_NS16550_REG_SIZE	-4
+ #if !CONFIG_IS_ENABLED(DM_SERIAL)
+ # define CFG_SYS_NS16550_COM1		SUNXI_UART0_BASE

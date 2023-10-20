@@ -1,0 +1,9 @@
+[Unit]
+Description=Button listener service
+
+[Service]
+ExecStart=/usr/bin/buttons
+ExecStop=killall -9 buttons
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+diff --git a/foot.ini b/foot.ini
+index 00505165..c094768e 100644
+--- a/foot.ini
++++ b/foot.ini
+@@ -8,7 +8,7 @@
+ # title=foot
+ # locked-title=no
+ 
+-# font=monospace:size=8
++font=monospace:size=14
+ # font-bold=<bold variant of regular font>
+ # font-italic=<italic variant of regular font>
+ # font-bold-italic=<bold+italic variant of regular font>

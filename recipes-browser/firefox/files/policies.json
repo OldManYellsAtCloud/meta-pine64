@@ -1,0 +1,34 @@
+{
+    "policies": {
+        "DisableFirefoxScreenshots": true,
+        "DisableFirefoxStudies": true,
+        "DisableTelemetry": true,
+        "DisablePocket": true,
+        "NoDefaultBookmarks": true,
+        "OverrideFirstRunPage": "",
+        "OverridePostUpdatePage": "",
+
+        "Homepage": {
+            "URL": "about:home",
+            "Locked": false,
+            "StartPage": "homepage"
+        },
+
+        "FirefoxHome": {
+            "Search": true,
+            "TopSites": false,
+            "Highlights": false,
+            "Pocket": false,
+            "Snippets": false,
+            "Locked": false
+        },
+
+        "UserMessaging": {
+            "WhatsNew": false,
+            "ExtensionRecommendations": false,
+            "FeatureRecommendations": false,
+            "UrlbarInterventions": false,
+            "SkipOnboarding": false
+        }
+    }
+}

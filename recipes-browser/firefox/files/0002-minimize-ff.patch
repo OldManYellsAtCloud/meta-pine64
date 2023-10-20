@@ -1,0 +1,61 @@
+--- ./toolkit/moz.configure	2023-10-03 10:12:59.499723611 +0200
++++ ./toolkit/moz.configure	2023-10-03 10:17:06.331763404 +0200
+@@ -100,6 +100,7 @@
+ 
+ @depends(gecko_profiler)
+ def gecko_profiler_define(value):
++    
+     if value:
+         return True
+ 
+@@ -121,6 +122,7 @@
+     # MozDescribeCodeAddress to call into some Rust crates that parse ELF and
+     # DWARF data, but build system issues currently prevent Rust from being
+     # used in mozglue.)
++    
+     if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
+         return True
+ 
+@@ -600,6 +602,7 @@
+ # ==============================================================
+ @depends(toolkit)
+ def pdf_printing(toolkit):
++    return False
+     if toolkit in ("windows", "gtk", "android"):
+         return True
+ 
+@@ -615,6 +618,7 @@
+ 
+ @depends("MOZ_INSTRUMENT_EVENT_LOOP", toolkit)
+ def instrument_event_loop(value, toolkit):
++    
+     if value or (
+         toolkit in ("windows", "gtk", "cocoa", "android") and value.origin == "default"
+     ):
+@@ -955,7 +959,7 @@
+ project_flag(
+     "MOZ_SERVICES_HEALTHREPORT",
+     help="Build Firefox Health Reporter Service",
+-    set_as_define=True,
++    set_as_define=False,
+ )
+ 
+ project_flag(
+@@ -993,7 +997,7 @@
+ 
+ option(
+     env="MOZ_TELEMETRY_REPORTING",
+-    default=mozilla_official,
++    default=False,
+     help="Enable telemetry reporting",
+ )
+ 
+@@ -1002,7 +1006,7 @@
+ 
+ @depends("MOZ_TELEMETRY_REPORTING", milestone.is_nightly)
+ def telemetry_on_by_default(reporting, is_nightly):
+-    return reporting and is_nightly
++    return False
+ 
+ 
+ set_define("MOZ_TELEMETRY_ON_BY_DEFAULT", True, when=telemetry_on_by_default)

@@ -1,0 +1,406 @@
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    /* Spawn the menu above the navigation bar (now that we've moved it to the
+     * bottom). Without this, it still spawns above, but only with a small
+     * height. This is due to the position="bottomcenter topright" attribute in
+     * the HTML, which we can't override via CSS. */
+    #appMenu-popup {
+        margin-top: -390px !important;
+        height: 310px;
+        max-height: 310px;
+    }
+    #appMenu-protonMainView vbox.panel-subview-body {
+        height: 300px !important;
+        max-height: 300px !important;
+    }
+    #appMenu-multiView box.panel-viewstack:first-child {
+        /* Use the whole space in the menu, instead of slowly increasing the
+         * height via animation. This animation is broken anyway due to the
+         * above menu size hack */
+        height: calc(100vh - 100px) !important;
+        max-height: calc(100vh - 100px) !important;
+    }
+
+    /* Menu content
+     * - configure it to have most important functions for mobile
+     *   on one page, without scrolling. (Scrolling was only possible with the
+     *   scrollbar on the right anyway, which is awkward when expecting to be
+     *   able to scroll with fingers.)
+     * - submenus are hidden, because attempting to scroll inside them with the
+     *   finger causes firefox to segfault. This is likely due to the menu
+     *   positioning hack above, looks like FF can't determine the height
+     *   properly. Help with fixing this is appreciated, the bookmarks and
+     *   history submenus would be useful. However even without the submenus,
+     *   the history and saved bookmarks can at least be accessed conveniently
+     *   through the navigation search.
+     * - fullscreen is hidden: not available in FF for android either, the
+     *   screen is almost used completely already, causes problems with UIs
+     *   that don't expect apps to go fullscreen (i.e. in Phosh, as soon as
+     *   the on screen keyboard is triggered, the top and bottom bars of Phosh
+     *   are over the FF in fullscreen) */
+    #appMenu-fxa-status2, /* FF login */
+    #appMenu-fxa-separator, /* FF login */
+    #appMenu-new-window-button2,
+    #appMenu-protonMainView toolbarseparator, /* all separators */
+    #appMenu-save-file-button2, /* Save file can be done from Print too */
+    #appMenu-fullscreen-button2,
+    #appMenu-passwords-button, /* accessible from settings */
+    #appMenu-extensions-themes-button, /* accessible from settings */
+    #appMenu-bookmarks-button, /* submenu */
+    #appMenu-history-button, /* submenu */
+    #appMenu-more-button2, /* submenu */
+    #appMenu-help-button2, /* submenu */
+    .subviewbutton[shortcut]::after { /* menu shortcuts ("Ctrl+T" etc.) */
+        display: none !important;
+    }
+}
+/* Copyright 2022 plata
+ * SPDX-License-Identifier: MPL-2.0 */
+
+/* Move navigation bar to bottom */
+@media (max-width: 700px) {
+    #browser {
+        -moz-box-ordinal-group: 0 !important;
+    }
+
+    /* Hide navigation bar in kiosk mode (to prevent bug #29). We can assume FF
+     * is in kiosk mode when fullscreen and max-width conditions are met,
+     * because at this max-width the fullscreen button is hidden
+     * (see appMenu.css). */
+    #nav-bar[inFullscreen],
+    #TabsToolbar[inFullscreen] {
+        display: none;
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    /* The only way I (ollieparanoid) found to make this not glitchy, was to
+     * reduce the bookmark panel to the minimum amount of useful controls and
+     * hardcode width and height. Patches to improve this welcome, but make
+     * sure that you don't introduce new UI glitches by doing extensive
+     * testing. */
+
+    #editBookmarkPanel {
+        margin-top: -390px !important;
+        height: 200px;
+        max-height: 200px;
+        max-width: calc(100vw - 100px);
+    }
+
+    #editBookmarkPanel box.panel-header,
+    #editBookmarkHeaderSeparator {
+        display: none !important;
+    }
+
+    #editBookmarkPanelContent {
+        max-width: 250px !important;
+        width: 250px !important;
+        padding-right: 20px;
+    }
+
+    /* Hide the screenshot and the line below it. The page is right there when
+     * you bring up the menu, no need for a screenshot. Also it has a glitch
+     * when taking the screenshot in mobile portrait view, half the screenshot
+     * is just black. Let's rather use the space to edit the bookmark
+     * information. */
+    #editBookmarkPanelInfoArea,
+    #editBookmarkSeparator {
+        display: none;
+    }
+
+    #editBMPanel_folderRow,
+    .editBMPanel_folderRow,
+    #editBMPanel_tagsRow,
+    .editBMPanel_tagsRow {
+        display: none;
+    }
+
+    #editBookmarkPanelBottomButtons {
+        width: 250px !important;
+        min-width: 250px !important;
+        padding: 0px !important;
+        justify-content: flex-start !important;
+        margin: 0px 0px 20px 0px !important;
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    .findbar-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 150px !important;
+    }
+
+    .findbar-textbox {
+        /* Overwrite fixed size, so the X on the right shows up */
+        width: 100% !important;
+    }
+
+    .findbar-container checkbox {
+        /* Add space around the buttons, looks nicer and makes it easier to hit
+         * them with the finger. */
+        padding: 10px 0px;
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    /* Hack to prevent popups from flickering around. It looks like e.g. the
+     * editBookmarkPanel has two heights otherwise, and draws one frame with a
+     * short height and one frame with the proper one. */
+    #mainPopupSet {
+        position: fixed !important;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 100px;
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    /* Now that the navbar is at the bottom, we need to set an offset to have
+     * the notifications (like the one for installing addons) displayed
+     * on-screen. */
+    #notification-popup {
+        margin-left: -200px !important;
+        margin-top: -500px !important;
+    }
+
+    #downloadsPanel-mainView {
+        max-width: calc(100vw - 10px);
+    }
+
+    /* Menu that appears when long-pressing the back-button */
+    #backForwardMenu {
+        margin-top: -250px;
+        height: 200px;
+        min-height: 200px;
+        max-width: 100vw !important;
+    }
+
+    /* Hide some context menu items */
+    #context-inspect,
+    #context-inspect-a11y,
+    #context-savelinktopocket,
+    #context-searchselect,
+    #context-sendlinktodevice,
+    #context-viewpartialsource-selection,
+    #inspect-separator {
+        display: none !important
+    }
+
+    /* fix flickering of the protections, permissions,
+     * widget overflow and identity popups */
+    #protections-popup,
+    #permission-popup,
+    #widget-overflow,
+    #identity-popup {
+        max-width: 100vw !important;
+    }
+
+    /* fix the protections popup gettting
+     * too wide, making controls unaccessible */
+    #protections-popup-mainView {
+        min-width: 100vw !important;
+        max-width: 100vw !important;
+    }
+
+    /* fix flicker on extension menus.
+     * The compromise is that the overflow menu always use
+     * all available height.
+     * The -80px is here to prevent covering the main bars */
+    #widget-overflow,
+    #widget-overflow-mainView {
+        height: calc(100vh - 80px) !important;
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+/* Reduce minimum window width */
+:root {
+    min-width: 300px !important;
+}
+/* Copyright 2022 Peter Mack, Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@media (max-width: 700px) {
+    /* Even when not in private browsing mode, reserve space to the right of
+     * the tab bar for the private-browsing-indicator (that mask icon). This
+     * gives the tab bar a consistent width in both the regular and the private
+     * browsing mode, so the increased width hack below looks good in both. */
+    #titlebar {
+        padding-right: 30px;
+    }
+    hbox.private-browsing-indicator {
+        position: fixed !important;
+        right: 0px;
+        bottom: 50px;
+        display: block;
+    }
+
+    /* Increase tab width, to have more space for displaying the title of the
+     * website and to make the "all tabs" button show up. */
+    #tabbrowser-tabs {
+        --tab-min-width: calc(100vw - 116px) !important;
+    }
+
+    /* Rotate the arrow on the "all tabs" button to point upwards, since the
+     * tabs and searchbar were moved to the bottom. */
+    #alltabs-button {
+        transform: rotate(180deg) !important;
+    }
+
+    /* All tabs menu: hide scroll buttons */
+    #scrollbutton-up, #scrollbutton-down {
+        display: none !important;
+    }
+
+    /* All tabs menu: hide the search and the separator below it. */
+    #allTabsMenu-searchTabs,
+    #allTabsMenu-tabsSeparator {
+        display: none;
+    }
+
+    /* Similar hack to what's in appMenu.css to properly spawn the "all tabs"
+     * popup above the navigation menu */
+    #customizationui-widget-panel {
+        /* Further up than appmenu, because the "all tabs" button that spawns
+         * this menu is above the hamburger button that spawns the regular
+         * menu. */
+        margin-top: -360px !important;
+        height: 320px;
+        max-height: 320px;
+    }
+
+    #allTabsMenu-allTabsView vbox.panel-subview-body {
+        /* Use the whole height */
+        height: 300px !important;
+        max-height: 300px !important;
+        /* When messing around with tabs, it gets into a state where it does
+         * not use the whole height anymore, it becomes a tiny window. Removing
+         * this attribute fixes it. */
+        -moz-box-flex: initial !important;
+    }
+
+    #allTabsMenu-allTabsView vbox.panel-subview-body:first-child {
+        /* the allTabsMenu has a vbox.panel-subview-body inside another one.
+         * With -moz-box-flex: initial, it will show a scroll bar in each, but
+         * we only want one scrollbar. */
+        overflow-y: hidden !important;
+    }
+
+    #allTabsMenu-multiView box.panel-viewstack {
+        /* Use the whole height */
+        height: calc(100vh - 100px) !important;
+        max-height: calc(100vh - 100px) !important;
+    }
+
+    #allTabsMenu-allTabsViewTabs {
+        /* Make sure tabs with long titles don't exceed the all tabs menu */
+        max-width: calc(100vw - 20px);
+    }
+}
+/* Copyright 2022 Oliver Smith
+ * SPDX-License-Identifier: MPL-2.0 */
+
+/* Reduce minimum window width */
+#urlbar-container {
+    min-width: 150px !important;
+}
+
+@media (max-width: 700px) {
+    /* Remove various buttons left and right of the URL bar:
+       - forward-button: also reachable via longpress of back button
+       - home-button: not important enough
+       - customizableui-special-spring: empty space
+       - library-button: also reachable via PanelUI-menu-button
+       - sidebar-button: not useful on mobile (we try to gain horizontal space)
+       - fxa-toolbar-menu-button: firefox cloud stuff, also reachable via
+         #PanelUI-menu-button
+    */
+    /* #back-button */
+    #forward-button,
+    /* #reload-button */
+    #home-button,
+    #customizableui-special-spring1,
+    /* (urlbar) */
+    #customizableui-special-spring2,
+    #library-button,
+    #sidebar-button,
+    #fxa-toolbar-menu-button
+    /* #PanelUI-menu-button */ {
+        display: none !important;
+    }
+
+    #urlbar {
+        padding: 0px 5px;
+    }
+
+    /* Smaller font: show more of the URL */
+    #urlbar-input {
+        font-size: 9pt !important;
+    }
+
+    /* Focused urlbar: hide all icons around it, so we have more space to edit the URL */
+    #urlbar[focused] #remote-control-box,
+    #urlbar[focused] #identity-box,
+    #urlbar[focused] #tracking-protection-icon-container,
+    /* #urlbar-input */
+    #urlbar[focused] #reader-mode-button,
+    #urlbar[focused] #page-action-buttons {
+        display: none;
+    }
+
+    /* Label of "identity icons", e.g. firefox specific pages look weird
+     * when ellipsed, e.g. "F..x" instead of "Firefox". So just hide this
+     * label. The icon itself is still visible. */
+    #identity-icon-label {
+        display: none;
+    }
+
+    /* Move urlbar results to cover the whole displayed website, instead of
+     * being below the urlbar. */
+    .urlbarView {
+        position: fixed !important;
+        inset: 0px 0px 84px 0px;
+        width: 100% !important;
+
+        background: var(--arrowpanel-background);
+
+        margin: 0px !important;
+        margin-inline: 0px !important;
+        border-inline: 0px !important;
+
+        overflow-y:  auto !important;
+        overflow-x: none !important;
+        scrollbar-width: none;
+    }
+
+    /* Bookmarks toolbar. Firefox shows it for some reason when opening a
+     * private browsing window, even if it is not enabled in the normal
+     * window view. Hide it for mobile, it eats precious space and can't be
+     * organized properly on mobile anyway. Using the searchbar to filter
+     * through bookmarks is much more efficient. */
+    #PersonalToolbar {
+        display: none;
+    }
+}
+
+/* Even though amazon is removed as search engine in policies.json, it gets
+ * installed when FF starts for the first time. Hide the button in "This time,
+ * search with" inside the urlbar. Match localizations like Amazon.de with this
+ * regex. */
+button[id^='urlbar-engine-one-off-item-Amazon'] {
+    display: none !important;
+}

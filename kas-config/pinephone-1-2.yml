@@ -1,0 +1,17 @@
+header:
+  version: 11
+  includes:
+    - pine-common.yml
+
+machine: pinephone-1-2
+
+target: pinephone-image
+
+local_conf_header:
+  pp: |
+    PACKAGE_CLASSES = "package_ipk"
+    BB_NUMBER_THREADS = "4"
+    INHERIT += "rm_work"
+    DISTRO = "pp"
+    DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland "
+    EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland "

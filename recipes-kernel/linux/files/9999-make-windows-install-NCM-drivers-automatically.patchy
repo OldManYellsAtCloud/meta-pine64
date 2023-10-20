@@ -1,0 +1,83 @@
+--- ./drivers/usb/gadget/composite.c.orig	2023-02-21 20:01:19.437708941 +0100
++++ ./drivers/usb/gadget/composite.c	2023-02-21 20:14:49.358931274 +0100
+@@ -21,6 +21,43 @@
+ 
+ #include "u_os_desc.h"
+ 
++
++/**
++ * ms_compatible_payload - contains the compatible_id and sub_compatible_id for Windows
++ * @dwLength: full size of this struct, in bytes. The header is 16 Bytes, each function adds 24 extra.
++ * @bcdVersion: doesn't seem to matter. 0x0100 seems work well, indicating version 1.00
++ * @wIndex: this index should be set to the same as the request's index
++ * @bCount: number of function configurations included in this struct. In case
++ *          there are more than 1, the function description below needs to be
++ *          duplicated also.
++ * @reserved: reserved for Windows. Should contain only nulls.
++ * @bFirstInterfaceNumber: The interface ID this compatible string belongs to. Starts with 0.
++ *                         You will have to experiment with this, which interface is 0, 1 and 2...
++ * @reserved2: reserved for Windows. Should be hardcoded to 0x01.
++ * @compatible_string: The actual compatible string. This consists of two 8 bytes strings:
++ *                     The first 8 bytes has the compatible_id, and the lower 8 bytes
++ *                     contain the sub_compatible_id. All remaining bytes should be set to null.
++ * @reserved3: reserved for Windows. Should contain only nulls.
++ */
++struct ms_compatible_payload {
++        // Header starts
++        uint32_t dwLength;
++        uint16_t bcdVersion;
++        uint16_t wIndex;
++        uint8_t  bCount;
++        uint8_t  reserved[7];
++        // Header ends.
++
++        // Function description starts. The below elements can be duplicated
++        // in case there are multiple functions. All functions need to be
++        // present, even in case they have no relevant proeprties.
++        uint8_t  bFirstInterfaceNumber;
++        uint8_t  reserved2;
++        char     compatible_string[16];
++        uint8_t  reserved3[6];
++        // Function description ends.
++};
++
+ /**
+  * struct usb_os_string - represents OS String to be reported by a gadget
+  * @bLength: total length of the entire descritor, always 0x12
+@@ -1720,11 +1757,34 @@
+ 	 * Don't let non-standard requests match any of the cases below
+ 	 * by accident.
+ 	 */
+-	if ((ctrl->bRequestType & USB_TYPE_MASK) != USB_TYPE_STANDARD)
++	if ((ctrl->bRequestType & USB_TYPE_MASK) != USB_TYPE_STANDARD && ctrl->bRequestType != 0xc0)
+ 		goto unknown;
+ 
+-	switch (ctrl->bRequest) {
++	// Catch the request from Windows asking for compatible ID
++	if (ctrl->bRequestType == 0xc0 && w_index == 0x04){
++		char six_nulls[6] = {'\0', '\0', '\0', '\0', '\0', '\0'};
++		char seven_nulls[7] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0'};
++		// This compatible string is for NCM only.
++		char comp_str[16] = { 'W','I','N', 'N', 'C', 'M', '\0', '\0', //compatible_id
++				      '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' }; // sub_compatible_id
++
++		struct ms_compatible_payload mcp;
++		mcp.dwLength = 40;
++		mcp.bcdVersion = 0x0100;
++		mcp.wIndex = w_index;
++		mcp.bCount = 1;
++
++		memcpy(mcp.reserved, seven_nulls, 7);
++		mcp.bFirstInterfaceNumber = 0x00;
++		mcp.reserved2 = 0x01;
++		memcpy(mcp.compatible_string, comp_str, 16);
++		memcpy(mcp.reserved, six_nulls, 6);
++		value = w_length;
++		memcpy(req->buf, &mcp, w_length);
++		goto check_value;
++	}
+ 
++	switch (ctrl->bRequest) {
+ 	/* we handle all standard USB descriptors */
+ 	case USB_REQ_GET_DESCRIPTOR:
+ 		if (ctrl->bRequestType != USB_DIR_IN)

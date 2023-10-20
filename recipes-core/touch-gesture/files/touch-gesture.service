@@ -1,0 +1,9 @@
+[Unit]
+Description=Touch gesture listener service
+
+[Service]
+ExecStart=/usr/bin/gesture
+ExecStop=killall -9 gesture
+
+[Install]
+WantedBy=multi-user.target

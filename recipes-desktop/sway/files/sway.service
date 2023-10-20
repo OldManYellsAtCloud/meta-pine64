@@ -1,0 +1,10 @@
+[Unit]
+Description=Sway window manager
+
+[Service]
+Type=idle
+Environment=XDG_RUNTIME_DIR=/var/run/wayland
+ExecStart=/usr/bin/sway
+
+[Install]
+WantedBy=multi-user.target

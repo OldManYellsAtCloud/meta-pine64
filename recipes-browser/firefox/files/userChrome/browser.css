@@ -1,0 +1,27 @@
+/* Copyright 2022 plata
+ * SPDX-License-Identifier: MPL-2.0 */
+
+/* Move navigation bar to bottom */
+
+/* Following part removed, because when devPixelsPerPixel was set to a non-default value,
+   it caused the mouse/touchscreen events not register.
+#browser {
+        -moz-box-ordinal-group: 0 !important;
+        order: -1 !important;
+    } 
+
+*/
+@media (max-width: 700px) {
+
+    /* Hide navigation bar in kiosk mode (to prevent bug #29). We can assume FF
+     * is in kiosk mode when fullscreen and max-width conditions are met,
+     * because at this max-width the fullscreen button is hidden
+     * (see appMenu.css). */
+    #nav-bar[inFullscreen],
+    #TabsToolbar[inFullscreen] {
+        display: none;
+    }
+}
+
+/* PinePhone specific: Hide the close/minimize/maximize buttons */
+.titlebar-buttonbox-container{ display:none } 

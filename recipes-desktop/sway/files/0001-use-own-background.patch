@@ -1,0 +1,30 @@
+diff --git a/config.in b/config.in
+index 48ba1f1e..388b2c2c 100644
+--- a/config.in
++++ b/config.in
+@@ -23,7 +23,12 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
+ ### Output configuration
+ #
+ # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
+-output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
++output * bg @datadir@/backgrounds/sway/krtek.jpg fill
++
++font pango:monospace 0.001
++titlebar_border_thickness 0
++titlebar_padding 0
++
+ #
+ # Example configuration:
+ #
+@@ -205,7 +210,10 @@ bar {
+ 
+     # When the status_command prints a new line to stdout, swaybar updates.
+     # The default just shows the current date and time.
+-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
++    status_command while /usr/bin/sway_status.sh; do sleep 10; done
++    workspace_buttons no
++    font pango:monospace 10
++    pango_markup enabled
+ 
+     colors {
+         statusline #ffffff

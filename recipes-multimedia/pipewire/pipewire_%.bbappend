@@ -1,0 +1,1 @@
+PIPEWIRE_SESSION_MANAGER = "wireplumber"

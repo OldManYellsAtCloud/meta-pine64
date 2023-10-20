@@ -1,0 +1,17 @@
+SOC_FAMILY = "star64"
+
+require conf/machine/include/soc-family.inc
+
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot"
+UBOOT_BINARY ?= "u-boot.itb"
+SPL_BINARY ?= "spl/u-boot-spl.bin.normal.out"
+#UBOOT_ENTRYPOINT = "0x40000000"
+#UBOOT_DTB_LOADADDRESS = "0x4FA00000"
+UBOOT_ENTRYPOINT = "0x80200000"
+UBOOT_DTB_LOADADDRESS = "0x8FA00000"
+
+UBOOT_ENV ?= "boot"
+UBOOT_ENV_SUFFIX ?= "scr"
+
+#TFA_PLATFORM = "rk3399"
+#TFA_BUILD_TARGET = "bl31"

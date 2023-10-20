@@ -1,0 +1,19 @@
+diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
+index 54f9b90536..418ce61fc6 100644
+--- a/configs/pinephone-pro-rk3399_defconfig
++++ b/configs/pinephone-pro-rk3399_defconfig
+@@ -19,7 +19,7 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+-CONFIG_BOOTDELAY=3
++CONFIG_BOOTDELAY=15
+ CONFIG_USE_PREBOOT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-pinephone-pro.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+@@ -99,3 +99,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_EDP=y
+ CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
++CONFIG_AUTOBOOT_STOP_STR_ENABLE=y
++CONFIG_AUTOBOOT_STOP_STR=" "

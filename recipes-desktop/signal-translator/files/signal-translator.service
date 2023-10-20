@@ -1,0 +1,9 @@
+[Unit]
+Description=Handle keyboard visibility
+After=wvkbd.service
+
+[Service]
+ExecStart=/usr/bin/signal-translator
+
+[Install]
+WantedBy=multi-user.target

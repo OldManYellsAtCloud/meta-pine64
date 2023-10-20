@@ -1,0 +1,2 @@
+# this is GPLv2
+xinput set-float-prop "pointer:Goodix Capacitive TouchScreen" "libinput Calibration Matrix" 0.954186 0.013941 -0.003324 0.003457 0.989082 0.000570 0.000000 0.000000 1.000000;

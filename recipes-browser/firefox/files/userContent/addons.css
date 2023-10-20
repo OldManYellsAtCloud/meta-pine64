@@ -1,0 +1,8 @@
+/* Copyright 2022 Anri Dellal
+ * SPDX-License-Identifier: MPL-2.0 */
+
+@-moz-document url("about:addons"), url-prefix("about:addons") {
+    :root {
+        --section-width: min(664px, 100%) !important;
+    }
+}

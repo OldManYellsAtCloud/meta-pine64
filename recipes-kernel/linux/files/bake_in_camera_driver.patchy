@@ -1,0 +1,15 @@
+diff --git a/arch/arm64/configs/pinephone_defconfig b/arch/arm64/configs/pinephone_defconfig
+index 09e54b5d0cbf..4ee8f7ea24c8 100644
+--- a/arch/arm64/configs/pinephone_defconfig
++++ b/arch/arm64/configs/pinephone_defconfig
+@@ -351,8 +351,8 @@ CONFIG_VIDEO_MEM2MEM_DEINTERLACE=m
+ CONFIG_VIDEO_SUN6I_CSI=m
+ CONFIG_VIDEO_SUN8I_DEINTERLACE=m
+ CONFIG_VIDEO_SUN8I_ROTATE=m
+-CONFIG_VIDEO_OV5640=m
+-CONFIG_VIDEO_GC2145=m
++CONFIG_VIDEO_OV5640=y
++CONFIG_VIDEO_GC2145=y
+ CONFIG_DRM=y
+ CONFIG_DRM_LOAD_EDID_FIRMWARE=y
+ CONFIG_DRM_SUN4I=y

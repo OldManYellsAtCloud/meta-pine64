@@ -1,0 +1,10 @@
+Upstream-Status: Denied
+diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+index 9d39204a43..ed0154f5b5 100644
+--- a/configs/pinephone_defconfig
++++ b/configs/pinephone_defconfig
+@@ -16,3 +16,4 @@ CONFIG_LED_STATUS_GPIO=y
+ CONFIG_LED_STATUS0=y
+ CONFIG_LED_STATUS_BIT=114
+ CONFIG_LED_STATUS_STATE=2
++CONFIG_MMC_BROKEN_CD=y

@@ -1,0 +1,13 @@
+[Unit]
+Description=Control modem power state
+
+[Service]
+ExecStart=/usr/bin/power-up-modem.sh start
+Type=oneshot
+ExecStop=/usr/bin/power-up-modem.sh stop
+RemainAfterExit=yes
+TimeoutStopSec=10
+
+
+[Install]
+WantedBy=multi-user.target

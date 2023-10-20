@@ -1,0 +1,11 @@
+[Unit]
+Description=Enable wireless devices
+After=sway.service
+
+[Service]
+Environment=XDG_RUNTIME_DIR=/var/run/wayland
+Environment=WAYLAND_DISPLAY=wayland-1
+ExecStart=/bin/sh -c "for i in `seq 10`; do if [ ! -e $XDG_RUNTIME_DIR/wayland-1 ]; then sleep 1; else break; fi done; /usr/bin/wvkbd-mobintl --hidden -o -l full,dialer | /usr/bin/rumble"
+
+[Install]
+WantedBy=multi-user.target

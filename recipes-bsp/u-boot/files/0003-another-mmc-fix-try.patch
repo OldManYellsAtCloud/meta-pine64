@@ -1,0 +1,14 @@
+Upstream-Status: Denied
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 12d29da528..ac34111756 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2890,7 +2890,7 @@ int mmc_start_init(struct mmc *mmc)
+ 	mmc_deferred_probe(mmc);
+ #endif
+ #if !defined(CONFIG_MMC_BROKEN_CD)
+-	no_card = mmc_getcd(mmc) == 0;
++	no_card = 0;
+ #else
+ 	no_card = 0;
+ #endif
