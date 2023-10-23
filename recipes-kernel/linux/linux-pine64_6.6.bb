@@ -16,29 +16,15 @@ SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
-SRC_URI = "git://git@git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git;branch=${BRANCH};protocol=https \
-           https://xff.cz/kernels/git/orange-pi-active.bundle;downloadfilename=megi-bundle \
-           file://9999-make-windows-install-NCM-drivers-automatically.patchy \
+# this is a regularly updated local mirror of mainline kernel, having megi's changes applied from the
+# bundle published at https://xff.cz/kernels/git/orange-pi-active.bundle
+
+do_kernel_metadata[network] = "1"
+
+SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch=${BRANCH} \
+           file://9999-make-windows-install-NCM-drivers-automatically.patch \
           "
 
-do_apply_bundle(){
-  cp ${WORKDIR}/megi-bundle ${STAGING_KERNEL_DIR}/
-  cd ${STAGING_KERNEL_DIR}
-  git fetch megi-bundle '+refs/heads/*:refs/remotes/megi/*'
-  git checkout megi/orange-pi-6.6
-  for p in `ls ${WORKDIR}/*.patchy`; do
-    patch -p 1 < $p
-  done
-  cd -
-}
-
-do_kernel_metadata:prepend(){
-  cd ${STAGING_KERNEL_DIR}
-  git checkout "megi/orange-pi-6.6"
-  cd -
-}
-
-addtask apply_bundle after do_validate_branches before do_kernel_metadata
 
 SRC_URI += "file://extra.cfg \
             file://battery.cfg \
@@ -46,10 +32,19 @@ SRC_URI += "file://extra.cfg \
             file://screen_new.cfg \
             file://try.cfg \
             file://enable_blobs.cfg \
-            file://bake_in_camera_driver.patchy \
-            file://8999-boot-with-broken-mmc-cd-pin.patchy \
+            file://bake_in_camera_driver.patch \
+            file://8999-boot-with-broken-mmc-cd-pin.patch \
             file://tether.cfg \
            "
+
+do_kernel_metadata:prepend(){
+	if [ "$1" != "config" ]; then
+		cd ${STAGING_KERNEL_DIR}
+		git fetch origin '+refs/remotes/megi/*:refs/remotes/megi/*'
+		git checkout megi/orange-pi-6.6
+		cd -
+	fi
+}
 
 SRC_URI[sha256sum] = "a8a9ef20db9be7ddb80ee668d955668b80fba09b457fd5d17fdeffbd2b4d351e"
 
