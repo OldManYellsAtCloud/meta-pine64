@@ -46,8 +46,6 @@ do_kernel_metadata:prepend(){
 	fi
 }
 
-SRC_URI[sha256sum] = "a8a9ef20db9be7ddb80ee668d955668b80fba09b457fd5d17fdeffbd2b4d351e"
-
 KCONF_AUDIT_LEVEL="1"
 KCONF_BSP_AUDIT_LEVEL="5"
 

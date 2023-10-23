@@ -44,7 +44,7 @@
  /**
   * struct usb_os_string - represents OS String to be reported by a gadget
   * @bLength: total length of the entire descritor, always 0x12
-@@ -1720,11 +1757,34 @@
+@@ -1720,11 +1751,28 @@
  	 * Don't let non-standard requests match any of the cases below
  	 * by accident.
  	 */
@@ -55,23 +55,17 @@
 -	switch (ctrl->bRequest) {
 +	// Catch the request from Windows asking for compatible ID
 +	if (ctrl->bRequestType == 0xc0 && w_index == 0x04){
-+		char six_nulls[6] = {'\0', '\0', '\0', '\0', '\0', '\0'};
-+		char seven_nulls[7] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0'};
-+		// This compatible string is for NCM only.
-+		char comp_str[16] = { 'W','I','N', 'N', 'C', 'M', '\0', '\0', //compatible_id
-+				      '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' }; // sub_compatible_id
-+
 +		struct ms_compatible_payload mcp;
 +		mcp.dwLength = 40;
 +		mcp.bcdVersion = 0x0100;
 +		mcp.wIndex = w_index;
 +		mcp.bCount = 1;
 +
-+		memcpy(mcp.reserved, seven_nulls, 7);
++		memset(&mcp.reserved, 0, 6);
 +		mcp.bFirstInterfaceNumber = 0x00;
 +		mcp.reserved2 = 0x01;
-+		memcpy(mcp.compatible_string, comp_str, 16);
-+		memcpy(mcp.reserved, six_nulls, 6);
++		strcpy(mcp.compatible_string, "WINNCM");
++		memset(&mcp.reserved3, 0, 7);
 +		value = w_length;
 +		memcpy(req->buf, &mcp, w_length);
 +		goto check_value;
