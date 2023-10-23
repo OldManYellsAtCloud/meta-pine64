@@ -14,7 +14,6 @@ IMAGE_INSTALL += " evtest \
                    touchscreen-cal-file \
                    firmware-blobs \
                    strace \
-                   pin-query \
                    buttond \
                    tzdata \
                    ttf-dejavu-sans \
