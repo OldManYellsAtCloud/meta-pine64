@@ -1,3 +1,5 @@
+RDEPENDS:${PN} += "${@ 'gtk3-immodule-wayland' if 'wayland' in d.getVar('PACKAGECONFIG') and 'touchscreen' in d.getVar('MACHINE_FEATURES') else ''}"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://common \
             file://userChrome \

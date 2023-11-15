@@ -21,7 +21,7 @@ case "$1" in
              break;
           fi
         done
-
+        sleep 2
         echo 1 > /sys/devices/platform/soc/1c28c00.serial/serial1/serial1-0/powered_blocking
         ;;
   stop)

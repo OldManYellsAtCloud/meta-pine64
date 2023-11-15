@@ -34,7 +34,7 @@ repos:
       meta-firefox:
   meta-clang:
     url: https://github.com/kraj/meta-clang
-    refspec: master
+    refspec: nanbield
     layers:
       .:
   meta-wayland:
@@ -53,6 +53,6 @@ local_conf_header:
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "118%"
+    PREFERRED_VERSION_firefox = "119%"
     SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/nanbield"
     INHERIT += "own-mirrors"

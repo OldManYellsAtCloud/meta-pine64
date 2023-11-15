@@ -1,6 +1,10 @@
 /* Copyright 2022 Peter Mack, Oliver Smith
  * SPDX-License-Identifier: MPL-2.0 */
 
+#firefox-view-button{
+    display: none;
+}
+
 @media (max-width: 700px) {
     /* Even when not in private browsing mode, reserve space to the right of
      * the tab bar for the private-browsing-indicator (that mask icon). This

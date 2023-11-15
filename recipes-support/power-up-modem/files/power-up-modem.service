@@ -3,7 +3,7 @@ Description=Control modem power state
 
 [Service]
 ExecStart=/usr/bin/power-up-modem.sh start
-Type=oneshot
+Type=idle
 ExecStop=/usr/bin/power-up-modem.sh stop
 RemainAfterExit=yes
 TimeoutStopSec=10

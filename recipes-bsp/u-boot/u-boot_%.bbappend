@@ -15,7 +15,6 @@ SRC_URI:append:pppro = " \
 
 SRC_URI:append:star64 = " \
     file://boot.cmd \
-    file://0005-star64-debug.patch \
     "
 
 DEPENDS:append:a64 = " u-boot-tools-native python3-pyelftools-native"

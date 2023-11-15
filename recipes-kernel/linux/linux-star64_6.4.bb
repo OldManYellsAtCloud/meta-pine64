@@ -17,7 +17,6 @@ SRCREV = "${AUTOREV}"
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
 SRC_URI = "git://git@github.com/Fishwaldo/Star64_linux.git;branch=${BRANCH};protocol=https \
-           file://5487-fickity-fuck-it.patch \
           "
 
 KCONF_AUDIT_LEVEL="1"
