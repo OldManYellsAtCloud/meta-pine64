@@ -2,7 +2,7 @@
 # The disk layout used is:
 #
 #    0                   -> reserverd
-#    8 KiB               -> u-boot SPL and u-boot
+#    32 KiB               -> u-boot SPL and u-boot
 #    20480 KiB           -> kernel, dtbs, boot script
 #    20480 KiB + 50 MiB  -> rootfs
 #
@@ -10,6 +10,6 @@
 # GPT table
 bootloader --ptable msdos
 
-part spl   --offset 64                          --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=idbloader.img"
+part spl   --align 32                --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=idbloader.img"
 part /boot --offset 16384 --size=100M --active --ondisk mmcblk1 --fstype=vfat --label pine64   --source bootimg-partition  --sourceparams="file=u-boot.itb"
 part /     --align 4096                        --ondisk mmcblk1 --fstype=ext4 --label platform --source=rootfs

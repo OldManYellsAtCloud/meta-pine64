@@ -17,9 +17,9 @@ do_install:append(){
 }
 
 RDEPENDS:${PN} = "gtk4"
-DEPENDS = "gtk4 libfeedback zbar"
+DEPENDS = "gtk4 libfeedback zbar libxml2-native"
 
 FILES:${PN} += "${datadir}/*"
 FILES:${PN} += "${sysconfdir}/launcher/megapixels.cfg"
 
-PR = "r01"
+PR = "r03"

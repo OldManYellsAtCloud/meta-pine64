@@ -18,4 +18,8 @@ do_install(){
 # regulatory db's are provided by other packages also
   rm ${D}${base_libdir}/firmware/regulatory.db.p7s
   rm ${D}${base_libdir}/firmware/regulatory.db
+
+  rm -rf ${D}${base_libdir}/firmware/rtw*
+  rm -rf ${D}${base_libdir}/firmware/rtl*
+  rm -rf ${D}${base_libdir}/firmware/brcm/2020-02-12
 }

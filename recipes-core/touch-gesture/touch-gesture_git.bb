@@ -6,7 +6,7 @@ SRC_URI += "file://touch-gesture.service"
 SRC_URI += "file://org.gspine.gesture.conf"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "0e9c53e46ffcfe2b2399e84c80dd2e7ed0d1bdb5"
+SRCREV = "849ec428033c571e6a83c0d297fddcbc40861963"
 
 DEPENDS = "sdbus-c++"
 RDEPENDS:${PN} = "sdbus-c++"

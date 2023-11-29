@@ -15,3 +15,6 @@ local_conf_header:
     DISTRO = "pp"
     DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland "
     EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland "
+    INITRAMFS_IMAGE = "pinephone-initramfs"
+    INITRAMFS_IMAGE_NAME = "core-image-minimal-initramfs-pinephonepro-1-0"
+    INITRAMFS_IMAGE_BUNDLE = "1"

@@ -13,5 +13,5 @@ local_conf_header:
     BB_NUMBER_THREADS = "4"
     INHERIT += "rm_work"
     DISTRO = "pp"
-    DISTRO_FEATURES += " x11 systemd opengl wifi usbhost bluetooth pulseaudio pam wayland "
-    EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost bluetooth pulseaudio pam wayland "
+    DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "
+    EXTRA_DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "

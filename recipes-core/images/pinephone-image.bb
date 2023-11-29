@@ -66,7 +66,7 @@ IMAGE_INSTALL += "\
     gdbserver \
     "
 
-IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file buttond touch-gesture info-panel power-up-modem eg25manager"
+IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file buttond touch-gesture info-panel power-up-modem eg25manager wvkbd signal-translator timetable"
 IMAGE_INSTALL:append:star64 = "jh7110-gpu-blob"
 
 # to test bluetooth audio

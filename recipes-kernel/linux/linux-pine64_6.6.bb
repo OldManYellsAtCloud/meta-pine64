@@ -35,6 +35,7 @@ SRC_URI += "file://extra.cfg \
             file://bake_in_camera_driver.patch \
             file://8999-boot-with-broken-mmc-cd-pin.patch \
             file://tether.cfg \
+            file://0001-silence-rk818-battery-driver.patch \
            "
 
 do_kernel_metadata:prepend(){

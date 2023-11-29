@@ -1,0 +1,19 @@
+Upstream-Status: Pending
+diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
+index e4a8beeb1a..0b5adfbf58 100644
+--- a/configs/pinephone-pro-rk3399_defconfig
++++ b/configs/pinephone-pro-rk3399_defconfig
+@@ -76,7 +76,7 @@ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+ CONFIG_DM_RNG=y
+ CONFIG_RNG_ROCKCHIP=y
+-CONFIG_BAUDRATE=1500000
++CONFIG_BAUDRATE=115200
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_ROCKCHIP_SPI=y
+ CONFIG_SYSRESET=y
+@@ -100,3 +100,4 @@ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_EDP=y
+ CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
++CONFIG_SYS_BOOTM_LEN=0x4000000

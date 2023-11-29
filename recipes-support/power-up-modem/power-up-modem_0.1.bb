@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 inherit systemd
 INHIBIT_DEFAULT_DEPS = "1"
 
-PR="r04"
+PR="r05"
 
 SRC_URI = "file://power-up-modem.sh"
 SRC_URI += "file://power-up-modem.service"

@@ -1,6 +1,18 @@
---- ./toolkit/moz.configure	2023-10-11 09:07:39.142480709 +0200
-+++ ./toolkit/moz.configure	2023-10-11 09:10:38.516100890 +0200
-@@ -122,7 +122,7 @@
+From 6be4cf9f63be147f86eb0f776c7805686b87736f Mon Sep 17 00:00:00 2001
+From: skandigraun <skandigraun@gmail.com>
+Date: Fri, 20 Oct 2023 13:06:21 +0200
+Subject: [PATCH] commit
+
+---
+ toolkit/moz.configure  | 4 ++--
+ widget/gtk/GfxInfo.cpp | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/toolkit/moz.configure b/toolkit/moz.configure
+index 4055865725..a1a9801b5f 100644
+--- a/toolkit/moz.configure
++++ b/toolkit/moz.configure
+@@ -123,7 +123,7 @@ def gecko_profiler_parse_elf(value, target):
      # MozDescribeCodeAddress to call into some Rust crates that parse ELF and
      # DWARF data, but build system issues currently prevent Rust from being
      # used in mozglue.)
@@ -9,7 +21,7 @@
      if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
          return True
  
-@@ -540,7 +540,7 @@
+@@ -543,7 +543,7 @@ set_define("MOZ_WAYLAND", depends_if(wayland_headers)(lambda _: True))
  def vaapi(target, toolkit_gtk):
      # VAAPI is mostly used on x86(-64) but is sometimes used on ARM/ARM64 SOCs.
      if target.cpu in ("arm", "aarch64", "x86", "x86_64") and toolkit_gtk:
@@ -18,9 +30,11 @@
  
  
  @depends(target, toolkit_gtk)
---- ./widget/gtk/GfxInfo.cpp	2023-10-11 09:12:06.866871728 +0200
-+++ ./widget/gtk/GfxInfo.cpp	2023-10-11 09:12:33.571705298 +0200
-@@ -222,8 +222,8 @@
+diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
+index 978166cbb3..4f5e2cb1c6 100644
+--- a/widget/gtk/GfxInfo.cpp
++++ b/widget/gtk/GfxInfo.cpp
+@@ -222,8 +222,8 @@ void GfxInfo::GetData() {
    char* glxData = nullptr;
    auto free = mozilla::MakeScopeExit([&] { g_free((void*)glxData); });
  
