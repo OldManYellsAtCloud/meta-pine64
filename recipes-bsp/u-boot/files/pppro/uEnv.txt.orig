@@ -1,0 +1,27 @@
+arch=arm
+baudrate=115200
+board=pinephone-pro-rk3399
+board_name=pinephone-pro-rk3399
+bootargs=console=ttyS2,115200 root=/dev/mmcblk1p2 rw
+boot_targets=mmc1 mmc0 nvme scsi usb pxe dhcp spi
+bootcmd=mmc dev 1; fatload mmc 1 $ramdisk_addr_r fitImage; bootm $ramdisk_addr_r
+bootdelay=3
+cpu=armv8
+fdt_addr_r=0x01f00000
+fdtfile=rockchip/rk3399-pinephone-pro.dtb
+fdtoverlay_addr_r=0x02000000
+kernel_addr_r=0x02080000
+kernel_comp_addr_r=0x08000000
+kernel_comp_size=0x2000000
+loadaddr=0x800800
+partitions=uuid_disk=${uuid_gpt_disk};name=loader1,start=32K,size=4000K,uuid=${uuid_gpt_loader1};name=loader2,start=8MB,size=4MB,uuid=${uuid_gpt_loader2};name=trust,size=4M,uuid=${uuid_gpt_atf};name=boot,size=112M,bootable,uuid=${uuid_gpt_boot};name=rootfs,size=-,uuid=B921B045-1DF0-41C3-AF44-4C6F280D3FAE;
+pxefile_addr_r=0x00600000
+ramdisk_addr_r=0x06000000
+script_offset_f=0xffe000
+script_size_f=0x2000
+scriptaddr=0x00500000
+soc=rk3399
+stderr=serial,vidconsole
+stdin=serial,usbkbd
+stdout=serial,vidconsole
+vendor=pine64

@@ -8,8 +8,20 @@
 #
 # MSDOS partition table is required because the bootloader would overlap the
 # GPT table
-bootloader --ptable msdos
+bootloader --ptable gpt
 
-part spl   --align 32                --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=idbloader.img"
-part /boot --offset 16384 --size=100M --active --ondisk mmcblk1 --fstype=vfat --label pine64   --source bootimg-partition  --sourceparams="file=u-boot.itb"
-part /     --align 4096                        --ondisk mmcblk1 --fstype=ext4 --label platform --source=rootfs
+# --align 32
+part spl   --align 32       --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=idbloader.img"
+part tpl   --offset 8192k   --ondisk mmcblk1 --source rawcopy  --sourceparams="file=u-boot.itb"
+# part /boot  --source rawcopy --ondisk mmcblk1  --sourceparams="file=fitImage"  --fstype=vfat
+part /boot  --size=100M  --fstype=vfat --ondisk mmcblk1 --source bootimg-partition --active --use-uuid  --offset 18192k
+#part /boot --align 16384     --size=100M --active --ondisk mmcblk1 --fstype=vfat   --source bootimg-partition
+#--source rawcopy  --sourceparams="file=fitImage"
+#part /boot --source rawcopy --sourceparams="file=u-boot.itb"
+#part /boot --source rawcopy --sourceparams="file=rk3399-pinephone-pro.dtb"
+
+# --source bootimg-partition --label pine64
+# --sourceparams="file=u-boot.itb"   --source bootimg-partition --label pine64 --offset 16384 --align 16384
+
+# --align 4096
+part /  --ondisk mmcblk1 --fstype=ext4 --label platform --source=rootfs
