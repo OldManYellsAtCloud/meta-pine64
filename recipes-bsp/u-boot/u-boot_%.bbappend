@@ -13,17 +13,13 @@ SRC_URI:append:a64 = " \
 SRC_URI:append:pinephonepro-1-0 = " \
     file://boot.cmd \
     file://0004-initramfs-for-ppp.patch \
-    file://9999-spi-test.cfg \
-    file://myconf.cfg \
-    file://aaa.patch \
-    file://bbb.patch \
-    file://0001-pine64-pinephonepro-device-enablement_v2.patch \
+    file://9999-store-uboot-on-mmc.cfg \
+    file://sidebutton.cfg \
     "
 
-
-# //0001-pine64-pinephonepro-device-enablement_v2.patch
-# 0004-initramfs-for-ppp.patch
-# /0006-ppp-saradc-debug.patch
+# bbb.patch
+# aaa.patch
+# 0001-pine64-pinephonepro-device-enablement_v2.patch
 
 SRC_URI:append:star64 = " \
     file://boot.cmd \
@@ -64,6 +60,8 @@ do_configure:prepend:pppro() {
 
 do_compile:append:pppro(){
     sed -i "s/baudrate=1500000/baudrate=115200/g" ${B}/u-boot-initial-env
+    echo "bootargs=console=ttyS2,115200 earlyprintk=serial,0xff1a0000,115200 root=/dev/mmcblk1p2 rw printk.time=1 rfkill.default_state=1" >> ${B}/u-boot-initial-env
+    echo "bootdelay=0" >> ${B}/u-boot-initial-env
 }
 
 do_compile:prepend:a64(){
