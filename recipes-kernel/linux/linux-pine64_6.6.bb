@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
 
-LINUX_VERSION ?= "6.6"
+LINUX_VERSION ?= "6.7"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
@@ -26,8 +26,7 @@ SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch
           "
 
 
-SRC_URI += "file://extra.cfg \
-            file://battery.cfg \
+SRC_URI += "file://battery.cfg \
             file://debug.cfg \
             file://screen_new.cfg \
             file://try.cfg \
@@ -38,11 +37,15 @@ SRC_URI += "file://extra.cfg \
             file://0001-silence-rk818-battery-driver.patch \
            "
 
+SRC_URI:append:pinephonepro-1-0 = " file://extra-ppp.cfg "
+SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
+
+
 do_kernel_metadata:prepend(){
 	if [ "$1" != "config" ]; then
 		cd ${STAGING_KERNEL_DIR}
 		git fetch origin '+refs/remotes/megi/*:refs/remotes/megi/*'
-		git checkout megi/orange-pi-6.6
+		git checkout megi/orange-pi-6.7
 		cd -
 	fi
 }

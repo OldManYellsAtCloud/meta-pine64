@@ -1,0 +1,51 @@
+Upstream-Status: Pending
+diff --git a/fs/fs.c b/fs/fs.c
+index 8324b4a22f..6f66b254ee 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -439,24 +439,33 @@ int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
+ 
+ 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
+ 						    &fs_partition, 1);
+-	if (part < 0)
++	if (part < 0) {
++		printf("fs_set_blk_dev: 1, part < 0, error\n");
+ 		return -1;
++	}
+ 
+ 	for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes); i++, info++) {
+ 		if (fstype != FS_TYPE_ANY && info->fstype != FS_TYPE_ANY &&
+-				fstype != info->fstype)
++				fstype != info->fstype){
++			printf("1 - iter %i cont\n", i);
+ 			continue;
++		}
+ 
+-		if (!fs_dev_desc && !info->null_dev_desc_ok)
++		if (!fs_dev_desc && !info->null_dev_desc_ok){
++			printf("2 - iter %i cont\n", i);
+ 			continue;
++		}
+ 
+ 		if (!info->probe(fs_dev_desc, &fs_partition)) {
+ 			fs_type = info->fstype;
+ 			fs_dev_part = part;
+ 			return 0;
++		} else {
++			printf("3 - iter %i cont\n", i);
+ 		}
+ 	}
+ 
++	printf("fs_set_blk_dev: 2, end, -1, error\n");
+ 	return -1;
+ }
+ 
+@@ -764,7 +773,7 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
+ 		return CMD_RET_USAGE;
+ 
+ 	if (fs_set_blk_dev(argv[1], (argc >= 3) ? argv[2] : NULL, fstype)) {
+-		log_err("Can't set block device\n");
++		log_err("Can't set block device. FSType: %d, argc >= 3?: %d\n", fstype, (argc >= 3));
+ 		return 1;
+ 	}
+ 

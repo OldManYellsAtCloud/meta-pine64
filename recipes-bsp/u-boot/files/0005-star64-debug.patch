@@ -1,0 +1,174 @@
+Upstream-Status: Pending
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index ffbc4b9476..d9ec0045f7 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -76,4 +76,5 @@ CONFIG_PINCTRL_STARFIVE=y
+ # CONFIG_RAM_SIFIVE is not set
+ CONFIG_SYS_NS16550=y
+ CONFIG_CADENCE_QSPI=y
+-CONFIG_TIMER_EARLY=y
++# CONFIG_TIMER_EARLY is not set
++CONFIG_TIMER=y
+diff --git a/drivers/timer/timer-uclass.c b/drivers/timer/timer-uclass.c
+index f4b871ac23..990bd3328a 100644
+--- a/drivers/timer/timer-uclass.c
++++ b/drivers/timer/timer-uclass.c
+@@ -153,6 +153,7 @@ int dm_timer_init(void)
+ 		return -EAGAIN;
+ 
+ 	if (CONFIG_IS_ENABLED(OF_REAL)) {
++		printf("dm_timer_init %d: inside CONFIG_IS_ENABLED(OF_REAL)\n", __LINE__);
+ 		/* Check for a chosen timer to be used for tick */
+ 		node = ofnode_get_chosen_node("tick-timer");
+ 
+@@ -162,8 +163,10 @@ int dm_timer_init(void)
+ 			 * If the timer is not marked to be bound before
+ 			 * relocation, bind it anyway.
+ 			 */
++			printf("dm_timer_init %d: node is valid\n", __LINE__);
+ 			if (!lists_bind_fdt(dm_root(), node, &dev, NULL, false)) {
+ 				ret = device_probe(dev);
++				printf("dm_timer_init %d: probing value: %d)\n", __LINE__, ret);
+ 				if (ret)
+ 					return ret;
+ 			}
+@@ -173,6 +176,7 @@ int dm_timer_init(void)
+ 	if (!dev) {
+ 		/* Fall back to the first available timer */
+ 		ret = uclass_first_device_err(UCLASS_TIMER, &dev);
++		printf("dm_timer_init %d: uclass_first_device_err(UCLASS_TIMER, &dev), val: %d, timerid: %d\n", __LINE__, ret, UCLASS_TIMER);
+ 		if (ret)
+ 			return ret;
+ 	}
+@@ -181,7 +185,7 @@ int dm_timer_init(void)
+ 		gd->timer = dev;
+ 		return 0;
+ 	}
+-
++	printf("dm_timer_init %d: I guess I will just die\n", __LINE__);
+ 	return -ENODEV;
+ }
+ 
+diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
+index e46d5717aa..f9dff4affd 100644
+--- a/drivers/core/uclass.c
++++ b/drivers/core/uclass.c
+@@ -56,11 +56,11 @@ static int uclass_add(enum uclass_id id, struct uclass **ucp)
+ 	struct uclass_driver *uc_drv;
+ 	struct uclass *uc;
+ 	int ret;
+-
++	printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 	*ucp = NULL;
+ 	uc_drv = lists_uclass_lookup(id);
+ 	if (!uc_drv) {
+-		debug("Cannot find uclass for id %d: please add the UCLASS_DRIVER() declaration for this UCLASS_... id\n",
++		printf("Cannot find uclass for id %d: please add the UCLASS_DRIVER() declaration for this UCLASS_... id\n",
+ 		      id);
+ 		/*
+ 		 * Use a strange error to make this case easier to find. When
+@@ -70,13 +70,16 @@ static int uclass_add(enum uclass_id id, struct uclass **ucp)
+ 		return -EPFNOSUPPORT;
+ 	}
+ 	uc = calloc(1, sizeof(*uc));
+-	if (!uc)
++	if (!uc){
++		printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 		return -ENOMEM;
++	}
+ 	if (uc_drv->priv_auto) {
+ 		void *ptr;
+ 
+ 		ptr = calloc(1, uc_drv->priv_auto);
+ 		if (!ptr) {
++			printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 			ret = -ENOMEM;
+ 			goto fail_mem;
+ 		}
+@@ -89,8 +92,10 @@ static int uclass_add(enum uclass_id id, struct uclass **ucp)
+ 
+ 	if (uc_drv->init) {
+ 		ret = uc_drv->init(uc);
+-		if (ret)
++		if (ret){
++			printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 			goto fail;
++		}
+ 	}
+ 
+ 	*ucp = uc;
+@@ -99,8 +104,10 @@ static int uclass_add(enum uclass_id id, struct uclass **ucp)
+ fail:
+ 	if (uc_drv->priv_auto) {
+ 		free(uclass_get_priv(uc));
++		printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 		uclass_set_priv(uc, NULL);
+ 	}
++	printf("uclass_add %d, id: %d\n", __LINE__, id);
+ 	list_del(&uc->sibling_node);
+ fail_mem:
+ 	free(uc);
+@@ -145,19 +152,25 @@ int uclass_destroy(struct uclass *uc)
+ int uclass_get(enum uclass_id id, struct uclass **ucp)
+ {
+ 	struct uclass *uc;
+-
++	printf("uclass_get %d, id: %d\n", __LINE__, id);
+ 	/* Immediately fail if driver model is not set up */
+-	if (!gd->uclass_root)
++	if (!gd->uclass_root){
++		printf("uclass_get %d, id: %d\n", __LINE__, id);
+ 		return -EDEADLK;
++	}
+ 	*ucp = NULL;
+ 	uc = uclass_find(id);
++	printf("uclass_get %d, id: %d\n", __LINE__, id);
+ 	if (!uc) {
+-		if (CONFIG_IS_ENABLED(OF_PLATDATA_INST))
++		printf("uclass_get %d, id: %d\n", __LINE__, id);
++		if (CONFIG_IS_ENABLED(OF_PLATDATA_INST)){
++			printf("uclass_get %d, id: %d\n", __LINE__, id);
+ 			return -ENOENT;
++		}
+ 		return uclass_add(id, ucp);
+ 	}
+ 	*ucp = uc;
+-
++	printf("uclass_get %d, id: %d\n", __LINE__, id);
+ 	return 0;
+ }
+ 
+@@ -251,12 +264,16 @@ int uclass_find_first_device(enum uclass_id id, struct udevice **devp)
+ 
+ 	*devp = NULL;
+ 	ret = uclass_get(id, &uc);
++	printf("uclass_find_first_device %d, uclass_id: %d, ret: %d - should be 0...\n", __LINE__, id, ret);
+ 	if (ret)
+ 		return ret;
+-	if (list_empty(&uc->dev_head))
++	if (list_empty(&uc->dev_head)){
++		printf("uclass_find_first_device %d, list_empty and returning 0?\n", __LINE__);
+ 		return 0;
++	}
+ 
+ 	*devp = list_first_entry(&uc->dev_head, struct udevice, uclass_node);
++	printf("uclass_find_first_device %d - got to the end, just retunging 0 here\n", __LINE__);
+ 
+ 	return 0;
+ }
+@@ -636,10 +653,13 @@ int uclass_first_device_check(enum uclass_id id, struct udevice **devp)
+ 
+ 	*devp = NULL;
+ 	ret = uclass_find_first_device(id, devp);
++	printf("uclass_first_device_check %d. Ret val of uclass_find_first_device: %d\n", __LINE__, ret);
+ 	if (ret)
+ 		return ret;
+-	if (!*devp)
++	if (!*devp){
++		printf("uclass_first_device_check %d. !*devp, returning 0! %d\n", __LINE__);
+ 		return 0;
++	}
+ 
+ 	return device_probe(*devp);
+ }
