@@ -1,0 +1,45 @@
+Upstream-Status: Pending
+diff --git a/arch/arm/dts/rk3399.dtsi b/arch/arm/dts/rk3399.dtsi
+index 3871c7fd83..ceafa21410 100644
+--- a/arch/arm/dts/rk3399.dtsi
++++ b/arch/arm/dts/rk3399.dtsi
+@@ -510,7 +510,7 @@
+ 		clock-names = "saradc", "apb_pclk";
+ 		resets = <&cru SRST_P_SARADC>;
+ 		reset-names = "saradc-apb";
+-		status = "disabled";
++		status = "okay";
+ 	};
+ 
+ 	i2c1: i2c@ff110000 {
+diff --git a/arch/arm/dts/rk3399-pinephone-pro.dts b/arch/arm/dts/rk3399-pinephone-pro.dts
+index 26757b3799..92a532cb01 100644
+--- a/arch/arm/dts/rk3399-pinephone-pro.dts
++++ b/arch/arm/dts/rk3399-pinephone-pro.dts
+@@ -29,6 +29,26 @@
+ 		stdout-path = "serial2:115200n8";
+ 	};
+ 
++	adc-keys {
++                compatible = "adc-keys";
++                io-channels = <&saradc 1>;
++                io-channel-names = "buttons";
++                keyup-threshold-microvolt = <1600000>;
++                poll-interval = <100>;
++
++                button-up {
++                        label = "Volume Up";
++                        linux,code = <KEY_VOLUMEUP>;
++                        press-threshold-microvolt = <1000>;
++                };
++
++                button-down {
++                        label = "Volume Down";
++                        linux,code = <KEY_VOLUMEDOWN>;
++                        press-threshold-microvolt = <290000>;
++                };
++        };
++
+ 	gpio-keys {
+ 		compatible = "gpio-keys";
+ 		pinctrl-names = "default";

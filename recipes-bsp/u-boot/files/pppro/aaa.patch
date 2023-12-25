@@ -1,0 +1,28 @@
+Upstream-Status: Pending
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index 02c0138a20..dee3a964ad 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -344,7 +344,7 @@ int usb_init(void)
+ 
+ 	/* if we were not able to find at least one working bus, bail out */
+ 	if (controllers_initialized == 0)
+-		printf("No working controllers found\n");
++		printf("xxxxNo working controllers found\n");
+ 
+ 	return usb_started ? 0 : -1;
+ }
+diff --git a/include/configs/pinephone-pro-rk3399.h b/include/configs/pinephone-pro-rk3399.h
+index 9cd4447343..2ab23aa48e 100644
+--- a/include/configs/pinephone-pro-rk3399.h
++++ b/include/configs/pinephone-pro-rk3399.h
+@@ -12,6 +12,9 @@
+ 		"stdout=serial,vidconsole\0" \
+ 		"stderr=serial,vidconsole\0"
+ 
++#define CFG_EXTRA_ENV_SETTINGS="bootargs=console=ttyS2,115200 root=/dev/mmcblk1p2 rw\0" \
++				"bootcmd=mmc dev 1; fatload mmc 1 $ramdisk_addr_r fitImage; bootm $ramdisk_addr_r\0"
++
+ #include <configs/rk3399_common.h>
+ 
+ #endif
