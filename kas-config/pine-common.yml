@@ -44,7 +44,7 @@ repos:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "6.6"
+    refspec: "ebb07490dae0e766829173d440c11bec01211371"
     layers:
       .:
 
@@ -53,6 +53,6 @@ local_conf_header:
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "120%"
+    PREFERRED_VERSION_firefox = "121%"
     SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/nanbield"
     INHERIT += "own-mirrors"

@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b265881..9bb7487 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,11 +10,28 @@ add_library(SettingsLib SHARED
+   settingslib.h
+ )
+ 
++
++set_target_properties(SettingsLib PROPERTIES VERSION "1.0")
++set_target_properties(SettingsLib PROPERTIES SOVERSION "1")
++set_target_properties(SettingsLib PROPERTIES PUBLIC_HEADER settingslib.h)
++
+ target_compile_definitions(SettingsLib PRIVATE SETTINGSLIB_LIBRARY)
+ 
+ include(GNUInstallDirs)
+ install(TARGETS SettingsLib
+-    BUNDLE DESTINATION .
+     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+ )
++
++# install(FILES settingslib.h settingslib.cpp DESTINATION "include/settingslib-${PROJECT_VERSION}")
++
++#export(TARGETS SettingsLib NAMESPACE SettingsLib:: FILE SettingsLibTargets.cmake)
++#set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
++#export(PACKAGE SettingsLib)
++
++#include(InstallRequiredSystemLibraries)
++#set(CPACK_PACKAGE_VERSION_MAJOR "1")
++#set(CPACK_PACKAGE_VERSION_MINOR "0")
++#set(CPACK_SOURCE_GENERATOR "TGZ")
++#include(CPack)

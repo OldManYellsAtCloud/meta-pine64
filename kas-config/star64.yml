@@ -7,6 +7,13 @@ machine: star64
 
 target: pinephone-image
 
+repos:
+  meta-riscv:
+    url: https://github.com/riscv/meta-riscv
+    refspec: master
+    layers:
+      .:
+
 local_conf_header:
   pp: |
     PACKAGE_CLASSES = "package_ipk"
@@ -15,3 +22,4 @@ local_conf_header:
     DISTRO = "pp"
     DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "
     EXTRA_DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "
+    IMG_GPU_POWERVR_VERSION = "img-gpu-powervr-bin-1.17.6210866"

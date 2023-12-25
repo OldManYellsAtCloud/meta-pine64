@@ -18,3 +18,174 @@
  }
  
  static u8 rk818_bat_check_reboot(struct rk818_battery *di)
+--- ./drivers/power/supply/rk818_battery.c.orig	2023-12-04 15:20:17.286344129 +0100
++++ ./drivers/power/supply/rk818_battery.c	2023-12-04 15:23:55.265798375 +0100
+@@ -712,12 +712,12 @@
+ 			ioffset = rk818_bat_get_ioffset(di);
+ 			di->poffset = coffset - ioffset;
+ 			rk818_bat_write(di, RK818_POFFSET_REG, di->poffset);
+-			BAT_INFO("new offset:c=0x%x, i=0x%x, p=0x%x\n",
+-				 coffset, ioffset, di->poffset);
++/*			BAT_INFO("new offset:c=0x%x, i=0x%x, p=0x%x\n",
++				 coffset, ioffset, di->poffset);*/
+ 			return true;
+ 		} else {
+-			BAT_INFO("coffset calib again %d.., max_cnt=%d\n",
+-				 i, di->adc_calib_cnt);
++/*			BAT_INFO("coffset calib again %d.., max_cnt=%d\n",
++				 i, di->adc_calib_cnt);*/
+ 			rk818_bat_set_coffset(di, coffset);
+ 			msleep(2000);
+ 		}
+@@ -867,13 +867,13 @@
+ 				di->age_keep_sec = get_boot_sec();
+ 			}
+ 
+-			BAT_INFO("init_age_algorithm: "
++/*			BAT_INFO("init_age_algorithm: "
+ 				 "age_vol:%d, age_ocv_cap:%d, "
+ 				 "age_ocv_soc:%d, old_age_level:%d, "
+ 				 "age_allow_update:%d, new_age_level:%d\n",
+ 				 di->age_voltage, di->age_ocv_cap,
+ 				 ocv_soc, age_level, di->age_allow_update,
+-				 di->age_level);
++				 di->age_level);*/
+ 		}
+ 	}
+ }
+@@ -1039,7 +1039,7 @@
+ 	buf = (fcc >> 0) & 0xff;
+ 	rk818_bat_write(di, RK818_NEW_FCC_REG0, buf);
+ 
+-	BAT_INFO("save fcc: %d\n", fcc);
++/*	BAT_INFO("save fcc: %d\n", fcc);*/
+ }
+ 
+ static int rk818_bat_get_fcc(struct rk818_battery *di)
+@@ -1052,11 +1052,11 @@
+ 	fcc |= rk818_bat_read(di, RK818_NEW_FCC_REG0) << 0;
+ 
+ 	if (fcc < MIN_FCC) {
+-		BAT_INFO("invalid fcc(%d), use design cap", fcc);
++/*		BAT_INFO("invalid fcc(%d), use design cap", fcc);*/
+ 		fcc = di->pdata->design_capacity;
+ 		rk818_bat_save_fcc(di, fcc);
+ 	} else if (fcc > di->pdata->design_qmax) {
+-		BAT_INFO("invalid fcc(%d), use qmax", fcc);
++/*		BAT_INFO("invalid fcc(%d), use qmax", fcc);*/
+ 		fcc = di->pdata->design_qmax;
+ 		rk818_bat_save_fcc(di, fcc);
+ 	}
+@@ -1143,8 +1143,8 @@
+ 	di->dsoc = di->rsoc;
+ 	di->is_first_on = true;
+ 
+-	BAT_INFO("first on: dsoc=%d, rsoc=%d cap=%d, fcc=%d, ov=%d\n",
+-		 di->dsoc, di->rsoc, di->nac, di->fcc, ocv_vol);
++/*	BAT_INFO("first on: dsoc=%d, rsoc=%d cap=%d, fcc=%d, ov=%d\n",
++		 di->dsoc, di->rsoc, di->nac, di->fcc, ocv_vol);*/
+ }
+ 
+ static void rk818_bat_not_first_pwron(struct rk818_battery *di)
+@@ -1209,11 +1209,11 @@
+ 	if (di->nac < 0)
+ 		di->nac = 0;
+ 
+-	BAT_INFO("dsoc=%d cap=%d v=%d ov=%d rv=%d min=%d psoc=%d pcap=%d\n",
++/*	BAT_INFO("dsoc=%d cap=%d v=%d ov=%d rv=%d min=%d psoc=%d pcap=%d\n",
+ 		 di->dsoc, di->nac, rk818_bat_get_avg_voltage(di),
+ 		 rk818_bat_get_ocv_voltage(di), rk818_bat_get_relax_voltage(di),
+ 		 di->pwroff_min, rk818_bat_get_prev_dsoc(di),
+-		 rk818_bat_get_prev_cap(di));
++		 rk818_bat_get_prev_cap(di));*/
+ }
+ 
+ static bool rk818_bat_ocv_sw_reset(struct rk818_battery *di)
+@@ -1408,8 +1408,8 @@
+ 
+ 	/* calib voltage kb */
+ 	rk818_bat_init_voltage_kb(di);
+-	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
+-		 ioffset, rk818_bat_get_coffset(di), di->poffset);
++/*	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
++		 ioffset, rk818_bat_get_coffset(di), di->poffset);*/
+ }
+ 
+ static void rk818_bat_init_caltimer(struct rk818_battery *di)
+@@ -1636,7 +1636,7 @@
+ 		if (!di->shtd_drop_sec)
+ 			di->shtd_drop_sec = get_boot_sec();
+ 		if (base2sec(di->shtd_drop_sec) > WAIT_SHTD_DROP_SEC) {
+-			BAT_INFO("voltage extreme low...soc:%d->0\n", di->dsoc);
++/*			BAT_INFO("voltage extreme low...soc:%d->0\n", di->dsoc);*/
+ 			di->shtd_drop_sec = 0;
+ 			di->dsoc = 0;
+ 		}
+@@ -2282,7 +2282,7 @@
+ 	soc = rk818_bat_vol_to_ocvsoc(di, vol);
+ 	cap = rk818_bat_vol_to_ocvcap(di, vol);
+ 	rk818_bat_init_capacity(di, cap);
+-	BAT_INFO("sleep ocv calib: rsoc=%d, cap=%d\n", soc, cap);
++/*	BAT_INFO("sleep ocv calib: rsoc=%d, cap=%d\n", soc, cap);*/
+ }
+ 
+ static void rk818_bat_relife_age_flag(struct rk818_battery *di)
+@@ -2319,11 +2319,11 @@
+ 			di->age_keep_sec = get_boot_sec();
+ 		}
+ 
+-		BAT_INFO("resume: age_vol:%d, age_ocv_cap:%d, age_ocv_soc:%d, "
++/*		BAT_INFO("resume: age_vol:%d, age_ocv_cap:%d, age_ocv_soc:%d, "
+ 			 "soc_level:%d, age_allow_update:%d, "
+ 			 "age_level:%d\n",
+ 			 di->age_voltage, di->age_ocv_cap, ocv_soc, soc_level,
+-			 di->age_allow_update, di->age_level);
++			 di->age_allow_update, di->age_level);*/
+ 	}
+ }
+ 
+@@ -2351,8 +2351,8 @@
+ 		sleep_soc = di->sleep_sum_cap * 100 / DIV(di->fcc);
+ 		tgt_dsoc = di->dsoc - sleep_soc;
+ 		if (sleep_soc > 0) {
+-			BAT_INFO("calib0: rl=%d, dl=%d, intval=%d\n",
+-				 di->rsoc, di->dsoc, sleep_soc);
++/*			BAT_INFO("calib0: rl=%d, dl=%d, intval=%d\n",
++				 di->rsoc, di->dsoc, sleep_soc);*/
+ 			if (di->dsoc < 5) {
+ 				di->dsoc--;
+ 			} else if ((tgt_dsoc < 5) && (di->dsoc >= 5)) {
+@@ -2373,8 +2373,8 @@
+ 		sleep_soc = di->sleep_sum_cap / DIV(di->fcc / 100);
+ 		gap_soc = di->dsoc - di->rsoc;
+ 
+-		BAT_INFO("calib1: rsoc=%d, dsoc=%d, intval=%d\n",
+-			 di->rsoc, di->dsoc, sleep_soc);
++/*		BAT_INFO("calib1: rsoc=%d, dsoc=%d, intval=%d\n",
++			 di->rsoc, di->dsoc, sleep_soc);*/
+ 		if (gap_soc > sleep_soc) {
+ 			if ((gap_soc - 5) > (sleep_soc * 2))
+ 				di->dsoc -= (sleep_soc * 2);
+@@ -2391,19 +2391,19 @@
+ 	if (di->voltage_avg <= pwroff_vol - 70) {
+ 		di->dsoc = 0;
+ 		rk_send_wakeup_key();
+-		BAT_INFO("low power sleeping, shutdown... %d\n", di->dsoc);
++/*		BAT_INFO("low power sleeping, shutdown... %d\n", di->dsoc);*/
+ 	}
+ 
+ 	if (ocv_soc_updated && sleep_soc && (di->rsoc - di->dsoc) < 5 &&
+ 	    di->dsoc < 40) {
+ 		di->dsoc--;
+-		BAT_INFO("low power sleeping, reserved... %d\n", di->dsoc);
++/*		BAT_INFO("low power sleeping, reserved... %d\n", di->dsoc);*/
+ 	}
+ 
+ 	if (di->dsoc <= 0) {
+ 		di->dsoc = 0;
+ 		rk_send_wakeup_key();
+-		BAT_INFO("sleep dsoc is %d...\n", di->dsoc);
++/*		BAT_INFO("sleep dsoc is %d...\n", di->dsoc);*/
+ 	}
+ 
+ 	DBG("<%s>. out: dsoc=%d, rsoc=%d, sum_cap=%d\n",

@@ -17,6 +17,8 @@ SRC_URI:append:star64 = " \
     file://boot.cmd \
     "
 
+SRC_URI:append:tibuta = " file://tibuta.cfg "
+
 DEPENDS:append:a64 = " u-boot-tools-native python3-pyelftools-native"
 
 DEPENDS:append:pppro = "python3-pyelftools-native"

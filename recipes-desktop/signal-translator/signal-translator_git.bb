@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 SRC_URI = "git://github.com/OldManYellsAtCloud/signal-translator.git;protocol=https;branch=master"
 SRC_URI += "file://signal-translator.service"
 
-DEPENDS = "sdbus-c++"
+DEPENDS = "sdbus-c++ loglibrary"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "7b6f2f79540e9113e4d5703304ee519e8835f8d6"
+SRCREV = "33dc9ff13971bb6933266f8cd5a3d16045ef837b"
 
 S = "${WORKDIR}/git"
 

@@ -8,11 +8,11 @@
 #
 # MSDOS partition table is required because the bootloader would overlap the
 # GPT table
-bootloader --ptable msdos
-#bootloader --ptable gpt
+#bootloader --ptable msdos
+bootloader --ptable gpt
 
 #part spl   --offset 64                          --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=u-boot-spl.bin.normal.out"
-part spl --offset 4096s	--ondisk mmcblk1  --no-table --source rawcopy --sourceparams="file=u-boot-spl.bin.normal.out"
+part spl	--offset 4096 --align 2 --ondisk mmcblk1 --source rawcopy --sourceparams="file=u-boot-spl.bin.normal.out" --part-type 2E54B353-1271-4842-806F-E436D6AF6985
 #part /boot --offset 16384 --size=100M --active --ondisk mmcblk1 --fstype=vfat --label pine64   --source bootimg-partition  --sourceparams="file=u-boot.itb"
-part /boot  --offset 8192s --active --ondisk mmcblk1  --label pine64   --source bootimg-partition  --sourceparams="file=u-boot.itb"
-part /     --align 4096  --ondisk mmcblk1 --fstype=ext4 --label platform --source=rootfs
+part /boot  --offset 8192 --align 2 --active --ondisk mmcblk1  --source rawcopy  --sourceparams="file=u-boot.itb" --part-type BC13C2FF-59E6-4262-A352-B275FD6F7172
+part /   --align 2 --ondisk mmcblk1 --fstype=ext4 --source=rootfs --part-type EBD0A0A2-B9E5-4433-87C0-68B6B72699C7

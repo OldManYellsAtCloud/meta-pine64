@@ -5,8 +5,8 @@ LICENSE = "MIT"
 
 inherit core-image populate_sdk_qt6
 
-
 IMAGE_INSTALL += " evtest \
+                   settingslib \
                    mingetty \
                    lua \
                    mesa \
@@ -36,6 +36,8 @@ IMAGE_INSTALL += " evtest \
                    screen \
                    eg25manager \
                    wayland-utils \
+                   libubootenv \
+                   curl \
 "
 
 # rtl8723cs-firmware
@@ -66,7 +68,7 @@ IMAGE_INSTALL += "\
     gdbserver \
     "
 
-IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file buttond touch-gesture info-panel power-up-modem eg25manager wvkbd signal-translator timetable"
+IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file buttond touch-gesture info-panel power-up-modem eg25manager wvkbd signal-translator timetable megapixels launcher"
 IMAGE_INSTALL:append:star64 = "jh7110-gpu-blob"
 
 # to test bluetooth audio
