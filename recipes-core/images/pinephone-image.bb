@@ -82,3 +82,5 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 
 # firefox requirement
 PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
+
+TOOLCHAIN_TARGET_TASK:append = " googletest "

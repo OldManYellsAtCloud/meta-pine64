@@ -10,11 +10,12 @@ SRC_URI:append:a64 = " \
     file://scp.bin \
     "
 
-SRC_URI:append:pinephonepro-1-0 = " \
+SRC_URI:append:pppro = " \
     file://boot.cmd \
     file://0004-initramfs-for-ppp.patch \
     file://9999-store-uboot-on-mmc.cfg \
     file://sidebutton.cfg \
+    file://enable-cat.cfg \
     "
 
 # bbb.patch

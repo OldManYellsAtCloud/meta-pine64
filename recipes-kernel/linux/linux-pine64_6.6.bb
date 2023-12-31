@@ -26,7 +26,8 @@ SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch
           "
 
 SRC_URI:append:pinephone-1-2 = " file://usb_bluetooth.cfg \
-                                 file://usb_wifi.cfg "
+                                 file://usb_wifi.cfg \
+                                 file://8999-boot-with-broken-mmc-cd-pin.patch"
 
 
 SRC_URI += "file://battery.cfg \
@@ -34,15 +35,13 @@ SRC_URI += "file://battery.cfg \
             file://screen_new.cfg \
             file://try.cfg \
             file://enable_blobs.cfg \
-            file://bake_in_camera_driver.patch \
-            file://8999-boot-with-broken-mmc-cd-pin.patch \
             file://tether.cfg \
-            file://0001-silence-rk818-battery-driver.patch \
            "
 
-SRC_URI:append:pinephonepro-1-0 = " file://extra-ppp.cfg "
+SRC_URI:append:pinephonepro-1-0 = " file://0001-silence-rk818-battery-driver.patch \
+                                    file://extra-ppp.cfg \
+                                    file://revert-saradc-commit-that-broke-adc-keys.patch "
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
-
 
 do_kernel_metadata:prepend(){
 	if [ "$1" != "config" ]; then
