@@ -3,14 +3,14 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=db9a68c16db2d1882b05938013
 
 
 SRC_URI = "git://github.com/OldManYellsAtCloud/buttond.git;protocol=https;branch=master"
-SRCREV = "70a583cfe68b0e36102d792392aa03ee9a2218b5"
+SRCREV = "f0ecfd929d84f783204e9bc4467fcf35b803fcaf"
 
 DEPENDS += "sdbus-c++ settingslib loglibrary"
 RDEPENDS:${PN} += "sdbus-c++"
 
 SRC_URI += "file://buttond.service"
 SRC_URI += "file://buttons.cfg"
-PR = "r05"
+PR = "r06"
 
 inherit cmake systemd 
 

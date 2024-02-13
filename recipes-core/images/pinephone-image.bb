@@ -38,8 +38,14 @@ IMAGE_INSTALL += " evtest \
                    wayland-utils \
                    libubootenv \
                    curl \
+                   rsync \
+                   nft-rules \
+                   save-logs \
+                   emailclient \
+                   screenlock \
 "
 
+# connman-client
 # rtl8723cs-firmware
 
 IMAGE_INSTALL += "\
@@ -68,7 +74,12 @@ IMAGE_INSTALL += "\
     gdbserver \
     "
 
-IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file buttond touch-gesture info-panel power-up-modem eg25manager wvkbd signal-translator timetable megapixels launcher"
+IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file \
+                               buttond touch-gesture info-panel \
+                               power-up-modem eg25manager wvkbd \
+                               signal-translator timetable \
+                               megapixels launcher"
+
 IMAGE_INSTALL:append:star64 = "jh7110-gpu-blob"
 
 # to test bluetooth audio
@@ -84,3 +95,4 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
 
 TOOLCHAIN_TARGET_TASK:append = " googletest "
+TOOLCHAIN_HOST_TASK:append = " nativesdk-loglibrary nativesdk-settingslib "

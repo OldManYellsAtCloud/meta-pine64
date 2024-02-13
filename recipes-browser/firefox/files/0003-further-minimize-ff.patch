@@ -21,15 +21,6 @@ index 4055865725..a1a9801b5f 100644
      if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
          return True
  
-@@ -543,7 +543,7 @@ set_define("MOZ_WAYLAND", depends_if(wayland_headers)(lambda _: True))
- def vaapi(target, toolkit_gtk):
-     # VAAPI is mostly used on x86(-64) but is sometimes used on ARM/ARM64 SOCs.
-     if target.cpu in ("arm", "aarch64", "x86", "x86_64") and toolkit_gtk:
--        return True
-+        return False
- 
- 
- @depends(target, toolkit_gtk)
 diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
 index 978166cbb3..4f5e2cb1c6 100644
 --- a/widget/gtk/GfxInfo.cpp

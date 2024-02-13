@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
 
-LINUX_VERSION ?= "6.7"
+LINUX_VERSION ?= "6.8"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
@@ -25,6 +25,8 @@ SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch
            file://9999-make-windows-install-NCM-drivers-automatically.patch \
           "
 
+# file://wifi-debug.patch
+
 SRC_URI:append:pinephone-1-2 = " file://usb_bluetooth.cfg \
                                  file://usb_wifi.cfg \
                                  file://8999-boot-with-broken-mmc-cd-pin.patch"
@@ -40,7 +42,9 @@ SRC_URI += "file://battery.cfg \
 
 SRC_URI:append:pinephonepro-1-0 = " file://0001-silence-rk818-battery-driver.patch \
                                     file://extra-ppp.cfg \
-                                    file://revert-saradc-commit-that-broke-adc-keys.patch "
+                                    file://revert-saradc-commit-that-broke-adc-keys.patch \
+                                    file://0002-silence-wifi-driver.patch"
+
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
 
 do_kernel_metadata:prepend(){

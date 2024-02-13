@@ -1,4 +1,4 @@
-PR = "r08"
+PR = "r11"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
@@ -10,3 +10,6 @@ do_install:append(){
 }
 
 FILES:${PN} += "/etc/connman/main.conf"
+
+PACKAGECONFIG:remove = "iptables"
+PACKAGECONFIG:append = " nftables "

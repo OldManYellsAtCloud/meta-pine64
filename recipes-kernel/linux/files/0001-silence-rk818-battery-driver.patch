@@ -189,3 +189,45 @@
  	}
  
  	DBG("<%s>. out: dsoc=%d, rsoc=%d, sum_cap=%d\n",
+diff --git a/drivers/power/supply/rk818_battery.c b/drivers/power/supply/rk818_battery.c
+index af6a84455369..350203e9acd1 100644
+--- a/drivers/power/supply/rk818_battery.c
++++ b/drivers/power/supply/rk818_battery.c
+@@ -2931,8 +2931,8 @@ static irqreturn_t rk818_vb_low_irq(int irq, void *bat)
+ 	struct rk818_battery *di = (struct rk818_battery *)bat;
+ 
+ 	rk_send_wakeup_key();
+-	BAT_INFO("lower power yet, power off system! v=%d, c=%d, dsoc=%d\n",
+-		 di->voltage_avg, di->current_avg, di->dsoc);
++/*	BAT_INFO("lower power yet, power off system! v=%d, c=%d, dsoc=%d\n",
++		 di->voltage_avg, di->current_avg, di->dsoc);*/
+ 
+ 	return IRQ_HANDLED;
+ }
+@@ -3388,10 +3388,10 @@ static int rk818_battery_suspend(struct platform_device *dev,
+ 	rk818_bat_write(di, RK818_VB_MON_REG, val);
+ 	rk818_bat_set_bits(di, RK818_INT_STS_MSK_REG1, VB_LOW_INT_EN, 0);
+ 
+-	BAT_INFO("suspend: dl=%d rl=%d c=%d v=%d cap=%d at=%ld ch=%d st=%s\n",
++/*	BAT_INFO("suspend: dl=%d rl=%d c=%d v=%d cap=%d at=%ld ch=%d st=%s\n",
+ 		 di->dsoc, di->rsoc, di->current_avg,
+ 		 rk818_bat_get_avg_voltage(di), rk818_bat_get_coulomb_cap(di),
+-		 di->sleep_dischrg_sec, di->sleep_chrg_online, bat_status[st]);
++		 di->sleep_dischrg_sec, di->sleep_chrg_online, bat_status[st]);*/
+ 
+ 	return 0;
+ }
+@@ -3422,11 +3422,11 @@ static int rk818_battery_resume(struct platform_device *dev)
+ 			time_step = DISCHRG_TIME_STEP2;
+ 	}
+ 
+-	BAT_INFO("resume: dl=%d rl=%d c=%d v=%d rv=%d "
++/*	BAT_INFO("resume: dl=%d rl=%d c=%d v=%d rv=%d "
+ 		 "cap=%d dt=%d at=%ld ch=%d st=%s\n",
+ 		 di->dsoc, di->rsoc, di->current_avg, di->voltage_avg,
+ 		 di->voltage_relax, rk818_bat_get_coulomb_cap(di), interval_sec,
+-		 di->sleep_dischrg_sec, di->sleep_chrg_online, bat_status[st]);
++		 di->sleep_dischrg_sec, di->sleep_chrg_online, bat_status[st]);*/
+ 
+ 	/* sleep: enough time and discharge */
+ 	if ((di->sleep_dischrg_sec > time_step) && (!di->sleep_chrg_online)) {

@@ -7,11 +7,14 @@ PV = "1.0+git"
 PR = "01"
 SRCREV = "679ae38f21a7efaf6877d15c56e62e7a91612754"
 
-DEPENDS = "googletest sdbus-c++ sdbus-c++-tools-native loglibrary"
+DEPENDS = "googletest loglibrary"
 RDEPENDS:${PN} = "loglibrary"
+RDEPENDS:${PN}-native = "loglibrary-native"
 
 S = "${WORKDIR}/git"
 
 inherit cmake
 
 PROVIDES = "settingslib"
+
+BBCLASSEXTEND:append = " native nativesdk "
