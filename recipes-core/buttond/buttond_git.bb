@@ -10,7 +10,8 @@ RDEPENDS:${PN} += "sdbus-c++"
 
 SRC_URI += "file://buttond.service"
 SRC_URI += "file://buttons.cfg"
-PR = "r06"
+SRC_URI += "file://sgy.pine.screenLock.conf"
+PR = "r07"
 
 inherit cmake systemd 
 
@@ -21,9 +22,11 @@ SRC_URI += "file://buttond.service"
 do_install:append(){
     install -D -m 0644 ${WORKDIR}/buttond.service ${D}${systemd_unitdir}/system/buttond.service
     install -D -m 0644 ${WORKDIR}/buttons.cfg ${D}${sysconfdir}/buttons.cfg
+    install -D -m 0644 ${WORKDIR}/sgy.pine.screenLock.conf ${D}${sysconfdir}/dbus-1/system.d/sgy.pine.screenLock.conf
 }
 
 FILES:${PN} = "${bindir}/buttons"
 FILES:${PN} += "${sysconfdir}/buttons.cfg"
+FILES:${PN} += "${sysconfdir}/dbus-1/system.d/sgy.pine.screenLock.conf"
 
 SYSTEMD_SERVICE:${PN} = "buttond.service"
