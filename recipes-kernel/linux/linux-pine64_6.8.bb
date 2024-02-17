@@ -34,8 +34,7 @@ SRC_URI:append:pinephone-1-2 = " file://usb_bluetooth.cfg \
 
 SRC_URI += "file://battery.cfg \
             file://debug.cfg \
-            file://screen_new.cfg \
-            file://try.cfg \
+            file://screen.cfg \
             file://enable_blobs.cfg \
             file://tether.cfg \
            "
