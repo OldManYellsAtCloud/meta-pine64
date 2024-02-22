@@ -42,7 +42,8 @@ SRC_URI += "file://battery.cfg \
 SRC_URI:append:pinephonepro-1-0 = " file://0001-silence-rk818-battery-driver.patch \
                                     file://extra-ppp.cfg \
                                     file://revert-saradc-commit-that-broke-adc-keys.patch \
-                                    file://0002-silence-wifi-driver.patch"
+                                    file://0002-silence-wifi-driver.patch \
+                                    file://9999-rk818-debug.patch"
 
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
 
@@ -50,7 +51,7 @@ do_kernel_metadata:prepend(){
 	if [ "$1" != "config" ]; then
 		cd ${STAGING_KERNEL_DIR}
 		git fetch origin '+refs/remotes/megi/*:refs/remotes/megi/*'
-		git checkout megi/orange-pi-6.7
+		git checkout megi/orange-pi-6.8
 		cd -
 	fi
 }

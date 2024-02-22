@@ -10,7 +10,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/emailclient;protocol=https;br
 
 # Modify these as desired
 PV = "1.0+git"
-SRCREV = "40089070bf5e216ddb761c9854356f529b5a4939"
+SRCREV = "92eb4d5925dcb9ae7a27872e9155815a9cc70270"
 SRCREV_FORMAT .= "_secret"
 SRCREV_secrets = "${AUTOREV}"
 
