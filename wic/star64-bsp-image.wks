@@ -14,5 +14,6 @@ bootloader --ptable gpt
 #part spl   --offset 64                          --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=u-boot-spl.bin.normal.out"
 part spl	--offset 4096 --align 2 --ondisk mmcblk1 --source rawcopy --sourceparams="file=u-boot-spl.bin.normal.out" --part-type 2E54B353-1271-4842-806F-E436D6AF6985
 #part /boot --offset 16384 --size=100M --active --ondisk mmcblk1 --fstype=vfat --label pine64   --source bootimg-partition  --sourceparams="file=u-boot.itb"
-part /boot  --offset 8192 --align 2 --active --ondisk mmcblk1  --source rawcopy  --sourceparams="file=u-boot.itb" --part-type BC13C2FF-59E6-4262-A352-B275FD6F7172
+part tpl  --offset 8192 --align 2 --active --ondisk mmcblk1  --source rawcopy  --sourceparams="file=u-boot.itb" --part-type BC13C2FF-59E6-4262-A352-B275FD6F7172
+part /boot --offset 16384 --size=100M --active --ondisk mmcblk1 --fstype=vfat --label star64   --source bootimg-partition
 part /   --align 2 --ondisk mmcblk1 --fstype=ext4 --source=rootfs --part-type EBD0A0A2-B9E5-4433-87C0-68B6B72699C7

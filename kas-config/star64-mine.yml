@@ -1,0 +1,24 @@
+header:
+  version: 11
+  includes:
+    - pine-common.yml
+
+machine: star64-mine
+
+target: star64-test
+
+repos:
+  meta-riscv:
+    url: https://github.com/riscv/meta-riscv
+    refspec: master
+    layers:
+      .:
+
+local_conf_header:
+  pp: |
+    PACKAGE_CLASSES = "package_ipk"
+    INHERIT += "rm_work"
+    DISTRO = "pp"
+    DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "
+    EXTRA_DISTRO_FEATURES += " x11 systemd wifi usbhost bluetooth pulseaudio pam wayland opengl "
+    IMG_GPU_POWERVR_VERSION = "img-gpu-powervr-bin-1.17.6210866"

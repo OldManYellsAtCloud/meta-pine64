@@ -1,0 +1,46 @@
+Upstream-Status: Pending
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b.dts b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b.dts
+index 3b3b3453a1..2dd5640d10 100644
+--- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b.dts
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b.dts
+@@ -7,6 +7,6 @@
+ #include "jh7110-starfive-visionfive-2.dtsi"
+ 
+ / {
+-	model = "StarFive VisionFive 2 v1.3B";
++	model = "Star64";
+ 	compatible = "starfive,visionfive-2-v1.3b", "starfive,jh7110";
+ };
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+index c6b6dfa940..e4fb91901f 100644
+--- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+@@ -29,7 +29,7 @@
+ 
+ 	memory@40000000 {
+ 		device_type = "memory";
+-		reg = <0x0 0x40000000 0x2 0x0>;
++		reg = <0x0 0x40000000 0x1 0x0>;
+ 	};
+ };
+ 
+diff --git a/drivers/timer/timer-uclass.c b/drivers/timer/timer-uclass.c
+index f4b871ac23..c12177c6f7 100644
+--- a/drivers/timer/timer-uclass.c
++++ b/drivers/timer/timer-uclass.c
+@@ -139,12 +139,15 @@ u64 timer_conv_64(u32 count)
+ int dm_timer_init(void)
+ {
+ 	struct udevice *dev = NULL;
++	struct uclass *uc;
+ 	__maybe_unused ofnode node;
+ 	int ret;
+ 
+ 	if (gd->timer)
+ 		return 0;
+ 
++	uclass_get(31, &uc);
++
+ 	/*
+ 	 * Directly access gd->dm_root to suppress error messages, if the
+ 	 * virtual root driver does not yet exist.
