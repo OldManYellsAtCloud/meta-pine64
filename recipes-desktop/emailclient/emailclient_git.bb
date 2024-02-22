@@ -6,6 +6,7 @@ RDEPENDS:${PN} = "qtwayland"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/emailclient;protocol=https;branch=master \
            file://mail.png \
+           file://email.cfg \
            git://git@192.168.1.130/opt/pine_secrets;branch=master;name=secrets;destsuffix=secrets;protocol=ssh"
 
 # Modify these as desired
@@ -16,11 +17,11 @@ SRCREV_secrets = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-# NOTE: unable to map the following CMake package dependencies: Qt6 GTest
 inherit qt6-cmake
 
 do_install:append(){
-  install -D -m 0644 ${S}/../secrets/emailclient/emailclient.cfg ${D}${sysconfdir}/launcher/emailclient.cfg
+  install -D -m 0644 ${S}/../email.cfg ${D}${sysconfdir}/launcher/email.cfg
   install -D -m 0644 ${S}/../mail.png ${D}${datadir}/pixmaps/mail.png
+  install -D -m 0644 ${S}/../secrets/emailclient/emailclient.cfg ${D}${sysconfdir}/emailclient.cfg
 }
 
