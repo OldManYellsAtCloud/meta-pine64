@@ -3,14 +3,14 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=db9a68c16db2d1882b05938013
 
 
 SRC_URI = "git://github.com/OldManYellsAtCloud/buttond.git;protocol=https;branch=master"
-SRCREV = "f0ecfd929d84f783204e9bc4467fcf35b803fcaf"
+SRCREV = "7b4e2190eb7567d95ed7af2633f7975af65d958a"
 
 DEPENDS += "sdbus-c++ settingslib loglibrary"
 RDEPENDS:${PN} += "sdbus-c++"
 
 SRC_URI += "file://buttond.service"
 SRC_URI += "file://buttons.cfg"
-SRC_URI += "file://sgy.pine.screenLock.conf"
+SRC_URI += "file://org.gspine.button.conf"
 PR = "r07"
 
 inherit cmake systemd 
@@ -22,11 +22,13 @@ SRC_URI += "file://buttond.service"
 do_install:append(){
     install -D -m 0644 ${WORKDIR}/buttond.service ${D}${systemd_unitdir}/system/buttond.service
     install -D -m 0644 ${WORKDIR}/buttons.cfg ${D}${sysconfdir}/buttons.cfg
-    install -D -m 0644 ${WORKDIR}/sgy.pine.screenLock.conf ${D}${sysconfdir}/dbus-1/system.d/sgy.pine.screenLock.conf
+    install -D -m 0644 ${WORKDIR}/org.gspine.button.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.button.conf
 }
 
 FILES:${PN} = "${bindir}/buttons"
 FILES:${PN} += "${sysconfdir}/buttons.cfg"
-FILES:${PN} += "${sysconfdir}/dbus-1/system.d/sgy.pine.screenLock.conf"
+FILES:${PN} += "${sysconfdir}/dbus-1/system.d/org.gspine.button.conf"
 
 SYSTEMD_SERVICE:${PN} = "buttond.service"
+
+COMPATIBLE_MACHINE = "^(pp|pppro|pinephone-1-2|pinephonepro-1-0)$"

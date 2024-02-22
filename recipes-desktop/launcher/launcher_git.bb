@@ -2,14 +2,14 @@ DESCRIPTION = "Small qt5 application to control some PinePhone properties"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
-DEPENDS = "qtwayland sdbus-c++ qtdeclarative-native"
+DEPENDS = "qtwayland sdbus-c++ qtdeclarative-native loglibrary"
 RDEPENDS:${PN} = "qtwayland sdbus-c++"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/Plauncher.git;protocol=ssh;branch=master"
 SRC_URI += "file://launcher.service"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "c61b15ea5ceeab09a7c79b64862de20e45202436"
+SRCREV = "d5e747fae38431d0643b9b3e61d3306051dbaa8a"
 
 S = "${WORKDIR}/git"
 
