@@ -2,6 +2,8 @@
 Description=Sway window manager
 
 [Service]
+User=swayuser
+Group=tty
 Type=idle
 Environment=XDG_RUNTIME_DIR=/var/run/wayland
 ExecStart=/usr/bin/sway

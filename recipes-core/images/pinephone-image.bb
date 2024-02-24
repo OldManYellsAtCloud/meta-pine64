@@ -43,10 +43,8 @@ IMAGE_INSTALL += " evtest \
                    save-logs \
                    emailclient \
                    screenlock \
+                   udev-rules \
 "
-
-# connman-client
-# rtl8723cs-firmware
 
 IMAGE_INSTALL += "\
     packagegroup-core-x11-xserver \
@@ -94,5 +92,5 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 # firefox requirement
 PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
 
-TOOLCHAIN_TARGET_TASK:append = " googletest "
+TOOLCHAIN_TARGET_TASK:append = " googletest qtwebview"
 TOOLCHAIN_HOST_TASK:append = " nativesdk-loglibrary nativesdk-settingslib "

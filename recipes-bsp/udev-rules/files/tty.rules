@@ -1,0 +1,4 @@
+# sway needs r/w access to tty, however it is not
+# possible by default in case it is not running with root
+# this adds write access to tty group users.
+SUBSYSTEM=="tty", ACTION=="add", MODE="0660"
