@@ -7,7 +7,7 @@ Environment=XDG_RUNTIME_DIR=/var/run/wayland
 Environment=WAYLAND_DISPLAY=wayland-1
 Environment=QT_QPA_PLATFORM=wayland
 Environment=HOME=/home/root
-ExecStart=/bin/sh -c "for i in `seq 10`; do if [ ! -e $XDG_RUNTIME_DIR/wayland-1 ]; then sleep 1; else break; fi done; SWAYSOCK=`ls /var/run/wayland/sway-ipc.0.*` exec /usr/bin/launcher"
+ExecStart=/bin/sh -c "for i in `seq 10`; do if [ ! -e $XDG_RUNTIME_DIR/wayland-1 ]; then sleep 1; else break; fi done; SWAYSOCK=`ls /var/run/wayland/sway-ipc.*` exec /usr/bin/launcher"
 
 [Install]
 WantedBy=multi-user.target
