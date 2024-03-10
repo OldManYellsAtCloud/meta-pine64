@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/ModemManager.git;protocol=https;branch=master"
 
-DEPENDS = "sdbus-c++ qtserialport settingslib"
+DEPENDS = "sdbus-c++ qtserialport settingslib qtwayland qtdeclarative qtwayland-native"
 RDEPENDS:${PN} = "qtserialport settingslib"
 
 # Modify these as desired
@@ -16,5 +16,5 @@ S = "${WORKDIR}/git"
 inherit qt6-cmake
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-EXTRA_OECMAKE = ""
+EXTRA_OECMAKE = " -Dbuild_ui=ON "
 

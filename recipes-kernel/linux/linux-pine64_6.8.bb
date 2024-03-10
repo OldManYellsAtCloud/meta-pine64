@@ -43,7 +43,8 @@ SRC_URI:append:pinephonepro-1-0 = " file://0001-silence-rk818-battery-driver.pat
                                     file://extra-ppp.cfg \
                                     file://revert-saradc-commit-that-broke-adc-keys.patch \
                                     file://0002-silence-wifi-driver.patch \
-                                    file://9999-rk818-debug.patch"
+                                    file://9999-rk818-debug.patch \
+                                    file://defconfig"
 
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
 
@@ -63,7 +64,7 @@ KBUILD_DEFCONFIG:sopine-a64 = "defconfig"
 KBUILD_DEFCONFIG:pine-a64-lts = "defconfig"
 KBUILD_DEFCONFIG:pine-a64-plus = "defconfig"
 KBUILD_DEFCONFIG:pinephone-1-2 = "pinephone_defconfig"
-KBUILD_DEFCONFIG:pinephonepro-1-0 = "pinephone_pro_defconfig"
+# KBUILD_DEFCONFIG:pinephonepro-1-0 = "pinephone_pro_defconfig"
 KCONFIG_MODE="--alldefconfig"
 
 COMPATIBLE_MACHINE = "pine-a64-lts|sopine-a64|pine-a64-plus|pinephone-1-2|pinephonepro-1-0"

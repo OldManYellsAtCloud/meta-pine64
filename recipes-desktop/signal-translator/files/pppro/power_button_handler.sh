@@ -2,7 +2,7 @@
 
 go_down(){
 	# disable touchscreen
-	echo 1 > /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input1/inhibited &
+	echo 1 > `ls /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input*/inhibited` &
 	# turn off backlight
 	echo 4 > /sys/class/backlight/backlight/bl_power &
 	# turn off most of CPU cores
@@ -17,7 +17,7 @@ go_down(){
 
 bring_up(){
 	# enable touchscreen
-	echo 0 > /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input1/inhibited &
+	echo 0 > `ls /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input*/inhibited` &
 	# turn on backlight
 	echo 0 > /sys/class/backlight/backlight/bl_power &
 	# turn on the CPU cores
@@ -33,7 +33,7 @@ bring_up(){
 
 #check if touchscreen is enabled, and infer the current state of it
 
-CURRENT_STATUS=`cat /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input1/inhibited`
+CURRENT_STATUS=`cat /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input*/inhibited`
 
 if [ $CURRENT_STATUS -eq 0 ]; then
 	go_down

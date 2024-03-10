@@ -4,7 +4,7 @@ header:
 repos:
   meta-oe:
     url: https://github.com/openembedded/meta-openembedded
-    refspec: nanbield
+    refspec: master-next
     layers:
       meta-oe:
       meta-networking:
@@ -12,7 +12,7 @@ repos:
       meta-python:
   poky:
     url: git://git.yoctoproject.org/poky
-    refspec: nanbield
+    refspec: scarthgap
     layers:
       meta:
       meta-poky:
@@ -38,13 +38,13 @@ repos:
     layers:
       .:
   meta-wayland:
-    url: https://github.com/MarkusVolk/meta-wayland.git
-    refspec: nanbield
+    url: https://codeberg.org/flk/meta-wayland.git
+    refspec: master
     layers:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "ebb07490dae0e766829173d440c11bec01211371"
+    refspec: "6.6.2"
     layers:
       .:
 
@@ -54,6 +54,7 @@ local_conf_header:
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
     PREFERRED_VERSION_firefox = "123%"
-    SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/nanbield"
+    SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/scarthgap"
     INHERIT += "own-mirrors"
     HOSTTOOLS += "rpm pkgconf"
+    BB_GENERATE_MIRROR_TARBALLS = "1"

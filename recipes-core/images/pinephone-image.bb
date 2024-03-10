@@ -44,6 +44,8 @@ IMAGE_INSTALL += " evtest \
                    emailclient \
                    screenlock \
                    udev-rules \
+                   dictionary \
+                   modemmanager-ng \
 "
 
 IMAGE_INSTALL += "\
