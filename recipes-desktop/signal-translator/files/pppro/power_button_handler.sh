@@ -13,6 +13,10 @@ go_down(){
 	echo 0 > /sys/devices/system/cpu/cpu3/online &
 	echo 0 > /sys/devices/system/cpu/cpu4/online &
 	echo 0 > /sys/devices/system/cpu/cpu5/online &
+	# send a signal about going down
+	dbus-send --system --dest=org.gspine.display --type=signal /org/gspine/display org.gspine.display.screenOff boolean:true &
+	# switch modem to low power mode
+	dbus-send --system --dest=sgy.pine.modem --type=method_call --print-reply=literal /sgy/pine/modem sgy.pine.modem.enable_low_power string:1
 }
 
 bring_up(){
@@ -29,6 +33,10 @@ bring_up(){
 	# change governor back only once all cores are back up
 	echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor &
 	echo performance > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor &
+	# send a signal about coming back up
+	dbus-send --system --dest=org.gspine.display --type=signal /org/gspine/display org.gspine.display.screenOff boolean:false &
+	# bring back the modem from low power mode
+	dbus-send --system --dest=sgy.pine.modem --type=method_call --print-reply=literal /sgy/pine/modem sgy.pine.modem.enable_low_power string:0
 }
 
 #check if touchscreen is enabled, and infer the current state of it
