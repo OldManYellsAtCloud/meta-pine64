@@ -1,0 +1,12 @@
+[Unit]
+Description=PIN input GUI
+After=modemmanager.service
+
+[Service]
+ExecStart=/usr/bin/pin-input
+Type=idle
+ExecStop=killall pin-input
+
+
+[Install]
+WantedBy=multi-user.target

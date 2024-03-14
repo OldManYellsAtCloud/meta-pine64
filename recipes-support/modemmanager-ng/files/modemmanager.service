@@ -1,0 +1,12 @@
+[Unit]
+Description=Control EG25 modem
+After=power-up-modem.service
+
+[Service]
+ExecStart=/usr/bin/modemmanager
+Type=idle
+ExecStop=killall modemmanager
+
+
+[Install]
+WantedBy=multi-user.target

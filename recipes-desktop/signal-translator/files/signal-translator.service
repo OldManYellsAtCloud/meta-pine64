@@ -3,6 +3,8 @@ Description=Handle keyboard visibility
 After=wvkbd.service
 
 [Service]
+Environment=XDG_RUNTIME_DIR=/var/run/wayland
+Environment=WAYLAND_DISPLAY=wayland-1
 ExecStart=/usr/bin/signal-translator
 
 [Install]

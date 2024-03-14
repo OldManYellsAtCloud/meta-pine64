@@ -1,0 +1,11 @@
+[Unit]
+Description=LED indicator for shutdown
+
+[Service]
+Type=oneshot
+ExecStop=sh -c 'echo 1 > /sys/class/leds/red:indicator/brightness'
+RemainAfterExit=yes
+
+
+[Install]
+WantedBy=multi-user.target

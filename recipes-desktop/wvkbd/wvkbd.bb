@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/OldManYellsAtCloud/wvkbd.git;protocol=https;branch=r
 SRC_URI += "file://wvkbd.service"
 
 SRCREV = "${AUTOREV}"
-# 83edf203a7e6c1c08dd97bebcc9a240f04565ccc
 
 S = "${WORKDIR}/git"
 

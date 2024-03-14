@@ -1,0 +1,16 @@
+ap can be NULL at this point, which makes the system very unhappy.
+Apparently this was fixed in the next version of ofono, but this is
+this version and not the next.
+
+Upstream-Status: Pending
+--- ./src/lte.c.orig	2024-03-13 11:22:14.625318527 +0100
++++ ./src/lte.c	2024-03-13 11:22:26.081131013 +0100
+@@ -83,7 +83,7 @@
+ 		}
+ 	}
+ 
+-	if (!is_valid_apn(ap->apn))
++	if (!ap || !is_valid_apn(ap->apn))
+ 		return false;
+ 
+ 	if (ap->username && strlen(ap->username) >

@@ -19,7 +19,7 @@ EXTRA_OECMAKE = " -Dbuild_ui=ON "
 
 do_install:append(){
   install -D -m 0644 ${WORKDIR}/modemmanager.service ${D}${systemd_unitdir}/system/modemmanager.service
-  install -D -m 0644 ${WORKDIR}/appconfig.cfg ${D}${sysconfdir}/modemservice.cfg
+  install -D -m 0644 ${WORKDIR}/appconfig.cfg ${D}${sysconfdir}/modemmanager.cfg
 }
 
 SYSTEMD_SERVICE:${PN} = "modemmanager.service"

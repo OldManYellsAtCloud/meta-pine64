@@ -34,7 +34,6 @@ IMAGE_INSTALL += " evtest \
                    signal-translator \
                    foot \
                    screen \
-                   eg25manager \
                    wayland-utils \
                    libubootenv \
                    curl \
@@ -46,6 +45,8 @@ IMAGE_INSTALL += " evtest \
                    udev-rules \
                    dictionary \
                    modemmanager-ng \
+                   pin-enter \
+                   shutdown-led-indicator \
 "
 
 IMAGE_INSTALL += "\

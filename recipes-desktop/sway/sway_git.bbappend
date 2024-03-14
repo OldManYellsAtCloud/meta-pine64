@@ -1,6 +1,6 @@
 inherit systemd useradd
 
-PR = "r18"
+PR = "r19"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://sway.service"
@@ -31,5 +31,5 @@ do_install:append(){
 RDEPENDS:${PN}:remove = "python3 python-i3ipc"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "-u 1100 -d /home/swayuser -r -s /bin/sh -g swaygroup -G input,tty,video swayuser"
+USERADD_PARAM:${PN} = "-u 1100 -d /home/swayuser -m -r -s /bin/sh -g swaygroup -G input,tty,video swayuser"
 GROUPADD_PARAM:${PN} = "-g 500 swaygroup"
