@@ -7,6 +7,13 @@ machine: pinephonepro-1-0
 
 target: pinephone-image
 
+repos:
+  meta-swupdate:
+    url: https://github.com/sbabic/meta-swupdate
+    refspec: master
+    layers:
+      .:
+
 local_conf_header:
   pp: |
     PACKAGE_CLASSES = "package_ipk"

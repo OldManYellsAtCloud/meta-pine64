@@ -13,3 +13,16 @@ index 667462369a32..5be96be5197e 100644
  				goto exit;
  			}
  		}
+diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+index 1ed169140c6a..91a804dd3d87 100644
+--- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
++++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+@@ -8071,7 +8071,7 @@ brcmf_set_channel(struct brcmf_cfg80211_info *cfg, struct ieee80211_channel *cha
+ 	if (chspec != INVCHANSPEC) {
+ 		err = brcmf_fil_iovar_int_set(ifp, "chanspec", chspec);
+ 		if (err) {
+-			brcmf_err("set chanspec 0x%04x fail, reason %d\n", chspec, err);
++//			brcmf_err("set chanspec 0x%04x fail, reason %d\n", chspec, err);
+ 			err = -EINVAL;
+ 		}
+ 	} else {

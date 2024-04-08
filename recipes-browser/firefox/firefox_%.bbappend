@@ -14,6 +14,10 @@ SRC_URI += "file://common \
             file://0003-further-minimize-ff.patch \
            "
 
+#            file://hwacc-debug.patch 
+
+
+
 do_install:append(){
     mkdir -p ${D}${sysconfdir}/firefox/policies
     cp ${WORKDIR}/policies.json ${D}${sysconfdir}/firefox/policies/
@@ -43,8 +47,12 @@ FILES:${PN} += "${sysconfdir}/launcher/firefox.cfg"
 
 PACKAGECONFIG:append = " forbid-multiple-compositors openmax disable-sandboxed-libraries wayland-only"
 
-EXTRA_OECONF:append = " --disable-backgroundtasks --disable-necko-wifi --enable-dbus --disable-printing --disable-synth-speechd --disable-webspeech --disable-webdriver --disable-accessibility --enable-mobile-optimize --disable-parental-controls --disable-legacy-profile-creation --enable-startupcache --disable-real-time-tracing --disable-webspeechtestbackend"
+EXTRA_OECONF:append = " --disable-backgroundtasks --disable-necko-wifi --enable-dbus --disable-printing \
+                        --disable-synth-speechd --disable-webspeech --disable-webdriver --disable-accessibility \
+                        --enable-mobile-optimize --disable-parental-controls --disable-legacy-profile-creation \
+                        --enable-startupcache --disable-real-time-tracing --disable-webspeechtestbackend \
+                        "
 
 PACKAGECONFIG:append:armv6 = " system-libvpx system-jpeg "
 
-PR = "r09"
+PR = "r10"

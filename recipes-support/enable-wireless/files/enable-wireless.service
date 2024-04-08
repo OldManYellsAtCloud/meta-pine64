@@ -2,7 +2,7 @@
 Description=Enable wireless devices
 
 [Service]
-ExecStart=/usr/sbin/rfkill unblock all
+ExecStart=/usr/sbin/rfkill unblock all && /usr/bin/connmanctl enable cellular
 Type=idle
 
 [Install]

@@ -5,7 +5,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/ModemManager.git;protocol=htt
            file://modemmanager.service \
            file://appconfig.cfg"
 
-DEPENDS = "sdbus-c++ qtserialport settingslib qtwayland qtdeclarative qtwayland-native"
+DEPENDS = "sdbus-c++ qtserialport settingslib qtwayland qtdeclarative qtwayland-native loglibrary"
 RDEPENDS:${PN} = "qtserialport settingslib"
 
 PV = "1.0+git"
@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 
 inherit qt6-cmake systemd
 
-EXTRA_OECMAKE = " -Dbuild_ui=ON "
+EXTRA_OECMAKE = " -Dbuild_ui=OFF "
 
 do_install:append(){
   install -D -m 0644 ${WORKDIR}/modemmanager.service ${D}${systemd_unitdir}/system/modemmanager.service

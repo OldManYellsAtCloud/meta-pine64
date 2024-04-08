@@ -47,6 +47,7 @@ IMAGE_INSTALL += " evtest \
                    modemmanager-ng \
                    pin-enter \
                    shutdown-led-indicator \
+                   kernel-module-cryptosk \
 "
 
 IMAGE_INSTALL += "\

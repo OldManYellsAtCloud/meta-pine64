@@ -34,7 +34,7 @@ repos:
       meta-firefox:
   meta-clang:
     url: https://github.com/kraj/meta-clang
-    refspec: nanbield
+    refspec: master
     layers:
       .:
   meta-wayland:
@@ -44,7 +44,7 @@ repos:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "6.6.2"
+    refspec: "6.7.0"
     layers:
       .:
 
@@ -53,7 +53,7 @@ local_conf_header:
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "123%"
+    PREFERRED_VERSION_firefox = "124%"
     SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/scarthgap"
     INHERIT += "own-mirrors"
     HOSTTOOLS += "rpm pkgconf"

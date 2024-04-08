@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
 
-LINUX_VERSION ?= "6.8"
+LINUX_VERSION ?= "6.9"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
 
-BRANCH = "master"
+BRANCH = "orange-pi-${LINUX_VERSION}"
 SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
@@ -23,6 +23,7 @@ do_kernel_metadata[network] = "1"
 
 SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch=${BRANCH} \
            file://9999-make-windows-install-NCM-drivers-automatically.patch \
+           file://0003-fix-serial-com.patch \
           "
 
 # file://wifi-debug.patch
@@ -47,15 +48,6 @@ SRC_URI:append:pinephonepro-1-0 = " file://0001-silence-rk818-battery-driver.pat
                                     file://defconfig"
 
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
-
-do_kernel_metadata:prepend(){
-	if [ "$1" != "config" ]; then
-		cd ${STAGING_KERNEL_DIR}
-		git fetch origin '+refs/remotes/megi/*:refs/remotes/megi/*'
-		git checkout megi/orange-pi-6.8
-		cd -
-	fi
-}
 
 KCONF_AUDIT_LEVEL="1"
 KCONF_BSP_AUDIT_LEVEL="5"

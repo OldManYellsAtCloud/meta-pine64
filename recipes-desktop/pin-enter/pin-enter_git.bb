@@ -11,7 +11,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;br
            file://pin-enter.service"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "7b0a40a188b5d5e84da045a277e7ceee859a46e2"
+SRCREV = "cb57ef45e1a8407bf34c09ff248af70c5c5d96a0"
 
 S = "${WORKDIR}/git"
 
