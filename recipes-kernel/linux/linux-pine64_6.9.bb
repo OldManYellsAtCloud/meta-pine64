@@ -24,6 +24,7 @@ do_kernel_metadata[network] = "1"
 SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch=${BRANCH} \
            file://9999-make-windows-install-NCM-drivers-automatically.patch \
            file://0003-fix-serial-com.patch \
+           file://0004-rk818-fix-unsupported-behavior-spam.patch \
           "
 
 # file://wifi-debug.patch
