@@ -3,8 +3,9 @@
 go_down(){
 	# disable touchscreen
 	echo 1 > `ls /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input*/inhibited` &
-	# turn off backlight
+	# turn off backlight and screen
 	echo 4 > /sys/class/backlight/backlight/bl_power &
+	echo 4 > /sys/devices/platform/display-subsystem/graphics/fb0/blank &
 	# turn off most of CPU cores
 	echo powersave > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor &
 	echo powersave > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor &
@@ -22,8 +23,9 @@ go_down(){
 bring_up(){
 	# enable touchscreen
 	echo 0 > `ls /sys/devices/platform/ff130000.i2c/i2c-3/3-0014/input/input*/inhibited` &
-	# turn on backlight
+	# turn on backlight and screen
 	echo 0 > /sys/class/backlight/backlight/bl_power &
+	echo 0 > /sys/devices/platform/display-subsystem/graphics/fb0/blank &
 	# turn on the CPU cores
 	echo 1 > /sys/devices/system/cpu/cpu1/online
 	echo 1 > /sys/devices/system/cpu/cpu2/online
