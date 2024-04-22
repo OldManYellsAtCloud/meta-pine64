@@ -8,10 +8,11 @@ RDEPENDS:${PN} = "qtwayland qtdeclarative modemmanager-ng"
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;branch=master \
            file://sim-card.png \
            file://pin-enter.cfg \
-           file://pin-enter.service"
+           file://pin-enter.service \
+           file://org.gspine.sim.conf"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "cb57ef45e1a8407bf34c09ff248af70c5c5d96a0"
+SRCREV = "23fae895e40507d4c0abba81569b318ff8d5ad54"
 
 S = "${WORKDIR}/git"
 
@@ -23,6 +24,7 @@ do_install(){
   install -d ${D}${datadir}/pixmaps
   install -m 0555 ${S}/../sim-card.png ${D}${datadir}/pixmaps/
   install -D -m 0555 ${S}/../pin-enter.cfg ${D}${sysconfdir}/launcher/pin-enter.cfg
+  install -D -m 0644 ${S}/../org.gspine.sim.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.sim.conf
 }
 
 FILES:${PN} += "${datadir}/pixmaps/sim-card.png"
