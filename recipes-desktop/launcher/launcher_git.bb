@@ -9,7 +9,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/Plauncher.git;protocol=ssh;br
 SRC_URI += "file://launcher.service"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "db42fc0545cf9ae20f0ea7ca77856de0e4502924"
+SRCREV = "b0fa5631c153cad077dde1329aeaf58c86c39f08"
 
 S = "${WORKDIR}/git"
 
