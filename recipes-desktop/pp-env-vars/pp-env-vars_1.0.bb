@@ -1,8 +1,8 @@
-DESCRIPTION = "Set basic environment variables files for Wayland"
+DESCRIPTION = "Set basic environment variables for all profiles"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PR = "r06"
+PR = "r07"
 
 SRC_URI += "file://set-env-vars.sh"
 

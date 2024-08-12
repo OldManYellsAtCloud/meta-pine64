@@ -5,3 +5,4 @@ export SWAYSOCK=$(ls $XDG_RUNTIME_DIR/sway-ipc*.sock | head -n 1)
 export $(dbus-launch | grep DBUS_SESSION_BUS_ADDRESS)
 export QT_QPA_PLATFORM=wayland
 export LANG=C.UTF-8
+export FONTCONFIG_PATH=/etc/fonts

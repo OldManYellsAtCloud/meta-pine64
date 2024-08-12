@@ -8,8 +8,8 @@ RDEPENDS:${PN} = "qtwayland sdbus-c++"
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/Plauncher.git;protocol=ssh;branch=master"
 SRC_URI += "file://launcher.service"
 
-PV = "1.0+git${SRCPV}"
-SRCREV = "b0fa5631c153cad077dde1329aeaf58c86c39f08"
+PV = "1.1+git${SRCPV}"
+SRCREV = "8e2a4db73761ba662a1ef5291bf00f267f116c32"
 
 S = "${WORKDIR}/git"
 

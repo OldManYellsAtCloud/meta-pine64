@@ -8,8 +8,8 @@ SRC_URI += "file://power_button_handler.sh"
 
 DEPENDS = "sdbus-c++ loglibrary settingslib"
 
-PV = "1.0+git${SRCPV}"
-SRCREV = "b6d906b637719b3ad556a8a148e051d9d0c2d69c"
+PV = "1.1+git${SRCPV}"
+SRCREV = "e848b1bee2cb0ffd9660a64f9ae8ca9ed5650a8a"
 
 S = "${WORKDIR}/git"
 

@@ -1,5 +1,5 @@
 # Simple initramfs image. Mostly used for live images.
-SUMMARY = "Small image capable of booting a device."
+SUMMARY = "InitramFS with some firmware blobs for pinephone pro and ."
 DESCRIPTION = "Small image capable of booting a device. The kernel includes \
 the Minimal RAM-based Initial Root Filesystem (initramfs), which finds the \
 first 'init' program more efficiently."

@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=db9a68c16db2d1882b05938013
 
 
 SRC_URI = "git://github.com/OldManYellsAtCloud/buttond.git;protocol=https;branch=master"
-SRCREV = "7b4e2190eb7567d95ed7af2633f7975af65d958a"
+SRCREV = "9da829b135d0ab98517741ac25e0c22cce875bd9"
 
 DEPENDS += "sdbus-c++ settingslib loglibrary"
 RDEPENDS:${PN} += "sdbus-c++"

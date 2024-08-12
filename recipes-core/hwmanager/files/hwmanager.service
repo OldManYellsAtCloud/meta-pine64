@@ -1,0 +1,9 @@
+[Unit]
+Description=Hardware manager service
+
+[Service]
+ExecStart=/usr/bin/hwmanager
+ExecStop=killall -SIGTERM hwmanager
+
+[Install]
+WantedBy=multi-user.target

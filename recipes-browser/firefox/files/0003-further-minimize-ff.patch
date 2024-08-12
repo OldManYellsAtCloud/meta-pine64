@@ -21,18 +21,3 @@ index 4055865725..a1a9801b5f 100644
      if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
          return True
  
-diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
-index 978166cbb3..4f5e2cb1c6 100644
---- a/widget/gtk/GfxInfo.cpp
-+++ b/widget/gtk/GfxInfo.cpp
-@@ -222,8 +222,8 @@ void GfxInfo::GetData() {
-   char* glxData = nullptr;
-   auto free = mozilla::MakeScopeExit([&] { g_free((void*)glxData); });
- 
--  bool error = !ManageChildProcess("glxtest", &sGLXTestPID, &sGLXTestPipe,
--                                   GFX_TEST_TIMEOUT, &glxData);
-+  bool error = true;
-+
-   if (error) {
-     gfxCriticalNote << "glxtest: ManageChildProcess failed\n";
-   }

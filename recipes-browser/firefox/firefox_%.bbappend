@@ -14,9 +14,6 @@ SRC_URI += "file://common \
             file://0003-further-minimize-ff.patch \
            "
 
-#            file://hwacc-debug.patch 
-
-
 
 do_install:append(){
     mkdir -p ${D}${sysconfdir}/firefox/policies

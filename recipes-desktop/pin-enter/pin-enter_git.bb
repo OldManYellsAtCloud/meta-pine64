@@ -12,7 +12,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;br
            file://org.gspine.sim.conf"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "23fae895e40507d4c0abba81569b318ff8d5ad54"
+SRCREV = "df97e77f49a9a01ae3253e1e155aaa73a1de0daf"
 
 S = "${WORKDIR}/git"
 
