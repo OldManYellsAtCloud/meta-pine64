@@ -3,7 +3,7 @@ IMAGE_FEATURES += "splash package-management ssh-server-dropbear"
 
 LICENSE = "MIT"
 
-inherit core-image populate_sdk_qt6
+inherit core-image
 
 IMAGE_INSTALL += " evtest \
                    settingslib \
@@ -14,10 +14,8 @@ IMAGE_INSTALL += " evtest \
                    touchscreen-cal-file \
                    firmware-blobs \
                    strace \
-                   buttond \
                    tzdata \
                    ttf-dejavu-sans \
-                   xserver-xorg \
                    font-bh-100dpi \
                    sway \
                    libubootenv \
@@ -25,12 +23,10 @@ IMAGE_INSTALL += " evtest \
                    pp-env-vars \
                    wvkbd \
                    enable-wireless \
-                   touch-gesture \
                    launcher \
                    connman-client \
                    at-spi2-atk \
                    atk \
-                   megapixels \
                    signal-translator \
                    foot \
                    screen \
@@ -40,28 +36,32 @@ IMAGE_INSTALL += " evtest \
                    rsync \
                    nft-rules \
                    save-logs \
-                   emailclient \
                    screenlock \
                    udev-rules \
                    dictionary \
                    modemmanager-ng \
                    pin-enter \
                    shutdown-led-indicator \
-                   kernel-module-cryptosk \
+                   mpv \
+                   megapixels \
+                   mesa-demos \
+                   firefox \
+                   emailclient \
+                   hwmanager \
 "
 
 IMAGE_INSTALL += "\
     packagegroup-core-x11-xserver \
     packagegroup-core-x11-utils \
+    mesa-demos \
     xserver-xorg-extension-glx \
+    xserver-xorg \
     my-wifi-connection \
     ntp \
     rumble-test \
     timetable \
-    firefox \
     mpd \
     mpc \
-    mpv \
     pipewire \
     bluealsa \
     pipewire-pulse \
@@ -87,14 +87,10 @@ IMAGE_INSTALL:append:star64 = "jh7110-gpu-blob"
 # to test bluetooth audio
 IMAGE_INSTALL += " sox "
 
-# x11-base seems to be the way to go
-EXTRA_IMAGE_FEATURES += "debug-tweaks"
+EXTRA_IMAGE_FEATURES += " allow-empty-password empty-root-password allow-root-login post-install-logging "
 
 
 PACKAGES:${PN}:append = "tools-bluetooth"
 
 # firefox requirement
 PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
-
-TOOLCHAIN_TARGET_TASK:append = " googletest qtwebview"
-TOOLCHAIN_HOST_TASK:append = " nativesdk-loglibrary nativesdk-settingslib "
