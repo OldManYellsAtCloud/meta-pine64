@@ -4,7 +4,7 @@ header:
 repos:
   meta-oe:
     url: https://github.com/openembedded/meta-openembedded
-    refspec: scarthgap
+    refspec: "5dcb1a2473464394503fbd839f89189317227835"
     layers:
       meta-oe:
       meta-networking:
@@ -12,14 +12,14 @@ repos:
       meta-python:
   poky:
     url: git://git.yoctoproject.org/poky
-    refspec: scarthgap
+    refspec: "88489115ae83f80f8f00f296f7f775ba24884744"
     layers:
       meta:
       meta-poky:
       meta-yocto-bsp:
   meta-arm:
     url: git://git.yoctoproject.org/meta-arm
-    refspec: master
+    refspec: "9d9c2fb93e673b7f83b399036cd22257002effe1"
     layers:
       meta-arm-toolchain:
       meta-arm:
@@ -34,35 +34,31 @@ repos:
       meta-firefox:
   meta-clang:
     url: https://github.com/kraj/meta-clang
-    refspec: master
+    refspec: "458566f290258d1fe63e95893bae143d9e2ab8e1"
     layers:
       .:
   meta-wayland:
     url: https://codeberg.org/flk/meta-wayland.git
-    refspec: master
+    refspec: "92dfbe50304f1aaa930bade7185d400efce4d391"
     layers:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "6.7.1"
+    refspec: "6.8.1"
     layers:
       .:
-  meta-servo:
-    url: https://github.com/OldManYellsAtCloud/meta-servo
-    refspec: master
-    layers:
-      .:
-
 
 local_conf_header:
   meta-pine64: |
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "129%"
-    SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/scarthgap"
+    PREFERRED_VERSION_firefox = "133%"
+    SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/common"
     INHERIT += "own-mirrors"
     HOSTTOOLS += "rpm pkgconf"
     BB_GENERATE_MIRROR_TARBALLS = "1"
     BBMASK += "meta-browser/meta-firefox/recipes-devtools/rust/"
-    PREFERRED_VERSION_wayland-protocols = "1.36"
+    PREFERRED_VERSION_wayland-protocols = "1.38"
+    DL_DIR = "/yocto/yocto_dl"
+    SSTATE_DIR = "/yocto/yocto_sstate"
