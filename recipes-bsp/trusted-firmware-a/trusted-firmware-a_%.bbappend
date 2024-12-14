@@ -7,6 +7,6 @@ SRC_URI += "https://developer.arm.com/-/media/Files/downloads/gnu/12.2.mpacbti-r
 SRC_URI[sha256sum] = "17455a06c816031cc2c66243c117cba48463cd6a3a3fdfac7275b4e9c40eb314"
 
 do_compile:prepend(){
-    export PATH="${WORKDIR}/arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi/bin:$PATH"
+    export PATH="${UNPACKDIR}/arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi/bin:$PATH"
 }
 

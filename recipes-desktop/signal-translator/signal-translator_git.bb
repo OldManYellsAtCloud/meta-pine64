@@ -11,16 +11,16 @@ DEPENDS = "sdbus-c++ loglibrary settingslib"
 PV = "1.1+git${SRCPV}"
 SRCREV = "e848b1bee2cb0ffd9660a64f9ae8ca9ed5650a8a"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake systemd
 
 do_install(){
   mkdir -p ${D}${bindir}
   cp ${B}/signal-translator ${D}${bindir}/
-  install -D -m 0644 ${WORKDIR}/signal-translator.service ${D}${systemd_unitdir}/system/signal-translator.service
-  install -D -m 0644 ${WORKDIR}/signal-translat.cfg ${D}${sysconfdir}/signal-translat.cfg
-  install -D -m 0766 ${WORKDIR}/power_button_handler.sh ${D}${bindir}/power_button_handler.sh
+  install -D -m 0644 ${UNPACKDIR}/signal-translator.service ${D}${systemd_unitdir}/system/signal-translator.service
+  install -D -m 0644 ${UNPACKDIR}/signal-translat.cfg ${D}${sysconfdir}/signal-translat.cfg
+  install -D -m 0766 ${UNPACKDIR}/power_button_handler.sh ${D}${bindir}/power_button_handler.sh
 }
 
 SYSTEMD_SERVICE:${PN} = "signal-translator.service"

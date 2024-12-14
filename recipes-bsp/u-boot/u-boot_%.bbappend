@@ -48,12 +48,12 @@ do_compile[depends] .= "${ATF_DEPENDS}"
 
 do_configure:prepend:a64() {
     mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" \
-        -d ${WORKDIR}/boot.cmd ${WORKDIR}/boot.scr
+        -d ${UNPACKDIR}/boot.cmd ${UNPACKDIR}/boot.scr
 }
 
 do_configure:prepend:pppro() {
     mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" \
-        -d ${WORKDIR}/boot.cmd ${WORKDIR}/boot.scr
+        -d ${UNPACKDIR}/boot.cmd ${UNPACKDIR}/boot.scr
 }
 
 do_compile:append:pppro(){

@@ -7,8 +7,8 @@ SRC_URI += "file://foot.cfg \
 
 
 do_install:append(){
-  install -D -m 0555 ${S}/../foot.cfg ${D}${sysconfdir}/launcher/foot.cfg
-  install -D -m 0555 ${S}/../terminal.png ${D}${datadir}/pixmaps/terminal.png
+  install -D -m 0555 ${UNPACKDIR}/foot.cfg ${D}${sysconfdir}/launcher/foot.cfg
+  install -D -m 0555 ${UNPACKDIR}/terminal.png ${D}${datadir}/pixmaps/terminal.png
 }
 
 

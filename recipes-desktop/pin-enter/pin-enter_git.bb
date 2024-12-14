@@ -14,7 +14,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;br
 PV = "1.0+git${SRCPV}"
 SRCREV = "df97e77f49a9a01ae3253e1e155aaa73a1de0daf"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake
 
@@ -22,9 +22,9 @@ do_install(){
   install -d ${D}/usr/bin
   install -m 0755 ${D}/../build/appmodem-network ${D}/usr/bin/pin-enter
   install -d ${D}${datadir}/pixmaps
-  install -m 0555 ${S}/../sim-card.png ${D}${datadir}/pixmaps/
-  install -D -m 0555 ${S}/../pin-enter.cfg ${D}${sysconfdir}/launcher/pin-enter.cfg
-  install -D -m 0644 ${S}/../org.gspine.sim.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.sim.conf
+  install -m 0555 ${UNPACKDIR}/sim-card.png ${D}${datadir}/pixmaps/
+  install -D -m 0555 ${UNPACKDIR}/pin-enter.cfg ${D}${sysconfdir}/launcher/pin-enter.cfg
+  install -D -m 0644 ${UNPACKDIR}/org.gspine.sim.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.sim.conf
 }
 
 FILES:${PN} += "${datadir}/pixmaps/sim-card.png"

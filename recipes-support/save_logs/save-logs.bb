@@ -9,9 +9,9 @@ SRC_URI += "file://save_logs.cfg \
 
 
 do_install(){
-  install -D -m 0664 ${S}/../save_logs.cfg ${D}${sysconfdir}/launcher/save_logs.cfg
-  install -D -m 0664 ${S}/../save_logs.png ${D}${datadir}/pixmaps/save_logs.png
-  install -D -m 0755 ${S}/../save_logs.sh  ${D}${bindir}/save_logs.sh
+  install -D -m 0664 ${UNPACKDIR}/save_logs.cfg ${D}${sysconfdir}/launcher/save_logs.cfg
+  install -D -m 0664 ${UNPACKDIR}/save_logs.png ${D}${datadir}/pixmaps/save_logs.png
+  install -D -m 0755 ${UNPACKDIR}/save_logs.sh  ${D}${bindir}/save_logs.sh
 }
 
 

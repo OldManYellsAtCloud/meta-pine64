@@ -6,12 +6,14 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 PR="r05"
 
+S = "${UNPACKDIR}"
+
 SRC_URI = "file://power-up-modem.sh"
 SRC_URI += "file://power-up-modem.service"
 
 SYSTEMD_SERVICE:${PN} = "power-up-modem.service"
 
 do_install:append(){
-  install -D -m 0744 ${WORKDIR}/power-up-modem.sh ${D}${bindir}/power-up-modem.sh
-  install -D -m 0644 ${WORKDIR}/power-up-modem.service ${D}${systemd_unitdir}/system/power-up-modem.service
+  install -D -m 0744 ${UNPACKDIR}/power-up-modem.sh ${D}${bindir}/power-up-modem.sh
+  install -D -m 0644 ${UNPACKDIR}/power-up-modem.service ${D}${systemd_unitdir}/system/power-up-modem.service
 }

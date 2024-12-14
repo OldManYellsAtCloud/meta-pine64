@@ -14,21 +14,20 @@ SRC_URI += "file://common \
             file://0003-further-minimize-ff.patch \
            "
 
-
 do_install:append(){
     mkdir -p ${D}${sysconfdir}/firefox/policies
-    cp ${WORKDIR}/policies.json ${D}${sysconfdir}/firefox/policies/
+    cp ${UNPACKDIR}/policies.json ${D}${sysconfdir}/firefox/policies/
 
     mkdir -p ${D}${sysconfdir}/mobile-config-firefox
-    cp ${WORKDIR}/userChrome.files ${D}${sysconfdir}/mobile-config-firefox/
-    cp ${WORKDIR}/userContent.files ${D}${sysconfdir}/mobile-config-firefox/
-    cp -r ${WORKDIR}/common ${D}${sysconfdir}/mobile-config-firefox/
-    cp -r ${WORKDIR}/userChrome ${D}${sysconfdir}/mobile-config-firefox/
-    cp -r ${WORKDIR}/userContent ${D}${sysconfdir}/mobile-config-firefox/
+    cp ${UNPACKDIR}/userChrome.files ${D}${sysconfdir}/mobile-config-firefox/
+    cp ${UNPACKDIR}/userContent.files ${D}${sysconfdir}/mobile-config-firefox/
+    cp -r ${UNPACKDIR}/common ${D}${sysconfdir}/mobile-config-firefox/
+    cp -r ${UNPACKDIR}/userChrome ${D}${sysconfdir}/mobile-config-firefox/
+    cp -r ${UNPACKDIR}/userContent ${D}${sysconfdir}/mobile-config-firefox/
 
     mkdir -p ${D}${libdir}/firefox/defaults/pref
-    cp ${WORKDIR}/mobile-config-prefs.js ${D}${libdir}/firefox/defaults/pref/
-    cp ${WORKDIR}/mobile-config-autoconfig.js ${D}${libdir}/firefox/
+    cp ${UNPACKDIR}/mobile-config-prefs.js ${D}${libdir}/firefox/defaults/pref/
+    cp ${UNPACKDIR}/mobile-config-autoconfig.js ${D}${libdir}/firefox/
 
     mkdir -p ${D}${ROOT_HOME}/Desktop
     ln -s /usr/share/applications/mozilla-firefox.desktop ${D}${ROOT_HOME}/Desktop/Firefox

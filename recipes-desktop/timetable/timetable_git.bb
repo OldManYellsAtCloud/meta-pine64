@@ -12,7 +12,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/timetable.git;protocol=https;
 PV = "1.0+git${SRCPV}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake
 
@@ -23,8 +23,8 @@ do_install(){
   install -d ${D}/home/root
   install -m 0755 ${S}/sample_pine_bus.cfg ${D}/home/root/pine_bus.cfg
   install -d ${D}${datadir}/pixmaps
-  install -m 0555 ${S}/../bus.png ${D}${datadir}/pixmaps/
-  install -D -m 0555 ${S}/../Timetable.cfg ${D}${sysconfdir}/launcher/Timetable.cfg
+  install -m 0555 ${UNPACKDIR}/bus.png ${D}${datadir}/pixmaps/
+  install -D -m 0555 ${UNPACKDIR}/Timetable.cfg ${D}${sysconfdir}/launcher/Timetable.cfg
 }
 
 FILES:${PN} += "/home/root/pine_bus.cfg"

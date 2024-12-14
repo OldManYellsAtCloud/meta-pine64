@@ -11,15 +11,15 @@ RDEPENDS:${PN} = "qtserialport settingslib"
 PV = "1.0+git"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake systemd
 
 EXTRA_OECMAKE = " -Dbuild_ui=OFF "
 
 do_install:append(){
-  install -D -m 0644 ${WORKDIR}/modemmanager.service ${D}${systemd_unitdir}/system/modemmanager.service
-  install -D -m 0644 ${WORKDIR}/appconfig.cfg ${D}${sysconfdir}/modemmanager.cfg
+  install -D -m 0644 ${UNPACKDIR}/modemmanager.service ${D}${systemd_unitdir}/system/modemmanager.service
+  install -D -m 0644 ${UNPACKDIR}/appconfig.cfg ${D}${sysconfdir}/modemmanager.cfg
 }
 
 SYSTEMD_SERVICE:${PN} = "modemmanager.service"

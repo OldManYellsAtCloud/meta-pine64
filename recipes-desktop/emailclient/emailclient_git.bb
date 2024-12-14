@@ -10,11 +10,11 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/emailclient-ng;protocol=https
            git://git@192.168.1.130/opt/pine_secrets;branch=master;name=secrets;destsuffix=secrets;protocol=ssh"
 
 PV = "1.2+${SRCPV}"
-SRCREV = "c5b2f00b1b217ae838bff141ccdad70001a429fa"
+SRCREV = "e6d2e423a66638bf0d61e0ec7a0f0bd569de7c7d"
 SRCREV_FORMAT .= "_secret"
 SRCREV_secrets = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake
 

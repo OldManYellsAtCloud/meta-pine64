@@ -12,13 +12,13 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/screenlock.git;protocol=https
 PV = "1.0+git${SRCPV}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake systemd
 
 do_install:append(){
-  install -D -m 0644 ${WORKDIR}/screenlock.service ${D}${systemd_unitdir}/system/screenlock.service
-  install -D -m 0644 ${WORKDIR}/org.gspine.display.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.display.conf
+  install -D -m 0644 ${UNPACKDIR}/screenlock.service ${D}${systemd_unitdir}/system/screenlock.service
+  install -D -m 0644 ${UNPACKDIR}/org.gspine.display.conf ${D}${sysconfdir}/dbus-1/system.d/org.gspine.display.conf
 }
 
 

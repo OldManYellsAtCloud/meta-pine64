@@ -11,17 +11,19 @@ SRC_URI += "file://sway_status.sh"
 
 SYSTEMD_SERVICE:${PN} = "sway.service"
 
+# SYSTEMD_AUTO_ENABLE:${PN}:am335x-evm = "disable"
+
 PACKAGECONFIG:append = " swaybar"
 
 do_install:append(){
-    install -m 0644 ${WORKDIR}/krtek.jpg ${D}${datadir}/backgrounds/sway/
-    install -D -m 0644 ${WORKDIR}/sway.service ${D}${systemd_unitdir}/system/sway.service
+    install -m 0644 ${UNPACKDIR}/krtek.jpg ${D}${datadir}/backgrounds/sway/
+    install -D -m 0644 ${UNPACKDIR}/sway.service ${D}${systemd_unitdir}/system/sway.service
 
     install -d ${D}${sysconfdir}/tmpfiles.d
-    install -m 0644 ${WORKDIR}/sway_volatiles.conf  ${D}${sysconfdir}/tmpfiles.d/
+    install -m 0644 ${UNPACKDIR}/sway_volatiles.conf  ${D}${sysconfdir}/tmpfiles.d/
 
     install -d ${D}${bindir}
-    install -m 0755 ${WORKDIR}/sway_status.sh ${D}${bindir}/sway_status.sh
+    install -m 0755 ${UNPACKDIR}/sway_status.sh ${D}${bindir}/sway_status.sh
 
 #    rm ${D}${bindir}/inactive-windows-transparency.py
 #    rm ${D}${bindir}/autoname-workspaces.py

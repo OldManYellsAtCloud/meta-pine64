@@ -11,5 +11,5 @@ SRC_URI = "file://shutdown-led-indicator.service"
 SYSTEMD_SERVICE:${PN} = "shutdown-led-indicator.service"
 
 do_install:append(){
-  install -D -m 0644 ${WORKDIR}/shutdown-led-indicator.service ${D}${systemd_unitdir}/system/shutdown-led-indicator.service
+  install -D -m 0644 ${UNPACKDIR}/shutdown-led-indicator.service ${D}${systemd_unitdir}/system/shutdown-led-indicator.service
 }

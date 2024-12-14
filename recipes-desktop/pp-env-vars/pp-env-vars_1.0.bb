@@ -9,8 +9,10 @@ SRC_URI += "file://set-env-vars.sh"
 # just copy a file, no need for a compiler
 INHIBIT_DEFAULT_DEPENDENCIES = "1"
 
+S = "${UNPACKDIR}"
+
 do_install(){
-  install -D -m0755 ${WORKDIR}/set-env-vars.sh ${D}${sysconfdir}/profile.d/set-env-vars.sh
+  install -D -m0755 ${UNPACKDIR}/set-env-vars.sh ${D}${sysconfdir}/profile.d/set-env-vars.sh
 }
 
 FILES:${PN} = "${sysconfdir}/profile.d/set-env-vars.sh"

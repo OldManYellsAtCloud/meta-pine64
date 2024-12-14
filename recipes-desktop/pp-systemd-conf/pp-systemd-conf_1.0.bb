@@ -10,7 +10,7 @@ SRC_URI += "file://00-pinephone.conf"
 INHIBIT_DEFAULT_DEPENDENCIES = "1"
 
 do_install(){
-  install -D -m0644 ${WORKDIR}/00-pinephone.conf ${D}${systemd_unitdir}/logind.conf.d/00-pinephone.conf
+  install -D -m0644 ${UNPACKDIR}/00-pinephone.conf ${D}${systemd_unitdir}/logind.conf.d/00-pinephone.conf
 }
 
 FILES:${PN} = "${systemd_unitdir}/logind.conf.d/"

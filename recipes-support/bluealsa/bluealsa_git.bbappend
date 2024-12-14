@@ -1,1 +1,0 @@
-PACKAGECONFIG += "ofono systemd"

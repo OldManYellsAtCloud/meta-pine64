@@ -18,7 +18,7 @@ SRCREV_main = "${AUTOREV}"
 SRCREV_FORMAT .= "_secret"
 SRCREV_secret = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake
 
@@ -27,14 +27,14 @@ do_install(){
   install -m 0755 ${D}/../build/appdictionary ${D}/usr/bin/dictionary
 
   install -d ${D}${datadir}/pixmaps
-  install -m 0555 ${S}/../dictionary.png ${D}${datadir}/pixmaps/
-  install -D -m 0555 ${S}/../dictionary.cfg ${D}${sysconfdir}/launcher/dictionary.cfg
+  install -m 0555 ${UNPACKDIR}/dictionary.png ${D}${datadir}/pixmaps/
+  install -D -m 0555 ${UNPACKDIR}/dictionary.cfg ${D}${sysconfdir}/launcher/dictionary.cfg
 
-  install -m 0555 ${S}/../appconfig.cfg ${D}${sysconfdir}/dictionary.cfg
+  install -m 0555 ${UNPACKDIR}/appconfig.cfg ${D}${sysconfdir}/dictionary.cfg
 
   install -d ${D}${datadir}/dictionary
-  gunzip -d -c ${S}/../secret/dictionary/en-de.txt.gz > ${D}${datadir}/dictionary/en-de.txt
-  gunzip -d -c ${S}/../secret/dictionary/de-en.txt.gz > ${D}${datadir}/dictionary/de-en.txt
+  gunzip -d -c ${UNPACKDIR}/secret/dictionary/en-de.txt.gz > ${D}${datadir}/dictionary/en-de.txt
+  gunzip -d -c ${UNPACKDIR}/secret/dictionary/de-en.txt.gz > ${D}${datadir}/dictionary/de-en.txt
 }
 
 FILES:${PN} += "${datadir}/pixmaps/dictionary.png"

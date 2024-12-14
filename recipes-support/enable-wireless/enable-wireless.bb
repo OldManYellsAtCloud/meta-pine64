@@ -11,5 +11,5 @@ SRC_URI += "file://enable-wireless.service"
 SYSTEMD_SERVICE:${PN} = "enable-wireless.service"
 
 do_install:append(){
-  install -D -m 0644 ${WORKDIR}/enable-wireless.service ${D}${systemd_unitdir}/system/enable-wireless.service
+  install -D -m 0644 ${UNPACKDIR}/enable-wireless.service ${D}${systemd_unitdir}/system/enable-wireless.service
 }

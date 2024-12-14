@@ -6,15 +6,18 @@ SRC_URI += "file://hwmanager.service"
 
 DEPENDS = "loglibrary settingslib sdbus-c++"
 
-PV = "1.0+git"
-SRCREV = "45ccab7d8f7f7cdf08f1f8c2b2a520e68e712449"
+PV = "1.1+git"
+SRCREV = "99c8bcc357dbe840f42f7bfd01c08e3abed0daf8"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake systemd
 
 do_install:append(){
-    install -D -m 0644 ${WORKDIR}/hwmanager.service ${D}${systemd_unitdir}/system/hwmanager.service
+    install -D -m 0644 ${UNPACKDIR}/hwmanager.service ${D}${systemd_unitdir}/system/hwmanager.service
 }
 
 SYSTEMD_SERVICE:${PN} = "hwmanager.service"
+
+EXTRA_OECMAKE:pinephone-1-2 = "-Dpinephone=ON"
+EXTRA_OECMAKE:pinephonepro-1-0 = "-Dpinephone_pro=ON"

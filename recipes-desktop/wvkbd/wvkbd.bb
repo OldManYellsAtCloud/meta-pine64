@@ -1,8 +1,8 @@
 DESCRIPTION = "Virtual keyboard for wayland"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 PR = "r16"
@@ -16,7 +16,7 @@ SRC_URI += "file://wvkbd.service"
 
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit pkgconfig systemd
 
@@ -32,10 +32,12 @@ do_compile(){
 do_install(){
   mkdir -p ${D}${bindir}
   cp ${S}/wvkbd-mobintl ${D}${bindir}/
-  install -D -m 0644 ${WORKDIR}/wvkbd.service ${D}${systemd_unitdir}/system/wvkbd.service
+  install -D -m 0644 ${UNPACKDIR}/wvkbd.service ${D}${systemd_unitdir}/system/wvkbd.service
   sed -i "s,RUMBLE_PATH,${RUMBLE_PATH},g" ${D}${systemd_unitdir}/system/wvkbd.service
 }
 
 SYSTEMD_SERVICE:${PN} = "wvkbd.service"
 
 FILES:${PN} = "${bindir}/wvkbd-mobintl"
+
+INSANE_SKIP:${PN}-dbg = "buildpaths"

@@ -11,14 +11,14 @@ SRC_URI += "file://launcher.service"
 PV = "1.1+git${SRCPV}"
 SRCREV = "8e2a4db73761ba662a1ef5291bf00f267f116c32"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake systemd
 
 do_install(){
   install -d ${D}/usr/bin
   install -m 0755 ${D}/../build/appLauncher ${D}/usr/bin/launcher
-  install -D -m 0644 ${WORKDIR}/launcher.service ${D}${systemd_unitdir}/system/launcher.service
+  install -D -m 0644 ${UNPACKDIR}/launcher.service ${D}${systemd_unitdir}/system/launcher.service
 }
 
 SYSTEMD_SERVICE:${PN} = "launcher.service"
