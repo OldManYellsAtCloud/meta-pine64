@@ -6,16 +6,16 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
 
-LINUX_VERSION ?= "6.10"
+DEPENDS:append = " wireless-regdb "
+
+LINUX_VERSION ?= "6.13"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
-BRANCH = "orange-pi-6.10"
+BRANCH = "orange-pi-6.13"
 SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
-
-PR = "r04"
 
 # this is a regularly updated local mirror of mainline kernel, having megi's changes applied from the
 # bundle published at https://xff.cz/kernels/git/orange-pi-active.bundle
@@ -36,13 +36,15 @@ SRC_URI:append:pinephone-1-2 = " file://usb_bluetooth.cfg \
 SRC_URI += "file://battery.cfg \
             file://debug.cfg \
             file://screen.cfg \
-            file://enable_blobs.cfg \
             file://tether.cfg \
            "
+
+# enable_blobs.cfg
 
 SRC_URI:append:pinephonepro-1-0 = " file://extra-ppp.cfg \
                                     file://revert-saradc-commit-that-broke-adc-keys.patch \
                                     file://0002-silence-wifi-driver.patch \
+                                    file://0001-silence-rk818-battery-driver.patch \
                                     file://defconfig"
 
 
