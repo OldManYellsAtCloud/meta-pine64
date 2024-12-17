@@ -6,6 +6,7 @@ to read random values.
 At some point will try to look into it, but for now just revert it
 with this patch.
 
+Upstream-Status: Inappropriate
 --- ./drivers/iio/adc/rockchip_saradc.c.orig	2023-12-31 19:38:31.520218212 +0100
 +++ ./drivers/iio/adc/rockchip_saradc.c	2023-12-31 19:41:50.399327189 +0100
 @@ -345,6 +345,20 @@
