@@ -2,7 +2,7 @@ DESCRIPTION = "Qt application for locking my phone screen"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
-DEPENDS = "qtwayland qtwayland-native qtdeclarative qtdeclarative-native sdbus-c++ loglibrary buttond"
+DEPENDS = "qtwayland qtwayland-native qtdeclarative qtdeclarative-native sdbus-c++ loglibrary hwmanager"
 RDEPENDS:${PN} = "qtwayland qtdeclarative"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/screenlock.git;protocol=https;branch=master \
