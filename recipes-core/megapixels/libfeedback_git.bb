@@ -1,4 +1,4 @@
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/git/COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://source.puri.sm/Librem5/feedbackd.git;protocol=https;branch=main"
