@@ -24,7 +24,6 @@ IMAGE_INSTALL += " evtest \
                    wvkbd \
                    enable-wireless \
                    launcher \
-                   connman-client \
                    at-spi2-atk \
                    atk \
                    signal-translator \
@@ -45,9 +44,11 @@ IMAGE_INSTALL += " evtest \
                    mpv \
                    megapixels \
                    mesa-demos \
+                   hwmanager \
+                   dhcpcd \
+                   iwd \
                    firefox \
                    emailclient \
-                   hwmanager \
 "
 
 IMAGE_INSTALL += "\
