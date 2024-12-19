@@ -49,6 +49,7 @@ IMAGE_INSTALL += " evtest \
                    iwd \
                    firefox \
                    emailclient \
+                   libubootenv-bin \
 "
 
 IMAGE_INSTALL += "\
