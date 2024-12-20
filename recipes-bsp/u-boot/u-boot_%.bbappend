@@ -9,11 +9,11 @@ SRC_URI:append:a64 = " \
     "
 
 SRC_URI:append:pppro = " \
-    file://boot.cmd \
     file://0004-initramfs-for-ppp.patch \
     file://9999-store-uboot-on-mmc.cfg \
     file://sidebutton.cfg \
     file://enable-cat.cfg \
+    file://init_env.cfg \
     "
 
 SRC_URI:append:star64-mine = " \
@@ -51,17 +51,6 @@ do_configure:prepend:a64() {
         -d ${UNPACKDIR}/boot.cmd ${UNPACKDIR}/boot.scr
 }
 
-do_configure:prepend:pppro() {
-    mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" \
-        -d ${UNPACKDIR}/boot.cmd ${UNPACKDIR}/boot.scr
-}
-
-do_compile:append:pppro(){
-    sed -i "s/baudrate=1500000/baudrate=115200/g" ${B}/u-boot-initial-env
-    echo "bootargs=console=ttyS2,115200 earlyprintk=serial,0xff1a0000,115200 root=/dev/mmcblk1p2 rw printk.time=1 rfkill.default_state=1" >> ${B}/u-boot-initial-env
-    echo "bootdelay=0" >> ${B}/u-boot-initial-env
-}
-
 do_compile:prepend:a64(){
     cp "${S}/../scp.bin" "${B}/scp.bin"
 }
@@ -72,7 +61,6 @@ do_compile:append:star64-mine(){
 
 FILES:${PN}:append:a64 = " /boot/boot.scr"
 FILES:${PN}:append:star64-mine = " /boot/boot.scr"
-FILES:${PN}:append:pinephonepro-1-0 = "/boot/boot.scr"
 
 CFLAGS += " -DCONFIG_MMC_BROKEN_CD=y "
 
