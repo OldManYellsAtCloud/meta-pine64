@@ -9,7 +9,6 @@ SRC_URI:append:a64 = " \
     "
 
 SRC_URI:append:pppro = " \
-    file://0004-initramfs-for-ppp.patch \
     file://9999-store-uboot-on-mmc.cfg \
     file://sidebutton.cfg \
     file://enable-cat.cfg \
