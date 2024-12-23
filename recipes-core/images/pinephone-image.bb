@@ -60,6 +60,7 @@ IMAGE_INSTALL += " evtest \
                    libubootenv-bin \
                    util-linux-lsblk \
                    e2fsprogs-resize2fs \
+                   e2fsprogs-tune2fs \
                    swupdate \
                    swupdate-www \
 "
