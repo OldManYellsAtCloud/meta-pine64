@@ -6,6 +6,7 @@ first 'init' program more efficiently."
 
 INITRAMFS_SCRIPTS ?= "\
                       initramfs-framework-base \
+                      initramfs-module-udev \
                      "
 
 PACKAGE_INSTALL = "${INITRAMFS_SCRIPTS} ${VIRTUAL-RUNTIME_base-utils} udev base-passwd ${ROOTFS_BOOTSTRAP_INSTALL} firmware-blobs"

@@ -4,7 +4,10 @@
 bootloader --ptable msdos 
 
 
-part spl   --offset 32k     --ondisk mmcblk1 --no-table                     --source rawcopy           --sourceparams="file=idbloader.img"
+part spl   --offset 32k     --ondisk mmcblk1 --no-table --source rawcopy  --sourceparams="file=idbloader.img"
 part tpl   --offset 8192k   --ondisk mmcblk1 --source rawcopy  --sourceparams="file=u-boot.itb" --no-table
 part /boot --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot --align 4
-part /  --ondisk mmcblk1 --fstype=ext4 --label platform --source=rootfs
+part --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot_bak --align 4
+part /  --ondisk mmcblk1 --fstype=ext4 --label system --source=rootfs
+part --ondisk mmcblk1 --fstype=ext4 --label system_bak --source=rootfs
+part /data --ondisk mmcblk1 --fstype=ext4 --label data --size 2G

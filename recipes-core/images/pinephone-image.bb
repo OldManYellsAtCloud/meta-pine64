@@ -5,6 +5,14 @@ LICENSE = "MIT"
 
 inherit core-image
 
+# swupdate
+
+SWUPDATE_IMAGES = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz fitImage"
+
+SWUPDATE_IMAGES_NOAPPEND_MACHINE[pinephone-image-pinephonepro-1-0.rootfs.ext4.gz] = "1"
+
+SWUPDTAE_IMAGES_FSTYPES[fitImage] = "bin"
+
 IMAGE_INSTALL += " evtest \
                    settingslib \
                    mingetty \
@@ -50,6 +58,10 @@ IMAGE_INSTALL += " evtest \
                    firefox \
                    emailclient \
                    libubootenv-bin \
+                   util-linux-lsblk \
+                   e2fsprogs-resize2fs \
+                   swupdate \
+                   swupdate-www \
 "
 
 IMAGE_INSTALL += "\
@@ -96,3 +108,5 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 
 # firefox requirement
 PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
+
+IMAGE_OVERHEAD_FACTOR = "3"
