@@ -12,7 +12,7 @@ LINUX_VERSION ?= "6.13"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
-BRANCH = "orange-pi-6.13"
+BRANCH = "orange-pi-6.12"
 SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
@@ -45,10 +45,10 @@ SRC_URI:append:pinephonepro-1-0 = " file://extra-ppp.cfg \
                                     file://revert-saradc-commit-that-broke-adc-keys.patch \
                                     file://0002-silence-wifi-driver.patch \
                                     file://0001-silence-rk818-battery-driver.patch \
-                                    file://defconfig"
+                                    file://defconfig \
+                                    file://enable_blobs.cfg"
 
 
-# 0001-silence-rk818-battery-driver.patch
 # 9999-rk818-debug.patch
 
 SRC_URI:append:pinephone-1-2 = " file://extra-pp.cfg "
@@ -77,3 +77,5 @@ COMPATIBLE_MACHINE = "pine-a64-lts|sopine-a64|pine-a64-plus|pinephone-1-2|pineph
 
 # This is necessary since kmeta would be necessary otherwise
 KERNEL_FEATURES:remove = "cfg/fs/vfat.scc"
+
+INSANE_SKIP:${PN} += " buildpaths " 

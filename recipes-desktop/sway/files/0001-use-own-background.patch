@@ -1,3 +1,4 @@
+Upstream-Status: Inappropriate
 diff --git a/config.in b/config.in
 index a5173165..d7b1efe9 100644
 --- a/config.in

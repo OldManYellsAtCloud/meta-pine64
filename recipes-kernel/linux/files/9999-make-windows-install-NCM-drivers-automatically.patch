@@ -1,3 +1,4 @@
+Upstream-Status: Inappropriate
 --- ./drivers/usb/gadget/composite.c.orig	2023-02-21 20:01:19.437708941 +0100
 +++ ./drivers/usb/gadget/composite.c	2023-02-21 20:14:49.358931274 +0100
 @@ -21,6 +21,43 @@

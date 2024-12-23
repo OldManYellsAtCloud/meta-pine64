@@ -1,3 +1,4 @@
+Upstream-Status: Inappropriate
 --- ./drivers/power/supply/rk818_battery.c.orig	2023-11-27 20:09:24.224255585 +0100
 +++ ./drivers/power/supply/rk818_battery.c	2023-11-27 20:09:36.136434763 +0100
 @@ -2434,7 +2434,7 @@
