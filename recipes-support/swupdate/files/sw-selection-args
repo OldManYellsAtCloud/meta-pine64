@@ -1,0 +1,10 @@
+current_system_partition=`cat /proc/cmdline | tr ' ' '\n' | grep root | grep -o [0-9]$`
+
+if [ $current_system_partition -eq 3 ]; then
+  SWUPDATE_ARGS="$SWUPDATE_ARGS -e sw,copy-2"
+elif [ $current_system_partition -eq 5 ]; then
+  SWUPDATE_ARGS="$SWUPDATE_ARGS -e sw,copy-1"
+else
+  echo Could not determine current system partition!
+  exit 1
+fi

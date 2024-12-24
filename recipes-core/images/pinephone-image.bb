@@ -5,14 +5,6 @@ LICENSE = "MIT"
 
 inherit core-image
 
-# swupdate
-
-SWUPDATE_IMAGES = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz fitImage"
-
-SWUPDATE_IMAGES_NOAPPEND_MACHINE[pinephone-image-pinephonepro-1-0.rootfs.ext4.gz] = "1"
-
-SWUPDTAE_IMAGES_FSTYPES[fitImage] = "bin"
-
 IMAGE_INSTALL += " evtest \
                    settingslib \
                    mingetty \
@@ -61,8 +53,11 @@ IMAGE_INSTALL += " evtest \
                    util-linux-lsblk \
                    e2fsprogs-resize2fs \
                    e2fsprogs-tune2fs \
+                   dosfstools \
                    swupdate \
                    swupdate-www \
+                   swupdate-progress \
+                   hwrevision \
 "
 
 IMAGE_INSTALL += "\

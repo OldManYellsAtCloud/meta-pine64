@@ -1,0 +1,39 @@
+From 3a8a625fa91bb7c21aec0bb61085fb9a849b2b0d Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Tue, 24 Dec 2024 15:09:12 +0100
+Subject: [PATCH] add extra u-boot env vars
+
+Add new variables to u-boot environment:
+bootpart: the partition number where the boot partition resides
+(containing the kernel image to load)
+first_boot: used to save the environment to the persistent storage
+upon the very first boot of the system
+save_init_env: script to save the environment to persistent storage
+update_bootpart: check if an update was done recently (by verifying
+the value/existence of 'update_done' variable. If it is true, then
+switch the bootpartition to boot from.
+
+Upstream-Status: Inappropriate
+---
+ include/configs/rk3399_common.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/include/configs/rk3399_common.h b/include/configs/rk3399_common.h
+index 96ba19c659..2560bc02de 100644
+--- a/include/configs/rk3399_common.h
++++ b/include/configs/rk3399_common.h
+@@ -52,7 +52,10 @@
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"partitions=" PARTS_DEFAULT \
+ 	ROCKCHIP_DEVICE_SETTINGS \
+-	"boot_targets=" BOOT_TARGETS "\0"
++	"boot_targets=" BOOT_TARGETS "\0" \
++        "bootpart=1\0" \
++        "first_boot=1\0" \
++        "save_init_env=if itest.s x$first_boot != x; then env delete first_boot; saveenv; fi\0"
+ 
+ #endif
+ 
+-- 
+2.47.1
+

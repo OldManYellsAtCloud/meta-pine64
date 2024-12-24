@@ -13,6 +13,7 @@ SRC_URI:append:pppro = " \
     file://sidebutton.cfg \
     file://enable-cat.cfg \
     file://init_env.cfg \
+    file://0001-add-extra-u-boot-env-vars.patch \
     "
 
 SRC_URI:append:star64-mine = " \

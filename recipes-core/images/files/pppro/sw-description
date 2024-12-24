@@ -1,0 +1,49 @@
+software =
+{
+        version = "0.1.0";
+        description = "Software for PinePhonePro - dual copy";
+        hardware-compatibility = ["1.0"];
+
+        sw = {
+		copy-1 : {
+		        images: (
+	        	        {
+                		        filename = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz";
+                	        	device = "/dev/mmcblk1p3";
+		                        compressed = "zlib";
+	        	        }
+		        );
+			files: (
+				{
+					filename = "fitImage";
+					device = "/dev/mmcblk1p1";
+					path = "/boot/fitImage";
+				}
+			);
+		}
+                copy-2 : {
+                        images: (
+                                { 
+                                        filename = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz";
+                                        device = "/dev/mmcblk1p5";
+                                        compressed = "zlib";
+                                }
+                        );
+                        files: (
+                                {
+                                        filename = "fitImage";
+                                        device = "/dev/mmcblk1p2";
+                                        path = "/boot/fitImage";
+                                }
+                        );
+
+                }
+        };
+
+        scripts: (
+                {
+                        filename = "update_bootargs.sh";
+                        type = "postinstall";
+                }
+        );
+}
