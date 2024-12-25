@@ -1,5 +1,6 @@
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+# actually this installs my wifi passwords, which is not exactly
+# a state secret, but still, not really MIT.
+LICENSE = "CLOSED"
 
 SRC_URI = "git://git@192.168.1.130/opt/pine_secrets;branch=master;protocol=ssh"
 SRCREV = "${AUTOREV}"

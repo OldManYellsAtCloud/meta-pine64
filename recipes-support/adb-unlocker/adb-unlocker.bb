@@ -1,19 +1,23 @@
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://../whatev.c;md5=d475f6e9f135b2ccc28137c8b4dc2467"
+LICENSE = "GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
 DEPENDS = "libxcrypt"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
+S = "${UNPACKDIR}"
+
 SRC_URI = "file://whatev.c"
 
 do_compile(){
-  ${CC} -lcrypt ${WORKDIR}/whatev.c -o adb-unlocker
+  ${CC} -lcrypt ${S}/whatev.c -o adb-unlocker
 }
 
 do_install(){
   install -d ${D}/usr/bin
-  install -m 755 ${WORKDIR}/adb-unlocker-1.0/adb-unlocker ${D}/usr/bin/
+  install -m 755 ${S}/adb-unlocker ${D}${bindir}
 }
 
-FILES:${PN} = "/usr/bin/adb-unlocker"
+FILES:${PN} = "${bindir}/adb-unlocker"
+
+INSANE_SKIP:${PN} = "ldflags"

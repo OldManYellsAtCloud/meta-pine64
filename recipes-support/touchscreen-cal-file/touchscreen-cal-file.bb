@@ -1,10 +1,12 @@
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/pointercal.xinput;md5=4aebd652e9c23d6837babdd28890465a"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = "file://pointercal.xinput"
+
+S = "${UNPACKDIR}"
 
 do_install(){
   install -d ${D}/etc
