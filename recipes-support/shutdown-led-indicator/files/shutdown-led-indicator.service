@@ -3,7 +3,7 @@ Description=LED indicator for shutdown
 
 [Service]
 Type=oneshot
-ExecStop=sh -c 'echo 1 > /sys/class/leds/red:indicator/brightness'
+ExecStop=sh -c 'echo 1 > /sys/class/leds/red:/brightness'
 RemainAfterExit=yes
 
 
