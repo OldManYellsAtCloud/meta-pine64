@@ -5,6 +5,7 @@ SRC_URI = "git://github.com/OldManYellsAtCloud/signal-translator.git;protocol=ht
 SRC_URI += "file://signal-translator.service"
 SRC_URI += "file://signal-translat.cfg"
 SRC_URI += "file://power_button_handler.sh"
+SRC_URI += "file://configure_wwan.sh" 
 
 DEPENDS = "sdbus-c++ loglibrary settingslib"
 
@@ -21,6 +22,7 @@ do_install(){
   install -D -m 0644 ${UNPACKDIR}/signal-translator.service ${D}${systemd_unitdir}/system/signal-translator.service
   install -D -m 0644 ${UNPACKDIR}/signal-translat.cfg ${D}${sysconfdir}/signal-translat.cfg
   install -D -m 0766 ${UNPACKDIR}/power_button_handler.sh ${D}${bindir}/power_button_handler.sh
+  install -m 0766 ${UNPACKDIR}/configure_wwan.sh ${D}${bindir}/configure_wwan.sh
 }
 
 SYSTEMD_SERVICE:${PN} = "signal-translator.service"

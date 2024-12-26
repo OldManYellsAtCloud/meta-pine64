@@ -45,7 +45,6 @@ IMAGE_INSTALL += " evtest \
                    megapixels \
                    mesa-demos \
                    hwmanager \
-                   dhcpcd \
                    iwd \
                    firefox \
                    emailclient \
@@ -58,6 +57,7 @@ IMAGE_INSTALL += " evtest \
                    swupdate-www \
                    swupdate-progress \
                    hwrevision \
+                   libqmi \
 "
 
 IMAGE_INSTALL += "\

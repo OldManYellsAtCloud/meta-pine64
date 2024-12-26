@@ -1,0 +1,13 @@
+[Match]
+Type=wwan
+
+[Network]
+IgnoreCarrierLoss=60
+Address=_IP_ADDR_
+DNS=_DNS1_
+DNS=_DNS2_
+Gateway=_GATEWAY_
+LinkLocalAddressing=no
+IPv6AcceptRA=no
+MulticastDNS=yes
+LLDP=no
