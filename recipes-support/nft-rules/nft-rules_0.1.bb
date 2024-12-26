@@ -8,6 +8,8 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 PR="r01"
 
+S = "${UNPACKDIR}"
+
 SRC_URI = "file://nft-rules"
 SRC_URI += "file://nft-rules.service"
 

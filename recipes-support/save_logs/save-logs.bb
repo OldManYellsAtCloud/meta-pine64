@@ -8,6 +8,8 @@ SRC_URI += "file://save_logs.cfg \
             file://save_logs.sh"
 
 
+S = "${UNPACKDIR}"
+
 do_install(){
   install -D -m 0664 ${UNPACKDIR}/save_logs.cfg ${D}${sysconfdir}/launcher/save_logs.cfg
   install -D -m 0664 ${UNPACKDIR}/save_logs.png ${D}${datadir}/pixmaps/save_logs.png

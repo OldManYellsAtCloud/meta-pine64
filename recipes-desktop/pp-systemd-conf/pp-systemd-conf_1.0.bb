@@ -9,6 +9,8 @@ SRC_URI += "file://00-pinephone.conf"
 # these are just config files, no need for a compiler
 INHIBIT_DEFAULT_DEPENDENCIES = "1"
 
+S = "${UNPACKDIR}"
+
 do_install(){
   install -D -m0644 ${UNPACKDIR}/00-pinephone.conf ${D}${systemd_unitdir}/logind.conf.d/00-pinephone.conf
 }

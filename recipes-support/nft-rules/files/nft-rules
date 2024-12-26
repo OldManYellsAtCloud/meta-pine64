@@ -1,0 +1,7 @@
+#!/usr/sbin/nft -f
+
+# allow ssh connection only from internal, home network
+add table filter
+add chain filter input { type filter hook input priority 0; }
+add rule ip filter input ip saddr 192.168.1.0/24 tcp dport 22 ct state new,established counter accept
+add rule ip filter input tcp dport 22 drop

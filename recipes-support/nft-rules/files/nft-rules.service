@@ -1,0 +1,10 @@
+[Unit]
+Description=Set up netfilter rules
+
+[Service]
+ExecStart=/usr/bin/nft-rules
+Type=idle
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

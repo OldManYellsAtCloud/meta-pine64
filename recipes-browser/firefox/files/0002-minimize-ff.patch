@@ -3,31 +3,23 @@ From: skandigraun <skandigraun@gmail.com>
 Date: Fri, 20 Oct 2023 13:06:21 +0200
 Subject: [PATCH] commit
 
+Upstream-Status: Inappropriate
 ---
  toolkit/moz.configure | 10 +++++++---
  1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 9d5ee0ca91..4055865725 100644
---- a/toolkit/moz.configure
-+++ b/toolkit/moz.configure
-@@ -101,6 +101,7 @@ def gecko_profiler(target):
- 
- @depends(gecko_profiler)
- def gecko_profiler_define(value):
-+    
-     if value:
-         return True
- 
-@@ -122,6 +123,7 @@ def gecko_profiler_parse_elf(value, target):
-     # MozDescribeCodeAddress to call into some Rust crates that parse ELF and
+--- ./toolkit/moz.configure.orig	2024-12-26 20:12:05.536834226 +0100
++++ ./toolkit/moz.configure	2024-12-26 20:18:43.137630913 +0100
+@@ -215,7 +215,7 @@
      # DWARF data, but build system issues currently prevent Rust from being
      # used in mozglue.)
-+    
      if value and (target.kernel == "Linux" or target.kernel == "FreeBSD"):
-         return True
+-        return True
++        return False
  
-@@ -603,6 +605,7 @@ set_define(gl_provider_define, True)
+ 
+ set_config("MOZ_GECKO_PROFILER_PARSE_ELF", gecko_profiler_parse_elf)
+@@ -718,6 +718,7 @@
  # ==============================================================
  @depends(toolkit)
  def pdf_printing(toolkit):
@@ -35,15 +27,7 @@ index 9d5ee0ca91..4055865725 100644
      if toolkit in ("windows", "gtk", "android"):
          return True
  
-@@ -618,6 +621,7 @@ option(env="MOZ_INSTRUMENT_EVENT_LOOP", help="Force-enable event loop instrument
- 
- @depends("MOZ_INSTRUMENT_EVENT_LOOP", toolkit)
- def instrument_event_loop(value, toolkit):
-+    
-     if value or (
-         toolkit in ("windows", "gtk", "cocoa", "android") and value.origin == "default"
-     ):
-@@ -949,7 +953,7 @@ project_flag("MOZ_PLACES", help="Build Places if required", set_as_define=True)
+@@ -1048,7 +1049,7 @@
  project_flag(
      "MOZ_SERVICES_HEALTHREPORT",
      help="Build Firefox Health Reporter Service",
@@ -52,7 +36,7 @@ index 9d5ee0ca91..4055865725 100644
  )
  
  project_flag(
-@@ -987,7 +991,7 @@ def check_places_and_android_history(places, android_history):
+@@ -1126,7 +1127,7 @@
  
  option(
      env="MOZ_TELEMETRY_REPORTING",
@@ -61,7 +45,7 @@ index 9d5ee0ca91..4055865725 100644
      help="Enable telemetry reporting",
  )
  
-@@ -996,7 +1000,7 @@ set_define("MOZ_TELEMETRY_REPORTING", True, when="MOZ_TELEMETRY_REPORTING")
+@@ -1135,7 +1136,7 @@
  
  @depends("MOZ_TELEMETRY_REPORTING", milestone.is_nightly)
  def telemetry_on_by_default(reporting, is_nightly):
