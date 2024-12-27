@@ -10,4 +10,4 @@ part /boot --fstype=vfat --source=bootimg-partition --active --use-uuid --label 
 part --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot_bak --align 4
 part /  --ondisk mmcblk2 --fstype=ext4 --label system --source=rootfs
 part --ondisk mmcblk2 --fstype=ext4 --label system_bak --source=rootfs
-part /data --ondisk mmcblk2 --fstype=ext4 --label data --size 2G
+part /data --ondisk mmcblk2 --fstype=ext4 --label data --size 2G --no-fstab-update

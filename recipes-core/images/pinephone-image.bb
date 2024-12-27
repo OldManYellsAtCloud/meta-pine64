@@ -3,7 +3,7 @@ IMAGE_FEATURES += "splash package-management ssh-server-dropbear"
 
 LICENSE = "MIT"
 
-inherit core-image
+inherit core-image populate_sdk populate_sdk_qt6
 
 IMAGE_INSTALL += " evtest \
                    settingslib \
@@ -58,6 +58,7 @@ IMAGE_INSTALL += " evtest \
                    swupdate-progress \
                    hwrevision \
                    libqmi \
+                   pp-common-files \
 "
 
 IMAGE_INSTALL += "\
@@ -99,10 +100,9 @@ IMAGE_INSTALL += " sox "
 
 EXTRA_IMAGE_FEATURES += " allow-empty-password empty-root-password allow-root-login post-install-logging "
 
-
 PACKAGES:${PN}:append = "tools-bluetooth"
 
-# firefox requirement
-PACKAGECONFIG:append:pn-mesa = " gallium lima kmsro"
-
 IMAGE_OVERHEAD_FACTOR = "3"
+
+TOOLCHAIN_TARGET_TASK:append = " googletest qtwebview qtdeclarative emailclient wlroots wayland-protocols"
+TOOLCHAIN_HOST_TASK:append = " nativesdk-loglibrary nativesdk-settingslib nativesdk-qtdeclarative"
