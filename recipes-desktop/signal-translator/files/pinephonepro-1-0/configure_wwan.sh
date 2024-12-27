@@ -27,7 +27,7 @@ if [ "$IS_OK" = "FALSE" ]; then
     exit 1
 fi
 
-ip_addr=`head -n 6 $response_file | tail -n 1 | cut -d\" -f2`/28
+ip_addr=`head -n 6 $response_file | tail -n 1 | cut -d\" -f2`/24
 gateway=`head -n 7 $response_file | tail -n 1 | cut -d\" -f2`
 dns1=`head -n 8 $response_file | tail -n 1 | cut -d\" -f2`
 dns2=`head -n 9 $response_file | tail -n 1 | cut -d\" -f2`
