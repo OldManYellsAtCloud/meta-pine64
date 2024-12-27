@@ -33,5 +33,5 @@ do_install:append(){
 RDEPENDS:${PN}:remove = "python3 python-i3ipc"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "-u 1100 -d /home/swayuser -m -r -s /bin/sh -g swaygroup -G input,tty,video swayuser"
+USERADD_PARAM:${PN} = "-u 1100 -d /data/swayuser -m -r -s /bin/sh -g swaygroup -G input,tty,video swayuser"
 GROUPADD_PARAM:${PN} = "-g 500 swaygroup"
