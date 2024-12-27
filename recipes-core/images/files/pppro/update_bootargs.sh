@@ -13,4 +13,4 @@ else
 fi
 
 fw_setenv bootpart $new_boot_partition
-fw_setenv bootargs "console=ttyS2,115200 root=/dev/mmcblk1p$new_system_partition rw earlyprintk=serial,ttyS2,11520"
+fw_setenv bootargs "console=ttyS2,115200 root=/dev/mmcblk2p$new_system_partition rw earlyprintk=serial,ttyS2,11520"

@@ -9,14 +9,14 @@ software =
 		        images: (
 	        	        {
                 		        filename = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz";
-                	        	device = "/dev/mmcblk1p3";
+                	        	device = "/dev/mmcblk2p3";
 		                        compressed = "zlib";
 	        	        }
 		        );
 			files: (
 				{
 					filename = "fitImage";
-					device = "/dev/mmcblk1p1";
+					device = "/dev/mmcblk2p1";
 					path = "/boot/fitImage";
 				}
 			);
@@ -25,14 +25,14 @@ software =
                         images: (
                                 { 
                                         filename = "pinephone-image-pinephonepro-1-0.rootfs.ext4.gz";
-                                        device = "/dev/mmcblk1p5";
+                                        device = "/dev/mmcblk2p5";
                                         compressed = "zlib";
                                 }
                         );
                         files: (
                                 {
                                         filename = "fitImage";
-                                        device = "/dev/mmcblk1p2";
+                                        device = "/dev/mmcblk2p2";
                                         path = "/boot/fitImage";
                                 }
                         );
