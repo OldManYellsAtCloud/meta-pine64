@@ -16,16 +16,18 @@ if [ -e /tmp/unreadMailFlag ]; then
   mail="<span foreground=\"GreenYellow\" size=\"10800\">✉</span>"
 fi
 
-connmanctl technologies > /tmp/sway_connman_text
+conn=""
 
-wifi=$(grep -A4 "/net/connman/technology/wifi" /tmp/sway_connman_text | grep Connected | cut -f2 -d=)
-if [[ "$wifi" == *"True"* ]]; then
+su root -c "iwctl station wlan0 show" | grep connected | grep -v disconnected > /dev/null
+if [ $? -eq 0 ]; then
   conn="W"
-else
-  cellular=$(grep -A4 "/net/connman/technology/cellular" /tmp/sway_connman_text | grep Connected | cut -f2 -d=)
-  if [[ "$cellular" == *"True"* ]]; then
-    conn="M"
-  fi
+fi
+
+su root -c "qmi-network /dev/cdc-wdm0 status" | grep Status | grep disconnected > /dev/null
+
+# dbus-send --system --dest=org.gspine.modem --type=method_call --print-reply /org/gspine/modem org.gspine.modem.pd.get_connection_details string:"internet" 2>/dev/null| grep internet
+if [ $? -eq 1 ]; then
+  conn=${conn}M
 fi
 
 echo "$mail $battery%$charging $conn $time"
