@@ -46,3 +46,4 @@ sed -i "s/_DNS2_/$dns2/g" /etc/systemd/network/10-wwan.network
 networkctl reload
 networkctl reconfigure wwan0
 qmi-network /dev/cdc-wdm0 start
+qmicli --wds-set-autoconnect-settings=enabled -d /dev/cdc-wdm0
