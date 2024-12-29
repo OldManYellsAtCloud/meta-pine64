@@ -1,4 +1,4 @@
 [SWUpdate]
 iconPath=/usr/share/pixmaps/swupdate.png
-command=systemctl start swupdate
+command=/bin/sh -c "systemctl start swupdate && systemctl start swupdate-progress"
 appId=swupdate
