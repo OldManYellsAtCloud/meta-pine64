@@ -1,0 +1,56 @@
+From 6574e5383e34755f9e982865f26e64dd87f438c7 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Mon, 27 May 2024 18:02:56 +0200
+Subject: [PATCH] panfrost add stub methods to report EGL 1.5 conformance
+
+Once the PIPE_CAP_DEVICE_RESET_STATUS_QUERY is missing to
+report EGL 1.5 conformance, instead of stucking on 1.4.
+
+Add a stub method, and hope that it doesn't blow up.
+
+Upstream-Status: Inappropriate
+---
+ src/gallium/drivers/panfrost/pan_context.c | 7 +++++++
+ src/gallium/drivers/panfrost/pan_screen.c  | 1 +
+ 2 files changed, 8 insertions(+)
+
+diff --git a/src/gallium/drivers/panfrost/pan_context.c b/src/gallium/drivers/panfrost/pan_context.c
+index 1acbc85..c4baa34 100644
+--- a/src/gallium/drivers/panfrost/pan_context.c
++++ b/src/gallium/drivers/panfrost/pan_context.c
+@@ -852,6 +852,12 @@ panfrost_create_fence_fd(struct pipe_context *pctx,
+    *pfence = panfrost_fence_from_fd(pan_context(pctx), fd, type);
+ }
+ 
++static enum pipe_reset_status
++panfrost_get_device_reset_status(struct pipe_context *pipe)
++{
++   return PIPE_NO_RESET;
++}
++
+ static void
+ panfrost_fence_server_sync(struct pipe_context *pctx,
+                            struct pipe_fence_handle *f)
+@@ -883,6 +889,7 @@ panfrost_create_context(struct pipe_screen *screen, void *priv, unsigned flags)
+ 
+    gallium->create_fence_fd = panfrost_create_fence_fd;
+    gallium->fence_server_sync = panfrost_fence_server_sync;
++   gallium->get_device_reset_status = panfrost_get_device_reset_status;
+ 
+    gallium->flush = panfrost_flush;
+    gallium->clear = panfrost_clear;
+diff --git a/src/gallium/drivers/panfrost/pan_screen.c b/src/gallium/drivers/panfrost/pan_screen.c
+index 1a3497b..f92b1ee 100644
+--- a/src/gallium/drivers/panfrost/pan_screen.c
++++ b/src/gallium/drivers/panfrost/pan_screen.c
+@@ -157,6 +157,7 @@ panfrost_get_param(struct pipe_screen *screen, enum pipe_cap param)
+    case PIPE_CAP_SURFACE_SAMPLE_COUNT:
+       return true;
+ 
++   case PIPE_CAP_DEVICE_RESET_STATUS_QUERY:
+    case PIPE_CAP_SAMPLER_VIEW_TARGET:
+    case PIPE_CAP_CLIP_HALFZ:
+    case PIPE_CAP_POLYGON_OFFSET_CLAMP:
+-- 
+2.45.0
+
