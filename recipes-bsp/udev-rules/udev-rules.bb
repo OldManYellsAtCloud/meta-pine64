@@ -3,12 +3,14 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 INHIBIT_DEFAULT_DEPS = "1"
 
-SRC_URI = "file://tty.rules"
+SRC_URI = "file://tty.rules \
+           file://modem.rules"
 
 S = "${UNPACKDIR}"
 
 do_install:append(){
   install -D -m 0644 ${UNPACKDIR}/tty.rules ${D}${sysconfdir}/udev/rules.d/tty.rules
+  install -m 0644 ${UNPACKDIR}/modem.rules ${D}${sysconfdir}/udev/rules.d/modem.rules
 }
 
 PACKAGE_ARCHS = "noarch"

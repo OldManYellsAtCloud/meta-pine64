@@ -7,14 +7,14 @@ IS_OK=FALSE
 
 # try a few times, as initially it might be still registering,
 # and not be ready on time
-while [ $COUNTER -le 5 -a "$IS_OK" != "TRUE" ]; do
+while [ $COUNTER -le 20 -a "$IS_OK" != "TRUE" ]; do
 
-    dbus-send --system --dest=org.gspine.modem --type=method_call --print-reply /org/gspine/modem org.gspine.modem.pd.get_connection_details string:"internet" > $response_file
+    dbus-send --system --dest=org.gspine.modem --type=method_call --print-reply=literal /org/gspine/modem org.gspine.modem.pd.get_connection_details string:"internet" > $response_file
 
-    # check if 2nd line contains "OK"
-    head -n2 $response_file | tail -n1 | grep OK
+    # check if response doesn't contain ERROR
+    grep ERROR $response_file
     
-    if [ $? -ne 0 ]; then
+    if [ $? -ne 1 ]; then
         COUNTER=$((COUNTER+1))
         sleep 1
     else
@@ -27,10 +27,10 @@ if [ "$IS_OK" = "FALSE" ]; then
     exit 1
 fi
 
-ip_addr=`head -n 6 $response_file | tail -n 1 | cut -d\" -f2`/24
-gateway=`head -n 7 $response_file | tail -n 1 | cut -d\" -f2`
-dns1=`head -n 8 $response_file | tail -n 1 | cut -d\" -f2`
-dns2=`head -n 9 $response_file | tail -n 1 | cut -d\" -f2`
+ip_addr=`jq -r '.["ip_address"]' < $response_file`/24
+gateway=`jq -r '.["gateway"]' < $response_file`
+dns1=`jq -r '.["dns1"]' < $response_file`
+dns2=`jq -r '.["dns2"]' < $response_file`
 
 rm $response_file
 if [ -z "$gateway" ]; then
