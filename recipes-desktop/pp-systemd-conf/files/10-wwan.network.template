@@ -11,3 +11,4 @@ LinkLocalAddressing=no
 IPv6AcceptRA=no
 MulticastDNS=yes
 LLDP=no
+DefaultRouteOnDevice=false
