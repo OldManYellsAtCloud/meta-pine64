@@ -1,0 +1,10 @@
+[Unit]
+Description=Logger Services
+
+[Service]
+ExecStart=/usr/bin/log
+Type=idle
+ExecStop=killall log
+
+[Install]
+WantedBy=multi-user.target
