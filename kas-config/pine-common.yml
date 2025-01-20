@@ -4,7 +4,7 @@ header:
 repos:
   meta-oe:
     url: https://github.com/openembedded/meta-openembedded
-    refspec: "5dcb1a2473464394503fbd839f89189317227835"
+    refspec: "89a1484f3a82ce6c70667986d03777914de8cce4"
     layers:
       meta-oe:
       meta-networking:
@@ -39,7 +39,7 @@ repos:
       .:
   meta-wayland:
     url: https://codeberg.org/flk/meta-wayland.git
-    refspec: "92dfbe50304f1aaa930bade7185d400efce4d391"
+    refspec: "a8a6a56b561e49b2cc7701cc096977cef558213a"
     layers:
       .:
   meta-qt:
@@ -53,7 +53,7 @@ local_conf_header:
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
     RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "133%"
+    PREFERRED_VERSION_firefox = "134%"
     SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/common"
     INHERIT += "own-mirrors"
     HOSTTOOLS += "rpm pkgconf"
