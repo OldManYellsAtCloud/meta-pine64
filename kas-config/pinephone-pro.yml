@@ -5,7 +5,7 @@ header:
 
 machine: pinephonepro-1-0
 
-target: pinephone-image
+target: pinephone-swupdate
 
 repos:
   meta-swupdate:
