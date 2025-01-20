@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/loglib.git;protocol=https;branch=master"
 
 PV = "1.0+git"
-SRCREV = "a4ee47ee6cb8c47c8621f99994f1cb0802d6c339"
+SRCREV = "b2a928263e93647f2360dbc880f9c9ffd920deae"
 
 DEPENDS = "log"
 RDEPENDS:${PN} = "log"
@@ -15,3 +15,4 @@ inherit cmake
 
 EXTRA_OECMAKE = ""
 
+BBCLASSEXTEND:append = " native nativesdk "

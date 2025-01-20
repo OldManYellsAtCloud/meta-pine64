@@ -7,10 +7,10 @@ SRC_URI += "file://signal-translat.cfg"
 SRC_URI += "file://power_button_handler.sh"
 SRC_URI += "file://configure_wwan.sh" 
 
-DEPENDS = "sdbus-c++ loglibrary settingslib"
+DEPENDS = "sdbus-c++ loglib settingslib"
 
 PV = "1.1+git${SRCPV}"
-SRCREV = "e848b1bee2cb0ffd9660a64f9ae8ca9ed5650a8a"
+SRCREV = "c85fa79e5521932c7149c5ef56b611988a23e7dc"
 
 S = "${UNPACKDIR}/git"
 

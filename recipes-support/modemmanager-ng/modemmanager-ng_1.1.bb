@@ -5,7 +5,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/ModemManager.git;protocol=htt
            file://modemmanager.service \
            file://appconfig.cfg"
 
-DEPENDS = "sdbus-c++ qtserialport settingslib qtwayland qtdeclarative qtwayland-native loglibrary nlohmann-json"
+DEPENDS = "sdbus-c++ qtserialport settingslib qtwayland qtdeclarative qtwayland-native loglib nlohmann-json"
 RDEPENDS:${PN} = "qtserialport settingslib"
 
 PV = "1.1"

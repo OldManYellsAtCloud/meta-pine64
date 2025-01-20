@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e5ed334b1d945eea01057c0950510c43"
 SRC_URI = "git://github.com/OldManYellsAtCloud/hwmanager.git;protocol=https;branch=master"
 SRC_URI += "file://hwmanager.service"
 
-DEPENDS = "loglibrary settingslib sdbus-c++"
+DEPENDS = "loglib settingslib sdbus-c++"
 
 PV = "1.1+git"
-SRCREV = "99c8bcc357dbe840f42f7bfd01c08e3abed0daf8"
+SRCREV = "d92e0afaabc0de983182db48e2e808fa23101b44"
 
 S = "${UNPACKDIR}/git"
 

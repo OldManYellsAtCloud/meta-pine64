@@ -2,7 +2,7 @@ DESCRIPTION = "Small offline dictionary Qt application"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
-DEPENDS = "qtwayland qtwayland-native qtdeclarative qtdeclarative-native loglibrary settingslib icu"
+DEPENDS = "qtwayland qtwayland-native qtdeclarative qtdeclarative-native loglib settingslib icu"
 RDEPENDS:${PN} = "qtwayland qtdeclarative"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/dictionary.git;protocol=https;branch=master;name=main \

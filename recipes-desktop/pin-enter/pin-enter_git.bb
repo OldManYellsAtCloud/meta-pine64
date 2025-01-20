@@ -2,7 +2,7 @@ DESCRIPTION = "Qt application to enter the PIN for EG25 modem"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
-DEPENDS = "qtwayland qtdeclarative qtdeclarative-native loglibrary sdbus-c++ settingslib nlohmann-json"
+DEPENDS = "qtwayland qtdeclarative qtdeclarative-native sdbus-c++ settingslib nlohmann-json"
 RDEPENDS:${PN} = "qtwayland qtdeclarative modemmanager-ng"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;branch=master \
@@ -12,7 +12,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;br
            file://org.gspine.sim.conf"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "245845ceaf0689888a2eeea4c0972be8ab38267c"
+SRCREV = "a5622273bbe890bd521d34b578ce90b72452627b"
 
 S = "${UNPACKDIR}/git"
 

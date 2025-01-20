@@ -5,7 +5,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/log.git;protocol=https;branch
            file://log.service"
 
 PV = "1.0+git"
-SRCREV = "594245bb269db85d62e773e726cde7f6c99b2b3d"
+SRCREV = "1b25cb7ad80c7b4a16cc7021a21dcc319fc7c835"
 
 S = "${WORKDIR}/git"
 
@@ -18,3 +18,5 @@ do_install:append(){
 }
 
 SYSTEMD_SERVICE:${PN} = "log.service"
+
+BBCLASSEXTEND:append = " native nativesdk "
