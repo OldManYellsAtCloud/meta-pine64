@@ -1,7 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRCREV = "0beb649053b86b2cfd5cf55a0fc68bc2fe91a430"
-
 SRC_URI:append:a64 = " \
     file://boot.cmd \
     file://0002-boot-from-broken-sdcard.patch \
