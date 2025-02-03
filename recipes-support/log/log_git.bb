@@ -5,7 +5,7 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/log.git;protocol=https;branch
            file://log.service"
 
 PV = "1.0+git"
-SRCREV = "1b25cb7ad80c7b4a16cc7021a21dcc319fc7c835"
+SRCREV = "15c84d0cab70618caa6caee1f9ce4490f5b4ba68"
 
 S = "${WORKDIR}/git"
 

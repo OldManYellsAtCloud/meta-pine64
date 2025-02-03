@@ -8,11 +8,11 @@ require recipes-kernel/linux/linux-yocto.inc
 
 DEPENDS:append = " wireless-regdb "
 
-LINUX_VERSION ?= "6.13"
+LINUX_VERSION ?= "6.14"
 LINUX_VERSION_EXTENSION = "-mainline"
 KERNEL_VERSION_SANITY_SKIP="1"
 
-BRANCH = "orange-pi-6.12"
+BRANCH = "orange-pi-6.14"
 SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"

@@ -105,9 +105,6 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 
 IMAGE_OVERHEAD_FACTOR = "3"
 
-TOOLCHAIN_TARGET_TASK:append = " googletest qtwebview qtdeclarative emailclient wlroots wayland-protocols"
-TOOLCHAIN_HOST_TASK:append = " nativesdk-loglibrary nativesdk-settingslib nativesdk-qtdeclarative"
-
 fix_fstab(){
   echo "/dev/mmcblk2p6 /data ext4 defaults" >> ${IMAGE_ROOTFS}${sysconfdir}/fstab
 }
