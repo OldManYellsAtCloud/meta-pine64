@@ -12,7 +12,7 @@ repos:
       meta-python:
   poky:
     url: git://git.yoctoproject.org/poky
-    refspec: "88489115ae83f80f8f00f296f7f775ba24884744"
+    refspec: "c996cfea529e6ec3fa6d511ed75694db9a3a2fd3"
     layers:
       meta:
       meta-poky:
@@ -34,7 +34,7 @@ repos:
       meta-firefox:
   meta-clang:
     url: https://github.com/kraj/meta-clang
-    refspec: "458566f290258d1fe63e95893bae143d9e2ab8e1"
+    refspec: "0ea2df0462edc0c01e787b6ee6c0e20cd6a42fc7"
     layers:
       .:
   meta-wayland:
@@ -61,4 +61,3 @@ local_conf_header:
     BBMASK += "meta-browser/meta-firefox/recipes-devtools/rust/"
     PREFERRED_VERSION_wayland-protocols = "1.38"
     DL_DIR = "/yocto/yocto_dl"
-    SSTATE_DIR = "/yocto/yocto_sstate"
