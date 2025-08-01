@@ -20,4 +20,4 @@ FILES:${PN} += "${sysconfdir}/launcher/swupdate.cfg"
 FILES:${PN} += "${datadir}/pixmaps/swupdate.png"
 
 # don't start it automatically
-SYSTEMD_AUTO_ENABLE="disable"
+SYSTEMD_AUTO_ENABLE = "disable"

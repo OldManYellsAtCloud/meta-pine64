@@ -1,6 +1,6 @@
-PACKAGECONFIG:append:h6 = " kmsro panfrost"
+PACKAGECONFIG:append:h6 = " panfrost"
 
-PACKAGECONFIG:append:pppro = " panfrost glvnd " 
+PACKAGECONFIG:append:pppro = " panfrost tools" 
 PACKAGECONFIG:append:pinephone-1-2 = " lima glvnd va gallium-llvm "
 
 EXTRA_OEMESON:append:star64 = "-Dvulkan-drivers=imagination-experimental -Dimagination-srv=true -Dgallium-drivers=zink"

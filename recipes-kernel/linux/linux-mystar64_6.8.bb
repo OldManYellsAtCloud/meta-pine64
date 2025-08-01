@@ -3,36 +3,37 @@ SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-# inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
+inherit externalsrc
 
-LINUX_VERSION ?= "6.8"
+LINUX_VERSION ?= "6.14"
 LINUX_VERSION_EXTENSION = "-mainline"
-KERNEL_VERSION_SANITY_SKIP="1"
+KERNEL_VERSION_SANITY_SKIP = "1"
 
+PR = "r06"
 
-BRANCH = "master"
-SRCREV = "${AUTOREV}"
+PV = "${LINUX_VERSION}"
 
-PV = "${LINUX_VERSION}+git${SRCPV}"
-
-do_kernel_metadata[network] = "1"
-
-
-SRC_URI = "git://git@192.168.1.130/opt/kernel/mainline/linux;protocol=ssh;branch=${BRANCH} \
-           file://9999-make-windows-install-NCM-drivers-automatically.patch \
+SRC_URI = "file://9999-make-windows-install-NCM-drivers-automatically.patch \
            file://star64-test-enable-usb.patch \
            file://star64-test.cfg \
-           file://star64-devicetree.patch \
           "
 
-KCONF_AUDIT_LEVEL = "1"
+#FILESEXTRAPATHS:prepend := "${THISDIR}/dts:"
+
+#SRC_URI += "file://star64-v1.1.dts;subdir=arch/riscv/boot/dts/starfive \
+#            file://star64-v1.1.dtsi;subdir=arch/riscv/boot/dts/starfive "
+
+
+KCONF_AUDIT_LEVEL = "2"
 KCONF_BSP_AUDIT_LEVEL = "5"
 
 KBUILD_DEFCONFIG:star64-mine = "defconfig"
-KCONFIG_MODE="--alldefconfig"
+KCONFIG_MODE = "--alldefconfig"
 
 COMPATIBLE_MACHINE = "star64-mine"
 
 # This is necessary since kmeta would be necessary otherwise
 KERNEL_FEATURES:remove = "cfg/fs/vfat.scc"
+
+EXTERNALSRC = "/yocto/star64-kernel-src"

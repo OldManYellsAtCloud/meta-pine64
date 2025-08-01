@@ -14,8 +14,6 @@ SRCREV = "08a7673678f17ac40eea6198e84213dbfa5a1171"
 SRCREV_FORMAT .= "_secret"
 SRCREV_secrets = "${AUTOREV}"
 
-S = "${UNPACKDIR}/git"
-
 inherit qt6-cmake
 
 do_install:append(){

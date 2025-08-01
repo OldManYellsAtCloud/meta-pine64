@@ -6,7 +6,7 @@ RDEPENDS:${PN} = "nftables"
 inherit systemd
 INHIBIT_DEFAULT_DEPS = "1"
 
-PR="r01"
+PR = "r01"
 
 S = "${UNPACKDIR}"
 

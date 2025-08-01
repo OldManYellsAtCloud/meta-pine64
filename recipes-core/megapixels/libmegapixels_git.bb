@@ -10,8 +10,6 @@ DEPENDS = "libconfig"
 PV = "1.0+git"
 SRCREV = "6c54600fdc758636c0a88ae2dd2fcc19a6ee5f26"
 
-S = "${WORKDIR}/git"
-
 inherit meson pkgconfig
 
 FILES:${PN} += "/usr/share/megapixels/config/*"

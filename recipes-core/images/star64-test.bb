@@ -13,7 +13,6 @@ inherit core-image
 #                   u-boot-fw-utils \
 #"
 
-# x11-base seems to be the way to go
-EXTRA_IMAGE_FEATURES += "debug-tweaks"
 
+EXTRA_IMAGE_FEATURES += " allow-empty-password empty-root-password allow-root-login post-install-logging splash package-management x11-base x11-sato ssh-server-dropbear hwcodecs"
 

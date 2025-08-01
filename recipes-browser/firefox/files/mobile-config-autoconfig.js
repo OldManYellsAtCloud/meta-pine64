@@ -18,8 +18,16 @@
 // https://web.archive.org/web/20201018211550/https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/File_I_O
 
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
-const Services = globalThis.Services
-Cu.import("resource://gre/modules/FileUtils.jsm");
+const Services = globalThis.Services;
+const { AppConstants } = ChromeUtils.importESModule("resource://gre/modules/AppConstants.sys.mjs");
+const IS_ESM_READY = parseInt(AppConstants.MOZ_APP_VERSION, 10) >= 128;
+
+// We need to conditionally load some modules because they haven't been ported
+// the ES module yet. This workaround can be removed when ESR128 will be EOL.
+const { FileUtils } =
+    IS_ESM_READY
+      ? ChromeUtils.importESModule("resource://gre/modules/FileUtils.sys.mjs")
+      : Cu.import("resource://gre/modules/FileUtils.jsm");
 
 var g_ff_version;
 var g_updated = false;
@@ -71,12 +79,7 @@ function log_obj(obj) {
 }
 
 function get_firefox_version() {
-    try {
-        return Services.appinfo.lastAppVersion.split(".")[0];
-    } catch(e) {
-        log("Couldn't get Firefox version (expected on first start): " + e);
-        return 0;
-    }
+    return Services.appinfo.version.split(".")[0];
 }
 
 function get_firefox_version_previous() {
@@ -250,10 +253,7 @@ function css_files_update() {
         var file = css_file_get(name);
 
         if (file.exists()) {
-            /* During the very first start, ff_previous is first "unknown",
-             * then the files get installed and Firefox gets restarted.
-             * Then ff_previous is 0. Don't restart it again. */
-            if (ff_previous != 0 && g_ff_version != ff_previous) {
+            if (g_ff_version != ff_previous) {
                 log("Removing outdated file: " + file.path + " (Firefox" +
                     " version changed)");
                 file.remove(false);
@@ -271,6 +271,12 @@ function css_files_update() {
         set_firefox_version_previous(g_ff_version);
 }
 
+/**
+ * Builds a user-agent as similar to the default as possible, but with "Mobile"
+ * inserted into the platforms section.
+ *
+ * @returns {string}
+ */
 function build_user_agent() {
     var appinfo = Services.appinfo;
     var vendor = appinfo.vendor || "Mozilla";
@@ -306,11 +312,24 @@ function set_default_prefs() {
     // empty page.
     defaultPref('browser.newtabpage.enabled', true);
 
-    // Disable "Firefox View" feature by default. It's a pinned tab that allows
-    // to "pick up" tabs from other devices after registering an account, and
-    // shows recently closed tabs. The always pinned tab takes up screen estate
-    // and it's slightly annoying if you do not want to register an account.
-    defaultPref('browser.tabs.firefox-view', false);
+    // FF >= 116 allows to use cameras via Pipewire. While it will likely still
+    // take a while until this is made the default, on most mobile devices it
+    // makes a lot of sense to enable it unconditionally, as cameras usually
+    // only work with libcamera, not via plain v4l2.
+    defaultPref('media.webrtc.camera.allow-pipewire', true);
+
+    // Make navigator.maxTouchPoints return 1 for clients to determine this is a
+    // touch device. This is the same value used by Web Developer Tools ->
+    // Responsive Design Mode -> Enable touch simulation.
+    defaultPref('dom.maxtouchpoints.testing.value', 1);
+
+    // Hide https:// in urlbar by default to save space and make more relevant
+    // parts of the urlbar visible.
+    defaultPref('browser.urlbar.trimHttps', true);
+
+    // Use the xdg-desktop-portal.file-picker by default, e.g., for a native
+    // file-picker instead of gtk-file-picker on Plasma Mobile
+    defaultPref('widget.use-xdg-desktop-portal.file-picker', 1);
 }
 
 function main() {
@@ -338,3 +357,4 @@ try {
     error;
 }
 g_logFileStream.close();
+

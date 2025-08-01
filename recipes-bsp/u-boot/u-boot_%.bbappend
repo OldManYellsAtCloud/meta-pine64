@@ -16,10 +16,8 @@ SRC_URI:append:pppro = " \
 
 SRC_URI:append:star64-mine = " \
     file://boot.cmd \
-    file://9999-debug.patch \
     file://test_config.cfg \
     "
-
 
 SRC_URI:append:tibuta = " file://tibuta.cfg "
 

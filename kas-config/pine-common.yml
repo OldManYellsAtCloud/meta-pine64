@@ -4,22 +4,23 @@ header:
 repos:
   meta-oe:
     url: https://github.com/openembedded/meta-openembedded
-    refspec: "89a1484f3a82ce6c70667986d03777914de8cce4"
+    refspec: "03c66e2ba3d6c1170b787ba5daec9bf8dddb69dc"
     layers:
       meta-oe:
       meta-networking:
       meta-multimedia:
       meta-python:
+      meta-gnome:
   poky:
     url: git://git.yoctoproject.org/poky
-    refspec: "c996cfea529e6ec3fa6d511ed75694db9a3a2fd3"
+    refspec: "217d5b3c3c95badd7c65f95232d15a81af8a01db"
     layers:
       meta:
       meta-poky:
       meta-yocto-bsp:
   meta-arm:
     url: git://git.yoctoproject.org/meta-arm
-    refspec: "9d9c2fb93e673b7f83b399036cd22257002effe1"
+    refspec: "ad117a27337629f114269d72d21579744602c38e"
     layers:
       meta-arm-toolchain:
       meta-arm:
@@ -28,23 +29,18 @@ repos:
     layers:
       .:
   meta-browser:
-    url: https://github.com/OldManYellsAtCloud/meta-browser
-    refspec: master
+    url: https://github.com/OSSystems/meta-browser
+    refspec: "b6b69ebe4b22ce6a99c53ed6544c649d7f3da3ea"
     layers:
       meta-firefox:
-  meta-clang:
-    url: https://github.com/kraj/meta-clang
-    refspec: "0ea2df0462edc0c01e787b6ee6c0e20cd6a42fc7"
-    layers:
-      .:
   meta-wayland:
     url: https://codeberg.org/flk/meta-wayland.git
-    refspec: "a8a6a56b561e49b2cc7701cc096977cef558213a"
+    refspec: "a71d7b340ed809008c30a6af3760b249b3a64841"
     layers:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "6.8.1"
+    refspec: "cae750cf1964a37a4744166e844cafa280c1356d"
     layers:
       .:
 
@@ -52,12 +48,9 @@ local_conf_header:
   meta-pine64: |
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
-    RUST_PANIC_STRATEGY = "abort"
-    PREFERRED_VERSION_firefox = "134%"
-    SOURCE_MIRROR_URL ?= "http://192.168.1.130:8888/common"
-    INHERIT += "own-mirrors"
+    PREFERRED_VERSION_firefox = "141%"
     HOSTTOOLS += "rpm pkgconf"
     BB_GENERATE_MIRROR_TARBALLS = "1"
     BBMASK += "meta-browser/meta-firefox/recipes-devtools/rust/"
-    PREFERRED_VERSION_wayland-protocols = "1.38"
+    PREFERRED_VERSION_wayland-protocols = "1.45"
     DL_DIR = "/yocto/yocto_dl"

@@ -1,13 +1,13 @@
 #
 # MSDOS partition table is required because the bootloader would overlap the
 # GPT table
-bootloader --ptable msdos 
+bootloader --ptable msdos
 
 
 part spl   --offset 32k     --ondisk mmcblk2 --no-table --source rawcopy  --sourceparams="file=idbloader.img"
 part tpl   --offset 8192k   --ondisk mmcblk2 --source rawcopy  --sourceparams="file=u-boot.itb" --no-table
 part /boot --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot --align 4
 part --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot_bak --align 4
-part /  --ondisk mmcblk2 --fstype=ext4 --label system --source=rootfs
-part --ondisk mmcblk2 --fstype=ext4 --label system_bak --source=rootfs
-part /data --ondisk mmcblk2 --fstype=ext4 --label data --size 2G --no-fstab-update
+part /  --ondisk mmcblk2 --fstype=ext4 --label system --source=rootfs --align 4 --size 3G
+part --ondisk mmcblk2 --fstype=ext4 --label system_bak --source=rootfs --align 4 --size 3G
+part --ondisk mmcblk2 --fstype=ext4 --label data --size 2G --align 16 --uuid ada7638a-c072-4fef-b4e2-963e23dd31b3

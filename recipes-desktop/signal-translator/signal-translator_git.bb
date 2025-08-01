@@ -12,8 +12,6 @@ DEPENDS = "sdbus-c++ loglib settingslib"
 PV = "1.1+git${SRCPV}"
 SRCREV = "c85fa79e5521932c7149c5ef56b611988a23e7dc"
 
-S = "${UNPACKDIR}/git"
-
 inherit cmake systemd
 
 do_install(){

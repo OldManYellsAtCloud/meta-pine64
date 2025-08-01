@@ -14,11 +14,9 @@ Upstream-Status: Inappropriate
  src/gallium/drivers/panfrost/pan_screen.c  | 1 +
  2 files changed, 8 insertions(+)
 
-diff --git a/src/gallium/drivers/panfrost/pan_context.c b/src/gallium/drivers/panfrost/pan_context.c
-index 1acbc85..c4baa34 100644
---- a/src/gallium/drivers/panfrost/pan_context.c
-+++ b/src/gallium/drivers/panfrost/pan_context.c
-@@ -852,6 +852,12 @@ panfrost_create_fence_fd(struct pipe_context *pctx,
+--- ./src/gallium/drivers/panfrost/pan_context.c.orig	2025-07-16 21:28:34.868817019 +0200
++++ ./src/gallium/drivers/panfrost/pan_context.c	2025-07-16 21:29:47.410388546 +0200
+@@ -982,6 +982,12 @@
     *pfence = panfrost_fence_from_fd(pan_context(pctx), fd, type);
  }
  
@@ -31,7 +29,7 @@ index 1acbc85..c4baa34 100644
  static void
  panfrost_fence_server_sync(struct pipe_context *pctx,
                             struct pipe_fence_handle *f)
-@@ -883,6 +889,7 @@ panfrost_create_context(struct pipe_screen *screen, void *priv, unsigned flags)
+@@ -1031,6 +1037,7 @@
  
     gallium->create_fence_fd = panfrost_create_fence_fd;
     gallium->fence_server_sync = panfrost_fence_server_sync;
@@ -39,18 +37,3 @@ index 1acbc85..c4baa34 100644
  
     gallium->flush = panfrost_flush;
     gallium->clear = panfrost_clear;
-diff --git a/src/gallium/drivers/panfrost/pan_screen.c b/src/gallium/drivers/panfrost/pan_screen.c
-index 1a3497b..f92b1ee 100644
---- a/src/gallium/drivers/panfrost/pan_screen.c
-+++ b/src/gallium/drivers/panfrost/pan_screen.c
-@@ -157,6 +157,7 @@ panfrost_get_param(struct pipe_screen *screen, enum pipe_cap param)
-    case PIPE_CAP_SURFACE_SAMPLE_COUNT:
-       return true;
- 
-+   case PIPE_CAP_DEVICE_RESET_STATUS_QUERY:
-    case PIPE_CAP_SAMPLER_VIEW_TARGET:
-    case PIPE_CAP_CLIP_HALFZ:
-    case PIPE_CAP_POLYGON_OFFSET_CLAMP:
--- 
-2.45.0
-

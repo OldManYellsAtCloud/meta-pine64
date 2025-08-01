@@ -8,7 +8,7 @@ require recipes-kernel/linux/linux-yocto.inc
 
 LINUX_VERSION ?= "5.15.115"
 LINUX_VERSION_EXTENSION = "-borged"
-KERNEL_VERSION_SANITY_SKIP="1"
+KERNEL_VERSION_SANITY_SKIP = "1"
 
 
 BRANCH = "Star64_devel"
@@ -19,11 +19,11 @@ PV = "${LINUX_VERSION}+git${SRCPV}"
 SRC_URI = "git://git@github.com/Fishwaldo/Star64_linux.git;branch=${BRANCH};protocol=https \
           "
 
-KCONF_AUDIT_LEVEL="1"
-KCONF_BSP_AUDIT_LEVEL="5"
+KCONF_AUDIT_LEVEL = "1"
+KCONF_BSP_AUDIT_LEVEL = "5"
 
 KBUILD_DEFCONFIG:star64 = "pine64_star64_defconfig"
-KCONFIG_MODE="--alldefconfig"
+KCONFIG_MODE = "--alldefconfig"
 
 COMPATIBLE_MACHINE = "star64"
 

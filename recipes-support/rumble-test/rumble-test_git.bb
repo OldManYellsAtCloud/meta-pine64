@@ -7,8 +7,6 @@ SRCREV = "7c6e46d0db732afc74d628db2bdc9c4e0912b53a"
 
 PR = "r05"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 FILES:${PN} = "/usr/bin/rumble"

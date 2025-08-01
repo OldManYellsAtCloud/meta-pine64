@@ -8,6 +8,4 @@ DEPENDS = "tiff"
 PV = "1.0+git"
 SRCREV = "9c7b18e7ff687a8c69704dc6fc8e7689e2532060"
 
-S = "${WORKDIR}/git"
-
 inherit meson pkgconfig

@@ -10,7 +10,7 @@ target: pinephone-swupdate
 repos:
   meta-swupdate:
     url: https://github.com/sbabic/meta-swupdate
-    refspec: "e7fdc1e09e816d0118a145068b7fff338d8bb3db"
+    refspec: "cbd0ed50a61dd7cbad09740d5d0edd295e56f16a"
     layers:
       .:
 
@@ -20,11 +20,9 @@ local_conf_header:
     INHERIT += "rm_work"
     DISTRO = "pp"
     DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland vulkan"
-    EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland vulkan"
     INITRAMFS_IMAGE = "pinephone-initramfs"
     INITRAMFS_IMAGE_NAME = "core-image-minimal-initramfs-pinephonepro-1-0"
     INITRAMFS_IMAGE_BUNDLE = "1"
-    DATA_LAYOUT[x86_64] = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
     DL_DIR = "/yocto/yocto_dl"
-    SSTATE_DIR = "/yocto/yocto_sstate"
     EXTRA_OECONF:append:pn-ntp = " hw_cv_func_snprintf_c99=yes hw_cv_func_vsnprintf_c99=yes " 
+    CONF_VERSION = "2"

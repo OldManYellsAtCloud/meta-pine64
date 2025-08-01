@@ -1,29 +1,10 @@
-/* Copyright 2022 Oliver Smith
+/* Copyright 2025 Oliver Smith, Peter Mack
  * SPDX-License-Identifier: MPL-2.0 */
 
 /* Reduce minimum window width */
 #urlbar-container {
     min-width: 150px !important;
-}
-
-/* Pinephone specific */
-
-.urlbarView {
-    position: fixed !important;
-    padding-top: 81px !important;
-
-    background: transparent !important;
-    margin-inline: 0px !important;*/
-    margin-top: 300px !important;
-
-    overflow-y:  auto !important;
-    overflow-x: auto !important;
-    scrollbar-width: none;
-}
-
-/* Pinephone specific */
-.urlbarView-results {
-    background: var(--arrowpanel-background);
+    flex-shrink: 1 !important;
 }
 
 @media (max-width: 700px) {
@@ -59,14 +40,55 @@
         font-size: 9pt !important;
     }
 
+    /* urlbar: Hide translate and picture-in-picture icon */
+    #urlbar #translations-button,
+    #urlbar #picture-in-picture-button,
+    #urlbar #identity-box #identity-permission-box {
+        display: none !important;
+    }
+
+    /* hide protections container by default */
+    @media not (-moz-bool-pref: "mcf.showprotectionsicon") {
+        #tracking-protection-icon-container {
+            display: none !important;
+        }
+    }
+
     /* Focused urlbar: hide all icons around it, so we have more space to edit the URL */
     #urlbar[focused] #remote-control-box,
     #urlbar[focused] #identity-box,
     #urlbar[focused] #tracking-protection-icon-container,
     /* #urlbar-input */
     #urlbar[focused] #reader-mode-button,
-    #urlbar[focused] #page-action-buttons {
+    #urlbar[focused] #page-action-buttons,
+    #urlbar[focused] .urlbar-go-button {
         display: none;
+    }
+
+
+    #navigator-toolbox:not(:has(> #titlebar)) {
+
+      /* Fixing invisible URL bar on FF 133+ */
+      #urlbar[breakout][breakout-extend] {
+          left: 11vw !important; /* should be 10, but 10 looks off-center */
+          width: 80vw !important;
+          bottom: 0 !important;
+          z-index: 5 !important;
+      }
+
+      @media not (-moz-bool-pref: "mcf.addressbarontop") {
+          #urlbar[breakout][breakout-extend] {
+              top: 0 !important;
+              align-content: flex-end !important;
+          }
+      }
+
+      @media (-moz-bool-pref: "mcf.addressbarontop") {
+          #urlbar[breakout][breakout-extend] {
+              top: calc(1.1 * --urlbar-container-height) !important;
+              align-content: flex-start !important;
+          }
+      }
     }
 
     /* Label of "identity icons", e.g. firefox specific pages look weird
@@ -80,18 +102,21 @@
      * being below the urlbar. */
     .urlbarView {
         position: fixed !important;
-        inset: 0px 0px 84px 0px;
+        inset: 84px 0px 0px 0px;
         width: 100% !important;
-
         background: var(--arrowpanel-background);
-
         margin: 0px !important;
         margin-inline: 0px !important;
         border-inline: 0px !important;
-
-        overflow-y:  auto !important;
+        overflow-y: auto !important;
         overflow-x: none !important;
         scrollbar-width: none;
+    }
+
+    @media not (-moz-bool-pref: "mcf.addressbarontop") {
+        .urlbarView {
+            inset: 0px 0px 84px 0px;
+        }
     }
 
     /* Bookmarks toolbar. Firefox shows it for some reason when opening a
@@ -102,12 +127,20 @@
     #PersonalToolbar {
         display: none;
     }
+
+    /* If the bookmarks toolbar is configured to only show on the new tab page,
+     * Firefox makes the toolbar overlap the browser. When it's then hidden by
+     * the rule above, the urlbar is pushed off the bottom of the window. To
+     * prevent this, set the height of the overlapped toolbar to 0. */
+    :root {
+        --bookmarks-toolbar-overlapping-browser-height: 0 !important;
+    }
 }
 
 /* Even though amazon is removed as search engine in policies.json, it gets
  * installed when FF starts for the first time. Hide the button in "This time,
  * search with" inside the urlbar. Match localizations like Amazon.de with this
  * regex. */
-button[id^='urlbar-engine-one-off-item-Amazon'] {
+button[id^="urlbar-engine-one-off-item-Amazon"] {
     display: none !important;
 }

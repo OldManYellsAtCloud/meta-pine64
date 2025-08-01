@@ -5,8 +5,6 @@ LICENSE = "CLOSED"
 SRC_URI = "git://git@192.168.1.130/opt/pine_secrets;branch=master;protocol=ssh"
 SRCREV = "${AUTOREV}"
 
-S = "${UNPACKDIR}/git"
-
 do_install(){
     install -D -m 0755 -t ${D}${localstatedir}/lib/iwd/ ${S}/wifi/*psk
 }

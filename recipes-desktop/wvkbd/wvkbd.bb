@@ -1,7 +1,5 @@
 DESCRIPTION = "Virtual keyboard for wayland"
 
-S = "${UNPACKDIR}/git"
-
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
@@ -15,8 +13,6 @@ SRC_URI = "git://github.com/OldManYellsAtCloud/wvkbd.git;protocol=https;branch=r
 SRC_URI += "file://wvkbd.service"
 
 SRCREV = "${AUTOREV}"
-
-S = "${UNPACKDIR}/git"
 
 inherit pkgconfig systemd
 

@@ -7,8 +7,6 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/log.git;protocol=https;branch
 PV = "1.0+git"
 SRCREV = "15c84d0cab70618caa6caee1f9ce4490f5b4ba68"
 
-S = "${WORKDIR}/git"
-
 inherit cmake systemd
 
 EXTRA_OECMAKE = ""

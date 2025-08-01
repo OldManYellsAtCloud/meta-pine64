@@ -2,7 +2,7 @@ DESCRIPTION = "Qt application for checking Swiss public transportation"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=db9a68c16db2d1882b059380135f3056"
 
-DEPENDS = "qtwayland qtwayland-native qtdeclarative qtdeclarative-native"
+DEPENDS = "qtwayland qtdeclarative qtdeclarative-native"
 RDEPENDS:${PN} = "qtwayland qtdeclarative"
 
 SRC_URI = "git://git@github.com/OldManYellsAtCloud/timetable.git;protocol=https;branch=master \
@@ -11,8 +11,6 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/timetable.git;protocol=https;
 
 PV = "1.0+git${SRCPV}"
 SRCREV = "${AUTOREV}"
-
-S = "${UNPACKDIR}/git"
 
 inherit qt6-cmake
 

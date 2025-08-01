@@ -38,3 +38,6 @@ pref('browser.download.animateNotifications', false);
 
 // disable translation autopopup
 pref('browser.translations.automaticallyPopup', false);
+
+// Enable touch density
+pref('browser.uidensity', 2);

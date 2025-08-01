@@ -15,3 +15,5 @@ do_deploy(){
 INHIBIT_DEFAULT_DEPS = "1"
 
 addtask deploy after do_install before do_package
+
+COMPATIBLE_MACHINE = "^pinephone.*$"

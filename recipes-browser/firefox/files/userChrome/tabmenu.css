@@ -1,35 +1,95 @@
-/* Copyright 2022 Peter Mack, Oliver Smith
+/* Copyright 2025 Peter Mack, Oliver Smith
  * SPDX-License-Identifier: MPL-2.0 */
 
-#firefox-view-button{
-    display: none;
-}
-
 @media (max-width: 700px) {
-    /* Even when not in private browsing mode, reserve space to the right of
-     * the tab bar for the private-browsing-indicator (that mask icon). This
-     * gives the tab bar a consistent width in both the regular and the private
-     * browsing mode, so the increased width hack below looks good in both. */
+    /* Make sure that we don't waste space on the right.
+     * This can removed once we no longer support ESR 128 */
     #titlebar {
-        padding-right: 30px;
+        padding-right: 0px;
     }
-    hbox.private-browsing-indicator {
-        position: fixed !important;
-        right: 0px;
-        bottom: 50px;
-        display: block;
-    }
+
 
     /* Increase tab width, to have more space for displaying the title of the
-     * website and to make the "all tabs" button show up. */
+     * website, supporting uidensity=touch
+     * Note that -94px/-124px would be enough for current (136), but ESR 128
+     * requires more (-102px/-132px) */
     #tabbrowser-tabs {
-        --tab-min-width: calc(100vw - 116px) !important;
+        border-inline-start: 0 !important;
+        --tab-min-width: calc(100vw - 86px) !important;
+
+        :root[uidensity=touch] & {
+            --tab-min-width: calc(100vw - 102px) !important;
+        }
     }
 
-    /* Rotate the arrow on the "all tabs" button to point upwards, since the
-     * tabs and searchbar were moved to the bottom. */
-    #alltabs-button {
-        transform: rotate(180deg) !important;
+    /* Smaller tab width to allow for private browsing indicator */
+    :root[privatebrowsingmode="temporary"] #tabbrowser-tabs {
+        --tab-min-width: calc(100vw - 116px) !important; /* width */
+
+        :root[uidensity=touch] & {
+            --tab-min-width: calc(100vw - 132px) !important;
+        }
+    }
+
+    /* Fix private browsing mode for Firefox 115-132 */
+    #private-browsing-indicator-with-label {
+        margin-inline: 2px !important;
+        font-size: 0;
+    }
+    /* Fix private browsing mode for current Firefox >= 133 */
+    hbox.private-browsing-indicator-with-label label {
+        display: none;
+    }
+
+    /* Hide firefox-view tab, as none of the options in about:config hides it on FF 123 */
+    #firefox-view-button {
+        display: none;
+    }
+
+    /* Option to show multiple tabs in tab bar */
+    @media (-moz-bool-pref: "mcf.multipletabs") {
+        /* Set small tabs width for small screens */
+        #tabbrowser-tabs {
+            --tab-min-width: 75px !important;
+            --tab-max-width: 150px !important;
+        }
+
+        /* Remove empty space at start/end */
+        .titlebar-spacer[type="pre-tabs"], .titlebar-spacer[type="post-tabs"] {
+            width: 0px !important;
+        }
+
+        #private-browsing-indicator-with-label {
+            width: 22px;
+        }
+
+        /* Optionally show close button on all tabs */
+        @media (-moz-bool-pref: "mcf.multipletabs.showclose") {
+            .tab-close-button, .close-icon, #tabbrowser-tabs[closebuttons="activetab"][orient="horizontal"] &:not([selected]) {
+                display: block !important;
+            }
+        }
+    }
+
+    @media not (-moz-bool-pref: "mcf.addressbarontop") {
+        /* Rotate the arrow on the "all tabs" button to point upwards, since the
+         * tabs and searchbar were moved to the bottom. */
+        @media (-moz-bool-pref: "mcf.notabcounter") {
+            #alltabs-button {
+                transform: rotate(180deg) !important;
+            }
+        }
+
+        /* Similar hack to what's in appMenu.css to properly spawn the "all tabs"
+         * popup above the navigation menu */
+        #customizationui-widget-panel {
+            /* Further up than appmenu, because the "all tabs" button that spawns
+             * this menu is above the hamburger button that spawns the regular
+             * menu. */
+            margin-top: -360px !important;
+            height: 320px;
+            max-height: 320px;
+        }
     }
 
     /* All tabs menu: hide scroll buttons */
@@ -43,26 +103,10 @@
         display: none;
     }
 
-    /* Similar hack to what's in appMenu.css to properly spawn the "all tabs"
-     * popup above the navigation menu */
-    #customizationui-widget-panel {
-        /* Further up than appmenu, because the "all tabs" button that spawns
-         * this menu is above the hamburger button that spawns the regular
-         * menu. */
-        margin-top: -360px !important;
-        height: 320px;
-        max-height: 320px;
-    }
-
     #allTabsMenu-allTabsView vbox.panel-subview-body {
         /* Use the whole height */
         height: 300px !important;
         max-height: 300px !important;
-        /* When messing around with tabs, it gets into a state where it does
-         * not use the whole height anymore, it becomes a tiny window. Removing
-         * this attribute fixes it. Since FF 113, this no longer has any
-         * effect, but it doesn't seem to be necessary either. */
-        -moz-box-flex: initial !important;
     }
 
     #allTabsMenu-allTabsView vbox.panel-subview-body:first-child {
@@ -72,18 +116,12 @@
         overflow-y: hidden !important;
     }
 
-    #allTabsMenu-multiView box.panel-viewstack { /* before FF 102 or earlier */
-        /* Use the whole height */
-        height: calc(100vh - 100px) !important;
-        max-height: calc(100vh - 100px) !important;
-    }
     #customizationui-widget-multiview box.panel-viewstack { /* since FF 113 */
         /* Use the whole height */
         height: 300px !important;
         max-height: 300px !important;
     }
 
-    #allTabsMenu-allTabsViewTabs, /* before FF 106 */
     #allTabsMenu-allTabsView-tabs { /* since FF 106 */
         /* Make sure tabs with long titles don't exceed the all tabs menu */
         max-width: calc(100vw - 20px);

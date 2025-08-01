@@ -10,8 +10,6 @@ DEPENDS = "googletest loglib"
 RDEPENDS:${PN} = "loglib"
 RDEPENDS:${PN}-native = "loglib-native"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 PROVIDES = "settingslib"

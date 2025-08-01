@@ -14,8 +14,6 @@ SRC_URI = "git://git@github.com/OldManYellsAtCloud/pin-enter.git;protocol=ssh;br
 PV = "1.0+git${SRCPV}"
 SRCREV = "a5622273bbe890bd521d34b578ce90b72452627b"
 
-S = "${UNPACKDIR}/git"
-
 inherit qt6-cmake
 
 do_install(){
