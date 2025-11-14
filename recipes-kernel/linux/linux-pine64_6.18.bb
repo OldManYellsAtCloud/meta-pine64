@@ -3,15 +3,16 @@ SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
+
+inherit kernel
 
 DEPENDS:append = " wireless-regdb "
 
-LINUX_VERSION ?= "6.16"
+LINUX_VERSION ?= "6.18"
 KERNEL_VERSION_SANITY_SKIP = "1"
 
-BRANCH = "orange-pi-6.16"
+BRANCH = "orange-pi-6.18"
 SRCREV = "${AUTOREV}"
 
 PV = "${LINUX_VERSION}+git${SRCPV}"
