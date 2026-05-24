@@ -8,6 +8,8 @@ SRC_URI += "file://power_button_handler.sh"
 SRC_URI += "file://configure_wwan.sh" 
 
 DEPENDS = "sdbus-c++ loglib settingslib"
+# jq is needed for the configure_wwan script
+RDEPENDS:${PN} += "jq"
 
 PV = "1.1+git${SRCPV}"
 SRCREV = "c85fa79e5521932c7149c5ef56b611988a23e7dc"

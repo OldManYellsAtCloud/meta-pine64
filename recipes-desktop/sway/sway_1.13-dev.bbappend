@@ -1,7 +1,5 @@
 inherit systemd useradd
 
-PR = "r19"
-
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://sway.service"
 SRC_URI += "file://krtek.jpg"
@@ -35,8 +33,3 @@ USERADD_PARAM:${PN} = "-u 1100 -d /home/swayuser -m -r -s /bin/sh -g swaygroup -
 GROUPADD_PARAM:${PN} = "-g 500 swaygroup"
 
 RRECOMMENDS:${PN} = ""
-
-do_configure:prepend(){
-  export ABC="${ABC}"
-  export
-}

@@ -1,27 +1,10 @@
 Upstream-Status: Inappropriate
---- ./drivers/power/supply/rk818_battery.c.orig	2023-11-27 20:09:24.224255585 +0100
-+++ ./drivers/power/supply/rk818_battery.c	2023-11-27 20:09:36.136434763 +0100
-@@ -2434,7 +2434,7 @@
- 	if (di->bat)
- 		power_supply_changed(di->bat);
- 
--	BAT_INFO("changed: dsoc=%d, rsoc=%d, v=%d, ov=%d c=%d, "
-+/*	BAT_INFO("changed: dsoc=%d, rsoc=%d, v=%d, ov=%d c=%d, "
- 		 "cap=%d, f=%d, st=%s, hotdie=%d\n",
- 		 di->dsoc, di->rsoc, di->voltage_avg, di->voltage_ocv,
- 		 di->current_avg, di->remain_cap, di->fcc, bat_status[status],
-@@ -2445,7 +2445,7 @@
- 		 di->dbg_pwr_dsoc, di->dbg_pwr_rsoc, di->dbg_pwr_vol,
- 		 di->is_halt, di->halt_cnt, di->is_max_soc_offset,
- 		 di->is_initialized, di->is_sw_reset, di->is_ocv_calib,
--		 di->dbg_cap_low0, di->is_force_calib);
-+		 di->dbg_cap_low0, di->is_force_calib);*/
- }
- 
- static u8 rk818_bat_check_reboot(struct rk818_battery *di)
---- ./drivers/power/supply/rk818_battery.c.orig	2023-12-04 15:20:17.286344129 +0100
-+++ ./drivers/power/supply/rk818_battery.c	2023-12-04 15:23:55.265798375 +0100
-@@ -712,12 +712,12 @@
+
+diff --git a/drivers/power/supply/rk818_battery.c b/drivers/power/supply/rk818_battery.c
+index f3426524daf5..60d75e0bb272 100644
+--- a/drivers/power/supply/rk818_battery.c
++++ b/drivers/power/supply/rk818_battery.c
+@@ -818,12 +818,12 @@ static bool rk818_bat_adc_calib(struct rk818_battery *di)
  			ioffset = rk818_bat_get_ioffset(di);
  			di->poffset = coffset - ioffset;
  			rk818_bat_write(di, RK818_POFFSET_REG, di->poffset);
@@ -38,23 +21,7 @@ Upstream-Status: Inappropriate
  			rk818_bat_set_coffset(di, coffset);
  			msleep(2000);
  		}
-@@ -867,13 +867,13 @@
- 				di->age_keep_sec = get_boot_sec();
- 			}
- 
--			BAT_INFO("init_age_algorithm: "
-+/*			BAT_INFO("init_age_algorithm: "
- 				 "age_vol:%d, age_ocv_cap:%d, "
- 				 "age_ocv_soc:%d, old_age_level:%d, "
- 				 "age_allow_update:%d, new_age_level:%d\n",
- 				 di->age_voltage, di->age_ocv_cap,
- 				 ocv_soc, age_level, di->age_allow_update,
--				 di->age_level);
-+				 di->age_level);*/
- 		}
- 	}
- }
-@@ -1039,7 +1039,7 @@
+@@ -1037,7 +1037,7 @@ static void rk818_bat_save_fcc(struct rk818_battery *di, u32 fcc)
  	buf = (fcc >> 0) & 0xff;
  	rk818_bat_write(di, RK818_NEW_FCC_REG0, buf);
  
@@ -63,7 +30,7 @@ Upstream-Status: Inappropriate
  }
  
  static int rk818_bat_get_fcc(struct rk818_battery *di)
-@@ -1052,11 +1052,11 @@
+@@ -1050,11 +1050,11 @@ static int rk818_bat_get_fcc(struct rk818_battery *di)
  	fcc |= rk818_bat_read(di, RK818_NEW_FCC_REG0) << 0;
  
  	if (fcc < MIN_FCC) {
@@ -77,7 +44,7 @@ Upstream-Status: Inappropriate
  		fcc = di->pdata->design_qmax;
  		rk818_bat_save_fcc(di, fcc);
  	}
-@@ -1143,8 +1143,8 @@
+@@ -1141,8 +1141,8 @@ static void rk818_bat_first_pwron(struct rk818_battery *di)
  	di->dsoc = di->rsoc;
  	di->is_first_on = true;
  
@@ -88,7 +55,7 @@ Upstream-Status: Inappropriate
  }
  
  static void rk818_bat_not_first_pwron(struct rk818_battery *di)
-@@ -1209,11 +1209,11 @@
+@@ -1207,11 +1207,11 @@ static void rk818_bat_not_first_pwron(struct rk818_battery *di)
  	if (di->nac < 0)
  		di->nac = 0;
  
@@ -101,19 +68,8 @@ Upstream-Status: Inappropriate
 +		 rk818_bat_get_prev_cap(di));*/
  }
  
- static bool rk818_bat_ocv_sw_reset(struct rk818_battery *di)
-@@ -1408,8 +1408,8 @@
- 
- 	/* calib voltage kb */
- 	rk818_bat_init_voltage_kb(di);
--	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
--		 ioffset, rk818_bat_get_coffset(di), di->poffset);
-+/*	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
-+		 ioffset, rk818_bat_get_coffset(di), di->poffset);*/
- }
- 
- static void rk818_bat_init_caltimer(struct rk818_battery *di)
-@@ -1636,7 +1636,7 @@
+ static void rk818_bat_init_rsoc(struct rk818_battery *di)
+@@ -1518,7 +1518,7 @@ static void rk818_bat_calc_zero_linek(struct rk818_battery *di)
  		if (!di->shtd_drop_sec)
  			di->shtd_drop_sec = get_boot_sec();
  		if (base2sec(di->shtd_drop_sec) > WAIT_SHTD_DROP_SEC) {
@@ -122,7 +78,7 @@ Upstream-Status: Inappropriate
  			di->shtd_drop_sec = 0;
  			di->dsoc = 0;
  		}
-@@ -2282,7 +2282,7 @@
+@@ -2164,7 +2164,7 @@ static void rk818_bat_relax_vol_calib(struct rk818_battery *di)
  	soc = rk818_bat_vol_to_ocvsoc(di, vol);
  	cap = rk818_bat_vol_to_ocvcap(di, vol);
  	rk818_bat_init_capacity(di, cap);
@@ -131,7 +87,7 @@ Upstream-Status: Inappropriate
  }
  
  static void rk818_bat_relife_age_flag(struct rk818_battery *di)
-@@ -2319,11 +2319,11 @@
+@@ -2201,11 +2201,11 @@ static void rk818_bat_relife_age_flag(struct rk818_battery *di)
  			di->age_keep_sec = get_boot_sec();
  		}
  
@@ -145,7 +101,7 @@ Upstream-Status: Inappropriate
  	}
  }
  
-@@ -2351,8 +2351,8 @@
+@@ -2233,8 +2233,8 @@ static int rk818_bat_sleep_dischrg(struct rk818_battery *di)
  		sleep_soc = di->sleep_sum_cap * 100 / DIV(di->fcc);
  		tgt_dsoc = di->dsoc - sleep_soc;
  		if (sleep_soc > 0) {
@@ -156,7 +112,7 @@ Upstream-Status: Inappropriate
  			if (di->dsoc < 5) {
  				di->dsoc--;
  			} else if ((tgt_dsoc < 5) && (di->dsoc >= 5)) {
-@@ -2373,8 +2373,8 @@
+@@ -2255,8 +2255,8 @@ static int rk818_bat_sleep_dischrg(struct rk818_battery *di)
  		sleep_soc = di->sleep_sum_cap / DIV(di->fcc / 100);
  		gap_soc = di->dsoc - di->rsoc;
  
@@ -167,10 +123,10 @@ Upstream-Status: Inappropriate
  		if (gap_soc > sleep_soc) {
  			if ((gap_soc - 5) > (sleep_soc * 2))
  				di->dsoc -= (sleep_soc * 2);
-@@ -2391,19 +2391,19 @@
+@@ -2272,18 +2272,18 @@ static int rk818_bat_sleep_dischrg(struct rk818_battery *di)
+ 
  	if (di->voltage_avg <= pwroff_vol - 70) {
  		di->dsoc = 0;
- 		rk_send_wakeup_key();
 -		BAT_INFO("low power sleeping, shutdown... %d\n", di->dsoc);
 +/*		BAT_INFO("low power sleeping, shutdown... %d\n", di->dsoc);*/
  	}
@@ -184,20 +140,44 @@ Upstream-Status: Inappropriate
  
  	if (di->dsoc <= 0) {
  		di->dsoc = 0;
- 		rk_send_wakeup_key();
 -		BAT_INFO("sleep dsoc is %d...\n", di->dsoc);
 +/*		BAT_INFO("sleep dsoc is %d...\n", di->dsoc);*/
  	}
  
  	DBG("<%s>. out: dsoc=%d, rsoc=%d, sum_cap=%d\n",
-diff --git a/drivers/power/supply/rk818_battery.c b/drivers/power/supply/rk818_battery.c
-index af6a84455369..350203e9acd1 100644
---- a/drivers/power/supply/rk818_battery.c
-+++ b/drivers/power/supply/rk818_battery.c
-@@ -2931,8 +2931,8 @@ static irqreturn_t rk818_vb_low_irq(int irq, void *bat)
+@@ -2314,7 +2314,7 @@ static void rk818_bat_power_supply_changed(struct rk818_battery *di)
+ 	if (di->bat)
+ 		power_supply_changed(di->bat);
+ 
+-	BAT_INFO("changed: dsoc=%d, rsoc=%d, v=%d, ov=%d c=%d, "
++/*	BAT_INFO("changed: dsoc=%d, rsoc=%d, v=%d, ov=%d c=%d, "
+ 		 "cap=%d, f=%d, st=%s, hotdie=%d\n",
+ 		 di->dsoc, di->rsoc, di->voltage_avg, di->voltage_ocv,
+ 		 di->current_avg, di->remain_cap, di->fcc, bat_status[status],
+@@ -2325,7 +2325,7 @@ static void rk818_bat_power_supply_changed(struct rk818_battery *di)
+ 		 di->dbg_pwr_dsoc, di->dbg_pwr_rsoc, di->dbg_pwr_vol,
+ 		 di->is_halt, di->halt_cnt, di->is_max_soc_offset,
+ 		 di->is_initialized, di->is_ocv_calib,
+-		 di->dbg_cap_low0, di->is_force_calib);
++		 di->dbg_cap_low0, di->is_force_calib);*/
+ }
+ 
+ static u8 rk818_bat_check_reboot(struct rk818_battery *di)
+@@ -2974,8 +2974,8 @@ static void rk818_bat_internal_calib(struct work_struct *work)
+ 
+ 	/* calib voltage kb */
+ 	rk818_bat_init_voltage_kb(di);
+-	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
+-		 ioffset, rk818_bat_get_coffset(di), di->poffset);
++/*	BAT_INFO("caltimer: ioffset=0x%x, coffset=0x%x, poffset=%d\n",
++		 ioffset, rk818_bat_get_coffset(di), di->poffset);*/
+ }
+ 
+ static void rk818_bat_init_caltimer(struct rk818_battery *di)
+@@ -3055,8 +3055,8 @@ static irqreturn_t rk818_vb_low_irq(int irq, void *bat)
+ {
  	struct rk818_battery *di = (struct rk818_battery *)bat;
  
- 	rk_send_wakeup_key();
 -	BAT_INFO("lower power yet, power off system! v=%d, c=%d, dsoc=%d\n",
 -		 di->voltage_avg, di->current_avg, di->dsoc);
 +/*	BAT_INFO("lower power yet, power off system! v=%d, c=%d, dsoc=%d\n",
@@ -205,7 +185,7 @@ index af6a84455369..350203e9acd1 100644
  
  	return IRQ_HANDLED;
  }
-@@ -3388,10 +3388,10 @@ static int rk818_battery_suspend(struct platform_device *dev,
+@@ -3324,10 +3324,10 @@ static int rk818_battery_suspend(struct platform_device *dev,
  	rk818_bat_write(di, RK818_VB_MON_REG, val);
  	rk818_bat_set_bits(di, RK818_INT_STS_MSK_REG1, VB_LOW_INT_EN, 0);
  
@@ -218,7 +198,7 @@ index af6a84455369..350203e9acd1 100644
  
  	return 0;
  }
-@@ -3422,11 +3422,11 @@ static int rk818_battery_resume(struct platform_device *dev)
+@@ -3364,11 +3364,11 @@ static int rk818_battery_resume(struct platform_device *dev)
  			time_step = DISCHRG_TIME_STEP2;
  	}
  

@@ -16,7 +16,7 @@ Upstream-Status: Inappropriate
 
 --- ./src/gallium/drivers/panfrost/pan_context.c.orig	2025-07-16 21:28:34.868817019 +0200
 +++ ./src/gallium/drivers/panfrost/pan_context.c	2025-07-16 21:29:47.410388546 +0200
-@@ -982,6 +982,12 @@
+@@ -958,6 +958,12 @@
     *pfence = panfrost_fence_from_fd(pan_context(pctx), fd, type);
  }
  
@@ -28,8 +28,8 @@ Upstream-Status: Inappropriate
 +
  static void
  panfrost_fence_server_sync(struct pipe_context *pctx,
-                            struct pipe_fence_handle *f)
-@@ -1031,6 +1037,7 @@
+                            struct pipe_fence_handle *f,
+@@ -1009,6 +1015,7 @@
  
     gallium->create_fence_fd = panfrost_create_fence_fd;
     gallium->fence_server_sync = panfrost_fence_server_sync;

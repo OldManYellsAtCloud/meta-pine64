@@ -4,23 +4,26 @@ header:
 repos:
   meta-oe:
     url: https://github.com/openembedded/meta-openembedded
-    refspec: "03c66e2ba3d6c1170b787ba5daec9bf8dddb69dc"
+    commit: "9af4488d46cb4fd4c0d2d64820c86225ebd6ac71"
     layers:
       meta-oe:
       meta-networking:
       meta-multimedia:
       meta-python:
       meta-gnome:
-  poky:
-    url: git://git.yoctoproject.org/poky
-    refspec: "217d5b3c3c95badd7c65f95232d15a81af8a01db"
+  oe-core:
+    url: https://git.openembedded.org/openembedded-core.git
+    commit: "06dd66e6220e5ce4ed4b9af4d8231ae5f0a8ce80"
     layers:
       meta:
-      meta-poky:
-      meta-yocto-bsp:
+  bitbake:
+    url: https://git.openembedded.org/bitbake.git
+    commit: "22021758e66737bcf68dfd2b74adc6a0cb1d42d9"
+    layers:
+      bitbake: excluded
   meta-arm:
-    url: git://git.yoctoproject.org/meta-arm
-    refspec: "ad117a27337629f114269d72d21579744602c38e"
+    url: https://git.yoctoproject.org/meta-arm
+    commit: "957df323"
     layers:
       meta-arm-toolchain:
       meta-arm:
@@ -29,18 +32,18 @@ repos:
     layers:
       .:
   meta-browser:
-    url: https://github.com/OSSystems/meta-browser
-    refspec: "b6b69ebe4b22ce6a99c53ed6544c649d7f3da3ea"
+    url: https://github.com/OSSystems/meta-browser.git
+    commit: "e07817d8f8ada5340347c34f1ac6d5ee68eaa5ff"
     layers:
       meta-firefox:
   meta-wayland:
     url: https://codeberg.org/flk/meta-wayland.git
-    refspec: "a71d7b340ed809008c30a6af3760b249b3a64841"
+    commit: "3634f036df19b952fc78efb15381bf9e79c293b2"
     layers:
       .:
   meta-qt:
     url: https://code.qt.io/yocto/meta-qt6.git
-    refspec: "cae750cf1964a37a4744166e844cafa280c1356d"
+    commit: "c76c5dee65459f168623296d1d4e29f1199afcd9"
     layers:
       .:
 
@@ -48,9 +51,7 @@ local_conf_header:
   meta-pine64: |
     IMAGE_FSTYPES += "wic.bz2 wic.bmap"
     LICENSE_FLAGS_ACCEPTED += "commercial"
-    PREFERRED_VERSION_firefox = "141%"
+    PREFERRED_VERSION_firefox = "150%"
     HOSTTOOLS += "rpm pkgconf"
     BB_GENERATE_MIRROR_TARBALLS = "1"
-    BBMASK += "meta-browser/meta-firefox/recipes-devtools/rust/"
-    PREFERRED_VERSION_wayland-protocols = "1.45"
     DL_DIR = "/yocto/yocto_dl"

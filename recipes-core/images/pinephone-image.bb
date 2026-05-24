@@ -7,6 +7,8 @@ inherit core-image
 
 # populate_sdk populate_sdk_qt6
 
+TOOLCHAIN_TARGET_TASK += "libsdl3 v4l-utils"
+
 IMAGE_INSTALL += " evtest \
                    settingslib \
                    mingetty \
@@ -44,12 +46,10 @@ IMAGE_INSTALL += " evtest \
                    pin-enter \
                    shutdown-led-indicator \
                    mpv \
-                   megapixels \
                    mesa-demos \
                    hwmanager \
                    iwd \
                    firefox \
-                   emailclient \
                    libubootenv-bin \
                    util-linux-lsblk \
                    e2fsprogs-resize2fs \
@@ -86,7 +86,16 @@ IMAGE_INSTALL += "\
     power-up-modem \
     htop \
     gdbserver \
+    e2fsprogs-mke2fs \
+    megapixels \
     "
+
+#    libgles1-mesa
+#   libgles2-mesa
+# libgles3-mesa
+
+IMAGE_INSTALL += "xwayland \
+   libglvnd"
 
 IMAGE_INSTALL:remove:star64 = "firmware-blobs touchscreen-cal-file \
                                buttond touch-gesture info-panel \
@@ -109,4 +118,5 @@ fix_fstab(){
   echo "/dev/mmcblk2p6 /data ext4 defaults" >> ${IMAGE_ROOTFS}${sysconfdir}/fstab
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "fix_fstab"
+# ROOTFS_POSTPROCESS_COMMAND += "fix_fstab"
+

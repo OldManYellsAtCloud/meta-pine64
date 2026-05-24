@@ -5,19 +5,19 @@ header:
 
 machine: pinephone-1-2
 
-target: pinephone-image
+target: pinephone-swupdate
+
+repos:
+  meta-swupdate:
+    url: https://github.com/sbabic/meta-swupdate
+    refspec: "74532b19cb5939d39ca777264e1029534279e6f3"
+    layers:
+      .:
 
 local_conf_header:
   pp: |
     PACKAGE_CLASSES = "package_ipk"
     INHERIT += "rm_work"
     DISTRO = "pp"
-    DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland vulkan "
-    EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland "
-    PREFERRED_VERSION_cargo-native = "1.74.%"
-    PREFERRED_VERSION_rust-llvm-native = "1.74.%"
-    PREFERRED_VERSION_rust-native = "1.74.%"
-    PREFERRED_VERSION_libstd-rs = "1.74.%"
-    PREFERRED_VERSION_cargo = "1.74.%"
-    PREFERRED_VERSION_rust = "1.74.%"
-    PREFERRED_VERSION_libstd-rs-dev = "1.74.%"
+    DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland vulkan glvnd "
+    EXTRA_DISTRO_FEATURES += " x11 systemd opengl wifi usbhost usbgadget bluetooth 3g pulseaudio pam wayland glvnd "

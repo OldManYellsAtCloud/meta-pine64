@@ -9,5 +9,5 @@ part tpl   --offset 8192k   --ondisk mmcblk2 --source rawcopy  --sourceparams="f
 part /boot --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot --align 4
 part --fstype=vfat --source=bootimg-partition --active --use-uuid --label boot_bak --align 4
 part /  --ondisk mmcblk2 --fstype=ext4 --label system --source=rootfs --align 4 --size 3G
-part --ondisk mmcblk2 --fstype=ext4 --label system_bak --source=rootfs --align 4 --size 3G
-part --ondisk mmcblk2 --fstype=ext4 --label data --size 2G --align 16 --uuid ada7638a-c072-4fef-b4e2-963e23dd31b3
+#part --ondisk mmcblk2 --fstype=ext4 --label system_bak --source=rootfs --align 4 --size 3G
+#part --ondisk mmcblk2 --fstype=ext4 --label data --size 2G --align 16 --uuid ada7638a-c072-4fef-b4e2-963e23dd31b3

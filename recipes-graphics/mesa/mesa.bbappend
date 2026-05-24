@@ -1,7 +1,8 @@
 PACKAGECONFIG:append:h6 = " panfrost"
 
 PACKAGECONFIG:append:pppro = " panfrost tools" 
-PACKAGECONFIG:append:pinephone-1-2 = " lima glvnd va gallium-llvm "
+# gbm is only required by chromium
+PACKAGECONFIG:append:pinephone-1-2 = " lima va gallium-llvm gbm"
 
 EXTRA_OEMESON:append:star64 = "-Dvulkan-drivers=imagination-experimental -Dimagination-srv=true -Dgallium-drivers=zink"
 
