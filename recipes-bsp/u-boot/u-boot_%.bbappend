@@ -29,11 +29,12 @@ DEPENDS:append:star64-mine = " spl-tool-native "
 
 ATF_DEPENDS ??= ""
 
-EXTRA_OEMAKE:append:a64 = " BL31=${DEPLOY_DIR_IMAGE}/bl31-sun50i_a64.bin"
-ATF_DEPENDS:pppro = " trusted-firmware-a:do_deploy"
+EXTRA_OEMAKE:append:a64 = " BL31=${DEPLOY_DIR_IMAGE}/bl31-sun50i_a64.bin SCP=${DEPLOY_DIR_IMAGE}/scp.bin"
+ATF_DEPENDS:a64 = " trusted-firmware-a:do_deploy crust:do_deploy"
 
 EXTRA_OEMAKE:append:pppro = " BL31=${DEPLOY_DIR_IMAGE}/trusted-firmware-a/bl31.elf"
-ATF_DEPENDS:a64 = " trusted-firmware-a:do_deploy"
+ATF_DEPENDS:pppro = " trusted-firmware-a:do_deploy"
+
 
 EXTRA_OEMAKE:append:h6 = " BL31=${DEPLOY_DIR_IMAGE}/bl31-sun50i_h6.bin"
 ATF_DEPENDS:h6 = " trusted-firmware-a:do_deploy"
