@@ -114,9 +114,10 @@ PACKAGES:${PN}:append = "tools-bluetooth"
 
 IMAGE_OVERHEAD_FACTOR = "3"
 
-fix_fstab(){
-  echo "/dev/mmcblk2p6 /data ext4 defaults" >> ${IMAGE_ROOTFS}${sysconfdir}/fstab
+# move it to shadown.bbappend at some point...
+clean_login_pam(){
+	sed -i "/.*pam_motd.*/d" ${IMAGE_ROOTFS}${sysconfdir}/pam.d/login
+	sed -i "/.*pam_mail.*/d" ${IMAGE_ROOTFS}${sysconfdir}/pam.d/login
 }
 
-# ROOTFS_POSTPROCESS_COMMAND += "fix_fstab"
-
+ROOTFS_POSTPROCESS_COMMAND += "clean_login_pam"
