@@ -1,7 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI:append:a64 = " \
-    file://boot.cmd \
+    file://boot_mmc.cmd \
     file://0002-boot-from-broken-sdcard.patch \
     file://scp.bin \
     "
@@ -45,7 +45,7 @@ do_compile[depends] .= "${ATF_DEPENDS}"
 
 do_configure:prepend:a64() {
     mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" \
-        -d ${UNPACKDIR}/boot.cmd ${UNPACKDIR}/boot.scr
+        -d ${UNPACKDIR}/boot_mmc.cmd ${UNPACKDIR}/boot.scr
 }
 
 do_compile:prepend:a64(){
